@@ -9,3 +9,4 @@ E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Deb
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net8.0\refint\NOTE.Solutions.Entities.dll
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net8.0\NOTE.Solutions.Entities.pdb
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net8.0\ref\NOTE.Solutions.Entities.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net8.0\NOTE.Solutions.Entities.sourcelink.json

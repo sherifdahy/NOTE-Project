@@ -15,3 +15,4 @@ E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\ne
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\refint\NOTE.Solutions.BLL.dll
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.pdb
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\ref\NOTE.Solutions.BLL.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.sourcelink.json

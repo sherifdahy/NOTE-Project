@@ -13,3 +13,4 @@ E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.DAL\obj\Debug\ne
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.DAL\obj\Debug\net8.0\refint\NOTE.Solutions.DAL.dll
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.DAL\obj\Debug\net8.0\NOTE.Solutions.DAL.pdb
 E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.DAL\obj\Debug\net8.0\ref\NOTE.Solutions.DAL.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.DAL\obj\Debug\net8.0\NOTE.Solutions.DAL.sourcelink.json
