@@ -1,0 +1,17 @@
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.BLL.deps.json
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.BLL.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.BLL.pdb
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.DAL.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.Entities.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.DAL.pdb
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.Entities.pdb
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.csproj.AssemblyReference.cache
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.GeneratedMSBuildEditorConfig.editorconfig
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.AssemblyInfoInputs.cache
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.AssemblyInfo.cs
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.csproj.CoreCompileInputs.cache
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Sol.94B99191.Up2Date
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\refint\NOTE.Solutions.BLL.dll
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.pdb
+E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\ref\NOTE.Solutions.BLL.dll
