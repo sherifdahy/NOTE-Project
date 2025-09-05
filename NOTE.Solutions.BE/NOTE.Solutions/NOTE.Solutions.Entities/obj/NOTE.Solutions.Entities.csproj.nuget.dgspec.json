@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "E:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj": {}
+    "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj": {}
   },
   "projects": {
-    "E:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj": {
+    "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj",
+        "projectUniqueName": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj",
         "projectName": "NOTE.Solutions.Entities",
-        "projectPath": "E:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj",
+        "projectPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj",
         "packagesPath": "C:\\Users\\shrif\\.nuget\\packages\\",
-        "outputPath": "E:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\obj\\",
+        "outputPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Progress\\ToolboxNuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\shrif\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Telerik UI for WPF.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -46,11 +44,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -67,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

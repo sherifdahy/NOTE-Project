@@ -11,10 +11,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Contracts\" />
+    <Folder Include="Contracts\Identity\" />
+    <Folder Include="Contracts\Country\" />
+    <Folder Include="Contracts\City\" />
+    <Folder Include="Contracts\Governate\" />
+    <Folder Include="Contracts\Company\" />
+    <Folder Include="Contracts\ActiveCode\" />
+    <Folder Include="Contracts\Branch\" />
+    <Folder Include="Contracts\Document\" />
+    <Folder Include="Contracts\DocumentType\" />
+    <Folder Include="Contracts\DocumentDetail\" />
+    <Folder Include="Contracts\Discount\" />
+    <Folder Include="Contracts\Tax\" />
+    <Folder Include="Contracts\ProductUnit\" />
+    <Folder Include="Contracts\Product\" />
+    <Folder Include="Contracts\Role\" />
     <Folder Include="Errors\" />
-    <Folder Include="Services\" />
+    <Folder Include="Authentication\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.4.2-pre02" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.3-pre02" />
   </ItemGroup>
 
 </Project>

@@ -22,8 +22,4 @@
     <ProjectReference Include="..\NOTE.Solutions.BLL\NOTE.Solutions.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

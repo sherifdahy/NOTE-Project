@@ -1,9 +1,35 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "NOTE.Solutions.API",
-    "version": "1.0"
+    "title": "NOTE.Solutions API",
+    "version": "v1"
   },
-  "paths": { },
-  "components": { }
+  "paths": {
+    "/api/Auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

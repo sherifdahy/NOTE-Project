@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using NOTE.Solutions.DAL.Data;
 using System.Runtime.CompilerServices;
 
@@ -31,8 +32,38 @@ public static class DInjection
     private static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "NOTE.Solutions API",
+                Version = "v1",
+            });
 
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+        });
         return services;
     }
+
 }

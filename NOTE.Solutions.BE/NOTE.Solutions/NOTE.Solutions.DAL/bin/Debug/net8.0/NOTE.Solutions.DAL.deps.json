@@ -554,6 +554,9 @@
         }
       },
       "NOTE.Solutions.Entities/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.0"
+        },
         "runtime": {
           "NOTE.Solutions.Entities.dll": {
             "assemblyVersion": "1.0.0.0",
