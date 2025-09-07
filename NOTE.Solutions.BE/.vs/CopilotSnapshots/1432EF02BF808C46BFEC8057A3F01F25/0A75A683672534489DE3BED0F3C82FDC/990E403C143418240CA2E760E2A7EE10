@@ -1,0 +1,84 @@
+﻿using NOTE.Solutions.Entities.Entities.Address;
+using NOTE.Solutions.BLL.Errors;
+using Mapster;
+
+namespace NOTE.Solutions.BLL.Services;
+
+public class GovernateService : IGovernateService
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public GovernateService(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<Result<GovernateResponse>> CreateAsync(GovernateRequest request)
+    {
+        if (_unitOfWork.Governorates.IsExist(x => x.Code == request.Code || x.Name == request.Name))
+            return Result.Failure<GovernateResponse>(GovernateErrors.Duplicated);
+
+        var governate = request.Adapt<Governorate>();
+
+        await _unitOfWork.Governorates.AddAsync(governate);
+        await _unitOfWork.SaveAsync();
+
+        return Result.Success(governate.Adapt<GovernateResponse>());
+    }
+
+    public async Task<Result> DeleteAsync(int id)
+    {
+        if (id <= 0)
+            return Result.Failure(GovernateErrors.InvalidId);
+
+        var governate = await _unitOfWork.Governorates.GetByIdAsync(id);
+
+        if (governate is null)
+            return Result.Failure(GovernateErrors.NotFound);
+
+        _unitOfWork.Governorates.Delete(governate);
+        await _unitOfWork.SaveAsync();
+
+        return Result.Success();
+    }
+
+    public async Task<Result<IEnumerable<GovernateResponse>>> GetAllAsync()
+    {
+        var governates = await _unitOfWork.Governorates.FindAllAsync(x => true);
+
+        return Result.Success(governates.Adapt<IEnumerable<GovernateResponse>>());
+    }
+
+    public async Task<Result<GovernateResponse>> GetByIdAsync(int id)
+    {
+        if (id <= 0)
+            return Result.Failure<GovernateResponse>(GovernateErrors.InvalidId);
+
+        var governate = await _unitOfWork.Governorates.FindAsync(x => x.Id == id);
+
+        if (governate is null)
+            return Result.Failure<GovernateResponse>(GovernateErrors.NotFound);
+
+        return Result.Success(governate.Adapt<GovernateResponse>());
+    }
+
+    public async Task<Result> UpdateAsync(int id, GovernateRequest request)
+    {
+        if (id <= 0)
+            return Result.Failure(GovernateErrors.InvalidId);
+
+        if (_unitOfWork.Governorates.IsExist(x => (x.Code == request.Code || x.Name == request.Name) && x.Id != id))
+            return Result.Failure(GovernateErrors.Duplicated);
+
+        var governate = await _unitOfWork.Governorates.GetByIdAsync(id);
+        if (governate is null)
+            return Result.Failure(GovernateErrors.NotFound);
+
+        request.Adapt(governate);
+
+        _unitOfWork.Governorates.Update(governate);
+        await _unitOfWork.SaveAsync();
+
+        return Result.Success();
+    }
+}

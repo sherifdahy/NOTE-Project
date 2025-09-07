@@ -1,22 +1,107 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NOTE.Solutions.BLL.Authentication;
+using NOTE.Solutions.BLL.Interfaces;
+using NOTE.Solutions.BLL.Services;
 using NOTE.Solutions.DAL.Data;
-using System.Runtime.CompilerServices;
+using NOTE.Solutions.DAL.Repository;
+using NOTE.Solutions.Entities.Interfaces;
+using System.Reflection;
+using System.Text;
 
 namespace NOTE.Solutions.API.ApplicationConfiguration;
 
 public static class DInjection
 {
-    public static IServiceCollection DI (this IServiceCollection services,IConfiguration configuration)
+    public static IServiceCollection DI(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
         services.AddSwaggerConfig();
         services.AddDbConfig(configuration);
+        services.AddServicesConfig();
+        services.AddAuthConfig(configuration);
+        services.AddCorsConfig(configuration);
+        services.AddFluentValidationConfig();
+
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
 
         return services;
     }
 
-    private static IServiceCollection AddDbConfig(this IServiceCollection services,IConfiguration configuration)
+    private static IServiceCollection AddCorsConfig(this IServiceCollection services,IConfiguration configuration)
+    {
+
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.WithOrigins(configuration.GetSection("AllowedOrigins").Get<string[]>()!);
+            });
+        });
+        return services;
+    }
+
+    private static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
+    {
+        var validationAssembly = Assembly.Load("NOTE.Solutions.BLL");
+        services.AddFluentValidationAutoValidation().AddValidatorsFromAssembly(validationAssembly);
+        return services;
+    }
+    private static IServiceCollection AddAuthConfig(this IServiceCollection services,IConfiguration configuration)
+    {
+        services.AddSingleton<IJWTProvider, JWTProvider>();
+
+        services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+
+        var jwtSettings = configuration.GetSection("Jwt").Get<JwtOptions>();
+
+        services.AddAuthentication(options =>
+        {
+            // to tell controller ( i use jwt bearer for auth )
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(o =>
+        {
+            o.SaveToken = true;
+            o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+            {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateActor = true,
+                ValidateLifetime = true,
+
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings!.Key)),
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+            };
+        });
+
+        
+
+        return services;
+    }
+    private static IServiceCollection AddServicesConfig(this IServiceCollection services)
+    {
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<ICompanyService, CompanyService>();
+        services.AddScoped<IBranchService, BranchService>();
+        services.AddScoped<ICountryService, CountryService>();
+        services.AddScoped<ICityService, CityService>();
+        services.AddScoped<IGovernateService, GovernateService>();
+        services.AddScoped<IActiveCodeService, ActiveCodeService>();
+        services.AddScoped<IAuthService, AuthService>();
+
+        return services;
+    }
+    private static IServiceCollection AddDbConfig(this IServiceCollection services, IConfiguration configuration)
     {
         string? connectionString = configuration?.GetConnectionString("default");
 
@@ -50,17 +135,17 @@ public static class DInjection
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    {
-                        new OpenApiSecurityScheme
                         {
-                            Reference = new OpenApiReference
+                            new OpenApiSecurityScheme
                             {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
                 });
         });
         return services;

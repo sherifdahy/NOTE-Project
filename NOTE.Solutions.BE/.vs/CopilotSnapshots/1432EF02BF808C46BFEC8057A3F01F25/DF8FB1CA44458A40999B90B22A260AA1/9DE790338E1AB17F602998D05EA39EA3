@@ -1,0 +1,94 @@
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using NOTE.Solutions.BLL.Interfaces;
+using NOTE.Solutions.BLL.Services;
+using NOTE.Solutions.DAL.Data;
+using NOTE.Solutions.DAL.Repository;
+using NOTE.Solutions.Entities.Interfaces;
+using System.Reflection;
+
+namespace NOTE.Solutions.API.ApplicationConfiguration;
+
+public static class DInjection
+{
+    public static IServiceCollection DI(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddControllers();
+        services.AddSwaggerConfig();
+        services.AddDbConfig(configuration);
+        services.AddServicesConfig();
+        services.AddFluentValidationConfig();
+
+        return services;
+    }
+    private static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
+    {
+        var validationAssembly = Assembly.Load("NOTE.Solutions.BLL");
+        services.AddFluentValidationAutoValidation().AddValidatorsFromAssembly(validationAssembly);
+        return services;
+    }
+    private static IServiceCollection AddServicesConfig(this IServiceCollection services)
+    {
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<ICompanyService, CompanyService>();
+        services.AddScoped<IBranchService, BranchService>();
+        services.AddScoped<ICountryService, CountryService>();
+        services.AddScoped<ICityService, CityService>();
+        services.AddScoped<IGovernateService, GovernateService>();
+
+        return services;
+    }
+    private static IServiceCollection AddDbConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+        string? connectionString = configuration?.GetConnectionString("default");
+
+        if (connectionString is null)
+            throw new Exception("Invalid Connection String");
+
+        services.AddDbContext<ApplicationDbContext>(x =>
+        {
+            x.UseSqlServer(connectionString);
+        });
+        return services;
+    }
+    private static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
+    {
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "NOTE.Solutions API",
+                Version = "v1",
+            });
+
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
+                });
+        });
+        return services;
+    }
+
+}

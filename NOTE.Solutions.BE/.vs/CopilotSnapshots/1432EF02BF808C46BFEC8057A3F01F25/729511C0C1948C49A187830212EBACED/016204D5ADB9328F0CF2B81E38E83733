@@ -1,0 +1,30 @@
+﻿
+namespace NOTE.Solutions.BLL.Services;
+
+public class CityService : ICityService
+{
+    public Task<Result<CityResponse>> CreateAsync(CityRequest request)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result> DeleteAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<IEnumerable<CityResponse>>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<CityResponse>> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result> UpdateAsync(int id, CityRequest request)
+    {
+        throw new NotImplementedException();
+    }
+}

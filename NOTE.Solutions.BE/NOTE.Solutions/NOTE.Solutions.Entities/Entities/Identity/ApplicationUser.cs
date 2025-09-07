@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Identity;
-public class ApplicationUser : TrackingBase
+public class ApplicationUser
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

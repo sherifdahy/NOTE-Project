@@ -19,9 +19,9 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().ToList();
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync()
+    public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().ToListAsync();
+        return await _context.Set<T>().ToListAsync(cancellationToken);
     }
 
     public T GetById(int id)
@@ -29,22 +29,17 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().Find(id);
     }
 
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().FindAsync(id);
+        return await _context.Set<T>().FindAsync([id], cancellationToken);
     }
 
     public List<string> GetDistinct(Expression<Func<T, string>> col)
     {
-        var distinctValues = _context.Set<T>()
-                                       .Select(col)
-                                       .Distinct()
-                                       .ToList();
-
-        return distinctValues;
+        return _context.Set<T>().Select(col).Distinct().ToList();
     }
 
-    public T Find(Expression<Func<T, bool>> criteria, string[] includes = null)
+    public T? Find(Expression<Func<T, bool>> criteria, string[]? includes = null)
     {
         IQueryable<T> query = _context.Set<T>();
 
@@ -55,7 +50,7 @@ public class Repository<T> : IRepository<T> where T : class
         return query.SingleOrDefault(criteria);
     }
 
-    public async Task<T> FindAsync(Expression<Func<T, bool>> criteria, string[] includes = null)
+    public async Task<T?> FindAsync(Expression<Func<T, bool>> criteria, string[]? includes = null, CancellationToken cancellationToken = default)
     {
         IQueryable<T> query = _context.Set<T>();
 
@@ -63,10 +58,10 @@ public class Repository<T> : IRepository<T> where T : class
             foreach (var include in includes)
                 query = query.Include(include);
 
-        return await query.SingleOrDefaultAsync(criteria);
+        return await query.SingleOrDefaultAsync(criteria, cancellationToken);
     }
 
-    public IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, string[] includes = null)
+    public IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, string[]? includes = null)
     {
         IQueryable<T> query = _context.Set<T>();
 
@@ -82,7 +77,7 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().Where(criteria).Skip(skip).Take(take).ToList();
     }
 
-    public IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, int? skip, int? take, Expression<Func<T, object>> orderBy = null, bool IsDesc = false)
+    public IEnumerable<T> FindAll(Expression<Func<T, bool>> criteria, int? skip, int? take, Expression<Func<T, object>>? orderBy = null, bool isDesc = false)
     {
         IQueryable<T> query = _context.Set<T>().Where(criteria);
 
@@ -93,70 +88,12 @@ public class Repository<T> : IRepository<T> where T : class
             query = query.Take(take.Value);
 
         if (orderBy != null)
-        {
-            if (!IsDesc)
-                query = query.OrderBy(orderBy);
-            else
-                query = query.OrderByDescending(orderBy);
-        }
+            query = isDesc ? query.OrderByDescending(orderBy) : query.OrderBy(orderBy);
 
         return query.ToList();
     }
 
-    /// <summary>
-    /// Used with jQuery DataTable
-    /// </summary>
-    /// <param name="criteria">Conditions</param>
-    /// <param name="sortColumn">Sort columns of DataTable</param>
-    /// <param name="sortColumnDirection">Asc or Desc</param>
-    /// <param name="skip">For paging</param>
-    /// <param name="take">For paging</param>
-    /// <returns>The records based on the current page</returns>
-    public IEnumerable<T> FindWithFilters(Expression<Func<T, bool>> criteria = null, string sortColumn = null, string sortColumnDirection = null, int? skip = null, int? take = null)
-    {
-        IQueryable<T> query = _context.Set<T>();
-
-        if (criteria != null)
-            query = query.Where(criteria);
-
-        if (!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection))
-        {
-            // Validate sortColumn exists
-            if (!typeof(T).GetProperties().Any(p => p.Name == sortColumn))
-                throw new ArgumentException($"Invalid sort column: {sortColumn}");
-
-            // Create parameter expression
-            var parameter = Expression.Parameter(typeof(T), "x");
-
-            // Create property expression
-            var property = Expression.Property(parameter, sortColumn);
-
-            // Create lambda expression
-            var lambda = Expression.Lambda(property, parameter);
-
-            // Create order by method call
-            string methodName = sortColumnDirection.ToLower() == "desc" ? "OrderByDescending" : "OrderBy";
-            var orderByExpression = Expression.Call(
-                typeof(Queryable),
-                methodName,
-                new[] { typeof(T), property.Type },
-                query.Expression,
-                Expression.Quote(lambda)
-            );
-
-            query = query.Provider.CreateQuery<T>(orderByExpression);
-        }
-
-        if (skip.HasValue)
-            query = query.Skip(skip.Value);
-
-        if (take.HasValue)
-            query = query.Take(take.Value);
-
-        return query.ToList();
-    }
-
-    public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, string[] includes = null)
+    public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, string[]? includes = null, CancellationToken cancellationToken = default)
     {
         IQueryable<T> query = _context.Set<T>();
 
@@ -164,15 +101,15 @@ public class Repository<T> : IRepository<T> where T : class
             foreach (var include in includes)
                 query = query.Include(include);
 
-        return await query.Where(criteria).ToListAsync();
+        return await query.Where(criteria).ToListAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int take, int skip)
+    public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int take, int skip, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().Where(criteria).Skip(skip).Take(take).ToListAsync();
+        return await _context.Set<T>().Where(criteria).Skip(skip).Take(take).ToListAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int? take, int? skip, Expression<Func<T, object>> orderBy = null, bool IsDesc = false)
+    public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, int? take, int? skip, Expression<Func<T, object>>? orderBy = null, bool isDesc = false, CancellationToken cancellationToken = default)
     {
         IQueryable<T> query = _context.Set<T>().Where(criteria);
 
@@ -183,14 +120,9 @@ public class Repository<T> : IRepository<T> where T : class
             query = query.Skip(skip.Value);
 
         if (orderBy != null)
-        {
-            if (!IsDesc)
-                query = query.OrderBy(orderBy);
-            else
-                query = query.OrderByDescending(orderBy);
-        }
+            query = isDesc ? query.OrderByDescending(orderBy) : query.OrderBy(orderBy);
 
-        return await query.ToListAsync();
+        return await query.ToListAsync(cancellationToken);
     }
 
     public T Add(T entity)
@@ -199,9 +131,9 @@ public class Repository<T> : IRepository<T> where T : class
         return entity;
     }
 
-    public async Task<T> AddAsync(T entity)
+    public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
     {
-        await _context.Set<T>().AddAsync(entity);
+        await _context.Set<T>().AddAsync(entity, cancellationToken);
         return entity;
     }
 
@@ -211,9 +143,9 @@ public class Repository<T> : IRepository<T> where T : class
         return entities;
     }
 
-    public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
+    public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
     {
-        await _context.Set<T>().AddRangeAsync(entities);
+        await _context.Set<T>().AddRangeAsync(entities, cancellationToken);
         return entities;
     }
 
@@ -249,32 +181,32 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().Count(criteria);
     }
 
-    public async Task<int> CountAsync()
+    public async Task<int> CountAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().CountAsync();
+        return await _context.Set<T>().CountAsync(cancellationToken);
     }
 
-    public async Task<int> CountAsync(Expression<Func<T, bool>> criteria)
+    public async Task<int> CountAsync(Expression<Func<T, bool>> criteria, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().CountAsync(criteria);
+        return await _context.Set<T>().CountAsync(criteria, cancellationToken);
     }
 
-    public async Task<Int64> MaxAsync(Expression<Func<T, object>> column)
+    public async Task<long> MaxAsync(Expression<Func<T, object>> column, CancellationToken cancellationToken = default)
     {
-        return Convert.ToInt64(await _context.Set<T>().MaxAsync(column));
+        return Convert.ToInt64(await _context.Set<T>().MaxAsync(column, cancellationToken));
     }
 
-    public async Task<Int64> MaxAsync(Expression<Func<T, bool>> criteria, Expression<Func<T, object>> column)
+    public async Task<long> MaxAsync(Expression<Func<T, bool>> criteria, Expression<Func<T, object>> column, CancellationToken cancellationToken = default)
     {
-        return Convert.ToInt64(await _context.Set<T>().Where(criteria).MaxAsync(column));
+        return Convert.ToInt64(await _context.Set<T>().Where(criteria).MaxAsync(column, cancellationToken));
     }
 
-    public Int64 Max(Expression<Func<T, object>> column)
+    public long Max(Expression<Func<T, object>> column)
     {
         return Convert.ToInt64(_context.Set<T>().Max(column));
     }
 
-    public Int64 Max(Expression<Func<T, bool>> criteria, Expression<Func<T, object>> column)
+    public long Max(Expression<Func<T, bool>> criteria, Expression<Func<T, object>> column)
     {
         return Convert.ToInt64(_context.Set<T>().Where(criteria).Max(column));
     }
@@ -284,8 +216,13 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().Any(criteria);
     }
 
-    public T Last(Expression<Func<T, bool>> criteria, Expression<Func<T, object>> orderBy)
+    public T? Last(Expression<Func<T, bool>> criteria, Expression<Func<T, object>> orderBy)
     {
         return _context.Set<T>().OrderByDescending(orderBy).FirstOrDefault(criteria);
+    }
+
+    public IEnumerable<T> FindWithFilters(Expression<Func<T, bool>>? criteria = null, string? sortColumn = null, string? sortColumnDirection = null, int? skip = null, int? take = null)
+    {
+        throw new NotImplementedException();
     }
 }

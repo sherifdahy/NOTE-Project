@@ -301,3 +301,8 @@ F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\ne
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\NOTE.Solutions.API.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\NOTE.Solutions.API.genruntimeconfig.cache
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\ref\NOTE.Solutions.API.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\bin\Debug\net8.0\FluentValidation.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\bin\Debug\net8.0\libman.json
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

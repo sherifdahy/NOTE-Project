@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NOTE.Solutions.Entities.Entities.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,5 +23,7 @@ public class DocumentDetail
     public int DocumentDetail_DiscountId { get; set; }
     public DocumentDetail_Discount DocumentDetail_Discount { get; set; }
 
+    public int ProductUnitId { get; set; }
+    public ProductUnit ProductUnit { get; set; }
 
 }

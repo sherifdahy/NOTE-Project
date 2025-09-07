@@ -1,0 +1,30 @@
+﻿
+namespace NOTE.Solutions.BLL.Services;
+
+public class GovernateService : IGovernateService
+{
+    public Task<Result<GovernateResponse>> CreateAsync(GovernateRequest request)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result> DeleteAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<IEnumerable<GovernateResponse>>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<GovernateResponse>> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result> UpdateAsync(int id, GovernateRequest request)
+    {
+        throw new NotImplementedException();
+    }
+}

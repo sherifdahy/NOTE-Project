@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.DI(builder.Configuration);
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,12 +20,16 @@ else
 }
 
 
-    app.UseHttpsRedirection();
+app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseExceptionHandler();
 
 app.Run();

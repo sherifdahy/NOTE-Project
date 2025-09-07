@@ -1,0 +1,83 @@
+﻿using NOTE.Solutions.Entities.Entities.Address;
+
+namespace NOTE.Solutions.BLL.Services;
+
+public class CityService(IUnitOfWork unitOfWork) : ICityService
+{
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly string[] _includes = new string[] 
+    { 
+        nameof(City.Governorate),
+        nameof(City.Governorate.Country)
+    };
+    public async Task<Result<CityResponse>> CreateAsync(CityRequest request, CancellationToken cancellationToken = default)
+    {
+        if (_unitOfWork.Cities.IsExist(x => (x.Name == request.Name && x.GovernorateId == request.GovernorateId) || x.Code == request.Code))
+            return Result.Failure<CityResponse>(CityErrors.Duplicated);
+
+        var city = request.Adapt<City>();
+
+        await _unitOfWork.Cities.AddAsync(city, cancellationToken);
+        await _unitOfWork.SaveAsync(cancellationToken);
+
+        city = await _unitOfWork.Cities.FindAsync(x => x.Id == city.Id, _includes, cancellationToken);
+
+        return Result.Success(city.Adapt<CityResponse>());
+    }
+
+    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure(CityErrors.InvalidId);
+
+        var city = await _unitOfWork.Cities.GetByIdAsync(id, cancellationToken);
+
+        if (city is null)
+            return Result.Failure(CityErrors.NotFound);
+
+        _unitOfWork.Cities.Delete(city);
+        await _unitOfWork.SaveAsync(cancellationToken);
+
+        return Result.Success();
+    }
+
+    public async Task<Result<IEnumerable<CityResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var cities = await _unitOfWork.Cities.FindAllAsync(x => true,cancellationToken:cancellationToken);
+
+        return Result.Success(cities.Adapt<IEnumerable<CityResponse>>());
+    }
+
+    public async Task<Result<CityResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure<CityResponse>(CityErrors.InvalidId);
+
+        var city = await _unitOfWork.Cities.FindAsync(x => x.Id == id,cancellationToken:cancellationToken);
+
+        if (city is null)
+            return Result.Failure<CityResponse>(CityErrors.NotFound);
+
+        return Result.Success(city.Adapt<CityResponse>());
+    }
+
+    public async Task<Result> UpdateAsync(int id, CityRequest request, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure(CityErrors.InvalidId);
+
+        if (_unitOfWork.Cities.IsExist(x => ((x.Name == request.Name && x.GovernorateId == request.GovernorateId) || x.Code == request.Code) && x.Id != id))
+            return Result.Failure(CityErrors.Duplicated);
+
+        var city = await _unitOfWork.Cities.GetByIdAsync(id, cancellationToken);
+        if (city is null)
+            return Result.Failure(CityErrors.NotFound);
+
+        request.Adapt(city);
+
+        _unitOfWork.Cities.Update(city);
+        await _unitOfWork.SaveAsync(cancellationToken);
+
+        return Result.Success();
+    }
+}

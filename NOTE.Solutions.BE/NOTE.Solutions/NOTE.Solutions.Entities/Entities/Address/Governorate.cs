@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Address;
-public class Governorate
+public class Governorate : AuditableEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

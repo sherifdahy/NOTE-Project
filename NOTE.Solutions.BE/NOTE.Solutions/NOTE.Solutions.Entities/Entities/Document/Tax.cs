@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Document;
-public class Tax
+public class Tax : AuditableEntity
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;

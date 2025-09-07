@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NOTE.Solutions.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba41390fe169e8d38fd4b1cf667de37660ebeac3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce189456aae22d162eba95b95c0a4e9de95c1cde")]
 [assembly: System.Reflection.AssemblyProductAttribute("NOTE.Solutions.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NOTE.Solutions.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Company;
-public class Branch : TrackingBase
+public class Branch : AuditableEntity
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
@@ -22,4 +22,6 @@ public class Branch : TrackingBase
 
     public ICollection<ApplicationUser> ApplicationUsers { get; set; } = new HashSet<ApplicationUser>();
     public ICollection<Product.Product> Products { get; set; } = new HashSet<Product.Product>();
+
+
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NOTE.Solutions.BLL.Interfaces;
-internal interface IBranchService
+﻿namespace NOTE.Solutions.BLL.Interfaces;
+public interface IBranchService
 {
+    Task<Result<IEnumerable<BranchResponse>>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Result<BranchResponse>> GetById(int id, CancellationToken cancellationToken = default);
+    Task<Result<BranchResponse>> CreateAsync(BranchRequest request, CancellationToken cancellationToken = default);
+    Task<Result> UpdateAsync(int id, BranchRequest request, CancellationToken cancellationToken = default);
+    Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default);
 }

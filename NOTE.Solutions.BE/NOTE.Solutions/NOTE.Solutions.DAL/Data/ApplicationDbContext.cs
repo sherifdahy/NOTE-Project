@@ -1,22 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using NOTE.Solutions.Entities.Entities;
 using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
 using NOTE.Solutions.Entities.Entities.Document;
 using NOTE.Solutions.Entities.Entities.Identity;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NOTE.Solutions.Entities.Extensions;
+using System.Security.Claims;
 
 namespace NOTE.Solutions.DAL.Data;
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions) : base(dbContextOptions)
+    private readonly IHttpContextAccessor _httpContext;
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions,IHttpContextAccessor httpContextAccessor) : base(dbContextOptions)
     {
-        
+        _httpContext = httpContextAccessor;
     }
 
     #region Identity
@@ -54,9 +54,34 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.ApplyAllConfigurations();
 
         base.OnModelCreating(modelBuilder);
     }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var entries = ChangeTracker.Entries<AuditableEntity>();
+
+        if(entries.Any())
+        {
+            var currentUserId = int.Parse(_httpContext.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)!.Value!);
+            foreach (var entityEntry in entries)
+            {
+                if (entityEntry.State == EntityState.Added)
+                {
+                    entityEntry.Property(x => x.CreatedById).CurrentValue = currentUserId;
+                    entityEntry.Property(x => x.CreatedAt).CurrentValue = DateTime.UtcNow;
+                }
+                else if (entityEntry.State == EntityState.Modified)
+                {
+                    entityEntry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
+                    entityEntry.Property(x => x.UpdatedAt).CurrentValue = DateTime.UtcNow;
+
+                }
+            }
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
+    }
 }

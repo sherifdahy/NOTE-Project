@@ -1,6 +1,6 @@
 ﻿
 namespace NOTE.Solutions.Entities.Entities.Document;
-public class DocumentType
+public class DocumentType : AuditableEntity
 {
     public int Id { get; set; }
     public string Type { get; set; } = string.Empty;

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Address;
-public class City : TrackingBase
+public class City : AuditableEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

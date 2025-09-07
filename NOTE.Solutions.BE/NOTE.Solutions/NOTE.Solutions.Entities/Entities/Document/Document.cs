@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Document;
-public class Document
+public class Document : AuditableEntity
 {
     public int Id { get; set; }
     public DateTime DateTime { get; set; }

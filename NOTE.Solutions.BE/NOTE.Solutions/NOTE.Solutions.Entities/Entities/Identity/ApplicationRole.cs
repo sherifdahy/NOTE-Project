@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Identity;
-public class ApplicationRole
+public class ApplicationRole 
 {
     public int Id { get; set; }
     public string Name { get; set; }
