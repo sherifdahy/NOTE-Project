@@ -9,5 +9,4 @@ namespace NOTE.Solutions.BLL.Contracts.Unit.Requests;
 public class UnitRequest
 {
     public string Code { get; set; } = string.Empty;
-    public int BranchId { get; set; }
 }

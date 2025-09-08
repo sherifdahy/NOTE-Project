@@ -8,7 +8,7 @@ public class CityService(IUnitOfWork unitOfWork) : ICityService
     private readonly string[] _includes = new string[] 
     { 
         nameof(City.Governorate),
-        nameof(City.Governorate.Country)
+        $"{nameof(City.Governorate)}.{nameof(City.Governorate.Country)}"
     };
     public async Task<Result<CityResponse>> CreateAsync(CityRequest request, CancellationToken cancellationToken = default)
     {

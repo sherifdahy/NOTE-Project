@@ -1,0 +1,13 @@
+﻿using FluentValidation;
+using NOTE.Solutions.BLL.Contracts.DocumentType.Requests;
+
+namespace NOTE.Solutions.BLL.Contracts.DocumentType.Validations;
+
+public class DocumentTypeValidator : AbstractValidator<DocumentTypeRequest>
+{
+    public DocumentTypeValidator()
+    {
+        RuleFor(x => x.Type).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.Version).NotEmpty().MaximumLength(20);
+    }
+}

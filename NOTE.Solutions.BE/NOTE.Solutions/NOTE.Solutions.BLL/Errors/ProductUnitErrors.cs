@@ -1,0 +1,8 @@
+namespace NOTE.Solutions.BLL.Errors;
+
+public static class ProductUnitErrors
+{
+    public static readonly Error Duplicated = new("ProductUnit.Duplicated", "The product unit already exists.", 400);
+    public static readonly Error InvalidId = new("ProductUnit.InvalidId", "The provided product unit ID is invalid.", 400);
+    public static readonly Error NotFound = new("ProductUnit.NotFound", "The product unit was not found.", 404);
+}

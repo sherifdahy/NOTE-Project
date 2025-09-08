@@ -8,6 +8,5 @@ namespace NOTE.Solutions.BLL.Contracts.Product.Requests;
 
 public class ProductRequest
 {
-    public string Name { get; set; }
-    public int BranchId { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

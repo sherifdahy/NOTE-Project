@@ -7,6 +7,5 @@ public class ProductValidator : AbstractValidator<ProductRequest>
     public ProductValidator()
     {
         RuleFor(x=>x.Name).NotEmpty().Length(3,100);
-        RuleFor(x => x.BranchId).NotEmpty().GreaterThan(0);
     }
 }

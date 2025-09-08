@@ -1,0 +1,12 @@
+﻿using FluentValidation;
+using NOTE.Solutions.BLL.Contracts.Tax.Requests;
+
+namespace NOTE.Solutions.BLL.Contracts.Tax.Validations;
+
+public class TaxValidator : AbstractValidator<TaxRequest>
+{
+    public TaxValidator()
+    {
+        RuleFor(x => x.Code).NotEmpty().MaximumLength(50);
+    }
+}

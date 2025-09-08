@@ -19,3 +19,7 @@ global using NOTE.Solutions.BLL.Contracts.City.Requests;
 global using NOTE.Solutions.BLL.Contracts.City.Responses;
 global using NOTE.Solutions.BLL.Contracts.Unit.Requests;
 global using NOTE.Solutions.BLL.Contracts.Unit.Responses;
+global using NOTE.Solutions.BLL.Contracts.ProductUnit.Requests;
+global using NOTE.Solutions.BLL.Contracts.ProductUnit.Responses;
+global using NOTE.Solutions.BLL.Contracts.Product.Requests;
+global using NOTE.Solutions.BLL.Contracts.Product.Responses;

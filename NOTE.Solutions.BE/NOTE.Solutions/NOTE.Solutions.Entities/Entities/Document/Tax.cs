@@ -10,6 +10,6 @@ public class Tax : AuditableEntity
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
 
-    public int DocumentDetail_TaxId { get; set; }
-    public DocumentDetail_Tax DocumentDetail_Tax { get; set; }
+    public ICollection<DocumentDetail_Tax> DocumentDetail_Taxes { get; set; } = new HashSet<DocumentDetail_Tax>();
 }
+

@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\contracts\\productunit\\validations\\productunitvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\contracts\\productunit\\validations\\productunitvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\contracts\\product\\validations\\productvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\contracts\\product\\validations\\productvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\contracts\\productunit\\requests\\productunitrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\contracts\\productunit\\requests\\productunitrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entities\\product\\productunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entities\\product\\productunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\contracts\\productunit\\responses\\productunitresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\contracts\\productunit\\responses\\productunitresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,53 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductUnitValidator.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Validations\\ProductUnitValidator.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Validations\\ProductUnitValidator.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Validations\\ProductUnitValidator.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Validations\\ProductUnitValidator.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAIwA0AAABAAAAAAAAAAA==",
+              "Title": "ProductValidator.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Product\\Validations\\ProductValidator.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Product\\Validations\\ProductValidator.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Product\\Validations\\ProductValidator.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Product\\Validations\\ProductValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T15:28:26.614Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProductUnitResponse.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Responses\\ProductUnitResponse.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Responses\\ProductUnitResponse.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Responses\\ProductUnitResponse.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Responses\\ProductUnitResponse.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T15:27:18.472Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductUnitRequest.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Requests\\ProductUnitRequest.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Requests\\ProductUnitRequest.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Requests\\ProductUnitRequest.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\ProductUnit\\Requests\\ProductUnitRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T15:27:11.195Z",
+              "WhenOpened": "2025-09-08T09:27:36.529Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ProductUnit.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Product\\ProductUnit.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Product\\ProductUnit.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Product\\ProductUnit.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Product\\ProductUnit.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\ProductsController.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T15:27:04.813Z",
+              "WhenOpened": "2025-09-07T17:29:40.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\ProductService.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\ProductService.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\ProductService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAkwEMAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T08:37:53.229Z",
               "EditorCaption": ""
             }
           ]

@@ -17,16 +17,12 @@
     <Folder Include="Contracts\DocumentDetail\Requests\" />
     <Folder Include="Contracts\DocumentDetail\Responses\" />
     <Folder Include="Contracts\DocumentDetail\Validations\" />
-    <Folder Include="Contracts\DocumentType\Requests\" />
-    <Folder Include="Contracts\DocumentType\Responses\" />
-    <Folder Include="Contracts\DocumentType\Validations\" />
     <Folder Include="Contracts\Document\Requests\" />
     <Folder Include="Contracts\Document\Responses\" />
     <Folder Include="Contracts\Document\Validations\" />
     <Folder Include="Contracts\Identity\Requests\" />
     <Folder Include="Contracts\Identity\Responses\" />
     <Folder Include="Contracts\Identity\Validations\" />
-    <Folder Include="Contracts\Tax\" />
   </ItemGroup>
 
   <ItemGroup>

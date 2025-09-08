@@ -1,0 +1,78 @@
+﻿using NOTE.Solutions.BLL.Contracts.Product.Requests;
+using NOTE.Solutions.BLL.Contracts.Product.Responses;
+using NOTE.Solutions.Entities.Entities.Product;
+using Mapster;
+
+namespace NOTE.Solutions.BLL.Services;
+
+public class ProductService(IUnitOfWork unitOfWork) : IProductService
+{
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
+    public async Task<Result<ProductResponse>> CreateAsync(ProductRequest request, CancellationToken cancellationToken = default)
+    {
+        if (_unitOfWork.Products.IsExist(x => x.Name == request.Name && x.BranchId == request.BranchId))
+            return Result.Failure<ProductResponse>("Product already exists.");
+
+        var product = request.Adapt<Product>();
+
+        await _unitOfWork.Products.AddAsync(product, cancellationToken);
+        await _unitOfWork.SaveAsync(cancellationToken);
+
+        return Result.Success(product.Adapt<ProductResponse>());
+    }
+
+    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure("Invalid Product ID.");
+
+        var product = await _unitOfWork.Products.GetByIdAsync(id, cancellationToken);
+
+        if (product is null)
+            return Result.Failure("Product not found.");
+
+        _unitOfWork.Products.Delete(product);
+        await _unitOfWork.SaveAsync(cancellationToken);
+
+        return Result.Success();
+    }
+
+    public async Task<Result<IEnumerable<ProductResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var products = await _unitOfWork.Products.FindAllAsync(x => true, cancellationToken);
+
+        return Result.Success(products.Adapt<IEnumerable<ProductResponse>>());
+    }
+
+    public async Task<Result<ProductResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure<ProductResponse>("Invalid Product ID.");
+
+        var product = await _unitOfWork.Products.FindAsync(x => x.Id == id, cancellationToken);
+
+        if (product is null)
+            return Result.Failure<ProductResponse>("Product not found.");
+
+        return Result.Success(product.Adapt<ProductResponse>());
+    }
+
+    public async Task<Result> UpdateAsync(int id, ProductRequest request, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure("Invalid Product ID.");
+
+        var product = await _unitOfWork.Products.GetByIdAsync(id, cancellationToken);
+
+        if (product is null)
+            return Result.Failure("Product not found.");
+
+        request.Adapt(product);
+
+        _unitOfWork.Products.Update(product);
+        await _unitOfWork.SaveAsync(cancellationToken);
+
+        return Result.Success();
+    }
+}

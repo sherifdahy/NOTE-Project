@@ -438,9 +438,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Property<int>("DocumentDetail_DiscountId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DocumentDetail_TaxId")
-                        .HasColumnType("int");
-
                     b.Property<int>("DocumentId")
                         .HasColumnType("int");
 
@@ -456,8 +453,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DocumentDetail_DiscountId");
-
-                    b.HasIndex("DocumentDetail_TaxId");
 
                     b.HasIndex("DocumentId");
 
@@ -487,11 +482,11 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("DocumentDetailId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("TaxId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -499,7 +494,9 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DocumentDetailId", "TaxId");
+
+                    b.HasIndex("TaxId");
 
                     b.ToTable("DocumentDetail_Tax");
                 });
@@ -520,7 +517,8 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -530,13 +528,17 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<string>("Version")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("UpdatedById");
+
+                    b.HasIndex("Type", "Version")
+                        .IsUnique();
 
                     b.ToTable("DocumentTypes");
                 });
@@ -551,15 +553,13 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DocumentDetail_TaxId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -570,9 +570,10 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("Code")
+                        .IsUnique();
 
-                    b.HasIndex("DocumentDetail_TaxId");
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("UpdatedById");
 
@@ -669,7 +670,8 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -682,6 +684,9 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasIndex("BranchId");
 
                     b.HasIndex("CreatedById");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("UpdatedById");
 
@@ -723,7 +728,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UnitId")
+                    b.Property<int>("UnitId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
@@ -756,12 +761,9 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -777,7 +779,8 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
+                    b.HasIndex("Code")
+                        .IsUnique();
 
                     b.HasIndex("CreatedById");
 
@@ -1027,12 +1030,6 @@ namespace NOTE.Solutions.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", "DocumentDetail_Tax")
-                        .WithMany("DocumentDetails")
-                        .HasForeignKey("DocumentDetail_TaxId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("NOTE.Solutions.Entities.Entities.Document.Document", "Document")
                         .WithMany("DocumentDetails")
                         .HasForeignKey("DocumentId")
@@ -1049,9 +1046,26 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Navigation("DocumentDetail_Discount");
 
-                    b.Navigation("DocumentDetail_Tax");
-
                     b.Navigation("ProductUnit");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", "DocumentDetail")
+                        .WithMany("DocumentDetail_Taxes")
+                        .HasForeignKey("DocumentDetailId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.Tax", "Tax")
+                        .WithMany("DocumentDetail_Taxes")
+                        .HasForeignKey("TaxId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("DocumentDetail");
+
+                    b.Navigation("Tax");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentType", b =>
@@ -1079,19 +1093,11 @@ namespace NOTE.Solutions.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", "DocumentDetail_Tax")
-                        .WithMany("Taxes")
-                        .HasForeignKey("DocumentDetail_TaxId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById");
 
                     b.Navigation("CreatedBy");
-
-                    b.Navigation("DocumentDetail_Tax");
 
                     b.Navigation("UpdatedBy");
                 });
@@ -1146,9 +1152,11 @@ namespace NOTE.Solutions.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Unit.Unit", null)
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Unit.Unit", "Unit")
                         .WithMany("ProductUnits")
-                        .HasForeignKey("UnitId");
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
                         .WithMany()
@@ -1158,17 +1166,13 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Navigation("Product");
 
+                    b.Navigation("Unit");
+
                     b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Unit.Unit", b =>
                 {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
@@ -1178,8 +1182,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedById");
-
-                    b.Navigation("Branch");
 
                     b.Navigation("CreatedBy");
 
@@ -1223,6 +1225,11 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("DocumentDetails");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", b =>
+                {
+                    b.Navigation("DocumentDetail_Taxes");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Discount", b =>
                 {
                     b.Navigation("Discounts");
@@ -1230,16 +1237,14 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("DocumentDetails");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", b =>
-                {
-                    b.Navigation("DocumentDetails");
-
-                    b.Navigation("Taxes");
-                });
-
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentType", b =>
                 {
                     b.Navigation("Documents");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.Tax", b =>
+                {
+                    b.Navigation("DocumentDetail_Taxes");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>

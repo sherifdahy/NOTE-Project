@@ -1,0 +1,64 @@
+﻿using NOTE.Solutions.BLL.Contracts.DocumentType.Requests;
+using NOTE.Solutions.BLL.Contracts.DocumentType.Responses;
+using NOTE.Solutions.BLL.Errors;
+using NOTE.Solutions.Entities.Entities.Document;
+using Mapster;
+
+namespace NOTE.Solutions.BLL.Services;
+
+public class DocumentTypeService(IUnitOfWork unitOfWork) : IDocumentTypeService
+{
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
+    public async Task<Result<DocumentTypeResponse>> CreateAsync(DocumentTypeRequest request, CancellationToken cancellationToken = default)
+    {
+        if (_unitOfWork.DocumentTypes.IsExist(x => x.Type == request.Type && x.Version == request.Version))
+            return Result.Failure<DocumentTypeResponse>(DocumentTypeErrors.Duplicated);
+
+        var docType = request.Adapt<DocumentType>();
+        await _unitOfWork.DocumentTypes.AddAsync(docType, cancellationToken);
+        await _unitOfWork.SaveAsync(cancellationToken);
+        return Result.Success(docType.Adapt<DocumentTypeResponse>());
+    }
+
+    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure(DocumentTypeErrors.InvalidId);
+        var docType = await _unitOfWork.DocumentTypes.GetByIdAsync(id, cancellationToken);
+        if (docType is null)
+            return Result.Failure(DocumentTypeErrors.NotFound);
+        _unitOfWork.DocumentTypes.Delete(docType);
+        await _unitOfWork.SaveAsync(cancellationToken);
+        return Result.Success();
+    }
+
+    public async Task<Result<IEnumerable<DocumentTypeResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var docTypes = await _unitOfWork.DocumentTypes.FindAllAsync(x => true, null);
+        return Result.Success(docTypes.Adapt<IEnumerable<DocumentTypeResponse>>());
+    }
+
+    public async Task<Result<DocumentTypeResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure<DocumentTypeResponse>(DocumentTypeErrors.InvalidId);
+        var docType = await _unitOfWork.DocumentTypes.FindAsync(x => x.Id == id, null);
+        if (docType is null)
+            return Result.Failure<DocumentTypeResponse>(DocumentTypeErrors.NotFound);
+        return Result.Success(docType.Adapt<DocumentTypeResponse>());
+    }
+
+    public async Task<Result> UpdateAsync(int id, DocumentTypeRequest request, CancellationToken cancellationToken = default)
+    {
+        if (id <= 0)
+            return Result.Failure(DocumentTypeErrors.InvalidId);
+        var docType = await _unitOfWork.DocumentTypes.GetByIdAsync(id, cancellationToken);
+        if (docType is null)
+            return Result.Failure(DocumentTypeErrors.NotFound);
+        request.Adapt(docType);
+        _unitOfWork.DocumentTypes.Update(docType);
+        await _unitOfWork.SaveAsync(cancellationToken);
+        return Result.Success();
+    }
+}

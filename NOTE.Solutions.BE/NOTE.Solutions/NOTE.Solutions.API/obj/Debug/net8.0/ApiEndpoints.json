@@ -148,6 +148,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductsController",
+    "Method": "GetAll",
+    "RelativePath": "api/branches/{branchId}/Products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "branchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductsController",
+    "Method": "Create",
+    "RelativePath": "api/branches/{branchId}/Products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "branchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Product.Requests.ProductRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NOTE.Solutions.API.Controllers.BranchesController",
     "Method": "GetById",
     "RelativePath": "api/Branches/{id}",
@@ -438,6 +475,85 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NOTE.Solutions.API.Controllers.DocumentTypesController",
+    "Method": "GetAll",
+    "RelativePath": "api/DocumentTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.DocumentTypesController",
+    "Method": "Create",
+    "RelativePath": "api/DocumentTypes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.DocumentType.Requests.DocumentTypeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.DocumentTypesController",
+    "Method": "GetById",
+    "RelativePath": "api/DocumentTypes/{documentTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "documentTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.DocumentTypesController",
+    "Method": "Update",
+    "RelativePath": "api/DocumentTypes/{documentTypeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "documentTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.DocumentType.Requests.DocumentTypeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.DocumentTypesController",
+    "Method": "Delete",
+    "RelativePath": "api/DocumentTypes/{documentTypeId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "documentTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NOTE.Solutions.API.Controllers.GovernatesController",
     "Method": "GetAll",
     "RelativePath": "api/Governates",
@@ -517,6 +633,138 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductsController",
+    "Method": "GetById",
+    "RelativePath": "api/Products/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductsController",
+    "Method": "Update",
+    "RelativePath": "api/Products/{productId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Product.Requests.ProductRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductsController",
+    "Method": "Delete",
+    "RelativePath": "api/Products/{productId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "GetAll",
+    "RelativePath": "api/ProductUnits",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "Create",
+    "RelativePath": "api/ProductUnits",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.ProductUnit.Requests.ProductUnitRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "GetById",
+    "RelativePath": "api/ProductUnits/{productUnitId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productUnitId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "Update",
+    "RelativePath": "api/ProductUnits/{productUnitId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productUnitId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.ProductUnit.Requests.ProductUnitRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "Delete",
+    "RelativePath": "api/ProductUnits/{productUnitId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productUnitId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NOTE.Solutions.API.Controllers.RolesController",
     "Method": "GetAll",
     "RelativePath": "api/Roles",
@@ -589,6 +837,164 @@
     "Parameters": [
       {
         "Name": "roleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.TaxesController",
+    "Method": "GetAll",
+    "RelativePath": "api/Taxes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.TaxesController",
+    "Method": "Create",
+    "RelativePath": "api/Taxes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Tax.Requests.TaxRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.TaxesController",
+    "Method": "GetById",
+    "RelativePath": "api/Taxes/{taxId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taxId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.TaxesController",
+    "Method": "Update",
+    "RelativePath": "api/Taxes/{taxId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taxId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Tax.Requests.TaxRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.TaxesController",
+    "Method": "Delete",
+    "RelativePath": "api/Taxes/{taxId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taxId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.UnitsController",
+    "Method": "GetAll",
+    "RelativePath": "api/Units",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.UnitsController",
+    "Method": "Create",
+    "RelativePath": "api/Units",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Unit.Requests.UnitRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.UnitsController",
+    "Method": "GetById",
+    "RelativePath": "api/Units/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.UnitsController",
+    "Method": "Update",
+    "RelativePath": "api/Units/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Unit.Requests.UnitRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.UnitsController",
+    "Method": "Delete",
+    "RelativePath": "api/Units/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }

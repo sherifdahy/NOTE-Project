@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 namespace NOTE.Solutions.Entities.Entities.Document;
 public class DocumentDetail_Tax
 {
-    public int Id { get; set; }
     public decimal Rate { get; set; }
     public decimal Amount { get; set; }
 
-    public ICollection<Tax> Taxes { get; set; } = new HashSet<Tax>();
-    public ICollection<DocumentDetail> DocumentDetails { get; set; } = new HashSet<DocumentDetail>();
 
+    public int DocumentDetailId { get; set; }
+    public DocumentDetail? DocumentDetail { get; set; }
+
+    public int TaxId { get; set; }
+    public Tax? Tax { get; set; }
+
+    
 }

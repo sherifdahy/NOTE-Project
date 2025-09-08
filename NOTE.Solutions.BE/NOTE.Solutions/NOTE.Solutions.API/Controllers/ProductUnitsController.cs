@@ -1,0 +1,47 @@
+using Microsoft.AspNetCore.Authorization;
+using NOTE.Solutions.BLL.Contracts.ProductUnit.Requests;
+
+namespace NOTE.Solutions.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+[Authorize]
+public class ProductUnitsController(IProductUnitService productUnitService) : ControllerBase
+{
+    private readonly IProductUnitService _productUnitService = productUnitService;
+
+    [HttpGet()]
+    public async Task<IActionResult> GetAll()
+    {
+        var result = await _productUnitService.GetAllAsync();
+        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+    }
+
+    [HttpGet("{productUnitId:int}")]
+    public async Task<IActionResult> GetById(int productUnitId)
+    {
+        var result = await _productUnitService.GetByIdAsync(productUnitId);
+        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] ProductUnitRequest request)
+    {
+        var result = await _productUnitService.CreateAsync(request);
+        return result.IsSuccess ? CreatedAtAction(nameof(GetById), new { productUnitId = result.Value.Id }, result.Value) : result.ToProblem();
+    }
+
+    [HttpPut("{productUnitId:int}")]
+    public async Task<IActionResult> Update(int productUnitId, [FromBody] ProductUnitRequest request)
+    {
+        var result = await _productUnitService.UpdateAsync(productUnitId, request);
+        return result.IsSuccess ? NoContent() : result.ToProblem();
+    }
+
+    [HttpDelete("{productUnitId:int}")]
+    public async Task<IActionResult> Delete(int productUnitId)
+    {
+        var result = await _productUnitService.DeleteAsync(productUnitId);
+        return result.IsSuccess ? NoContent() : result.ToProblem();
+    }
+}

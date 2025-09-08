@@ -32,7 +32,6 @@ public static class DInjection
 
         return services;
     }
-
     private static IServiceCollection AddCorsConfig(this IServiceCollection services,IConfiguration configuration)
     {
 
@@ -47,7 +46,6 @@ public static class DInjection
         });
         return services;
     }
-
     private static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
     {
         var validationAssembly = Assembly.Load("NOTE.Solutions.BLL");
@@ -98,6 +96,11 @@ public static class DInjection
         services.AddScoped<IGovernateService, GovernateService>();
         services.AddScoped<IActiveCodeService, ActiveCodeService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUnitService, UnitService>();
+        services.AddScoped<IDocumentTypeService, DocumentTypeService>();
+        services.AddScoped<ITaxService, TaxService>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IProductUnitService, ProductUnitService>();
 
         return services;
     }

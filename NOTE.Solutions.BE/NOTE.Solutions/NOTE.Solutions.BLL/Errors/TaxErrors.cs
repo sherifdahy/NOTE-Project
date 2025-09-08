@@ -1,0 +1,9 @@
+namespace NOTE.Solutions.BLL.Errors;
+
+public static class TaxErrors
+{
+    public static readonly Error Duplicated = new("Tax.Duplicated", "The tax already exists.", 400);
+    public static readonly Error InvalidId = new("Tax.InvalidId", "The provided tax ID is invalid.", 400);
+    public static readonly Error NotFound = new("Tax.NotFound", "The tax was not found.", 404);
+    public static readonly Error InvalidCode = new("Tax.InvalidCode", "Code is required and must not exceed 50 characters.", 400);
+}
