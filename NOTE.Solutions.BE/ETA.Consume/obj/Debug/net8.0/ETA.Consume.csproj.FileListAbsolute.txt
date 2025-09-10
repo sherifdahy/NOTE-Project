@@ -10,3 +10,4 @@ F:\NOTE-Project\NOTE.Solutions.BE\ETA.Consume\obj\Debug\net8.0\ETA.Consume.dll
 F:\NOTE-Project\NOTE.Solutions.BE\ETA.Consume\obj\Debug\net8.0\refint\ETA.Consume.dll
 F:\NOTE-Project\NOTE.Solutions.BE\ETA.Consume\obj\Debug\net8.0\ETA.Consume.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\ETA.Consume\obj\Debug\net8.0\ref\ETA.Consume.dll
+F:\NOTE-Project\NOTE.Solutions.BE\ETA.Consume\obj\Debug\net8.0\ETA.Consume.csproj.AssemblyReference.cache

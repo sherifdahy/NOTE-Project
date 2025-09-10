@@ -554,6 +554,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ETAController",
+    "Method": "GetToken",
+    "RelativePath": "api/ETA",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ETAController",
+    "Method": "Submit",
+    "RelativePath": "api/ETA",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NOTE.Solutions.API.Controllers.GovernatesController",
     "Method": "GetAll",
     "RelativePath": "api/Governates",
@@ -688,39 +708,13 @@
   {
     "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
     "Method": "GetAll",
-    "RelativePath": "api/ProductUnits",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
-    "Method": "Create",
-    "RelativePath": "api/ProductUnits",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "NOTE.Solutions.BLL.Contracts.ProductUnit.Requests.ProductUnitRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
-    "Method": "GetById",
-    "RelativePath": "api/ProductUnits/{productUnitId}",
+    "RelativePath": "api/products/{productId}/ProductUnits",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productUnitId",
+        "Name": "productId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -729,14 +723,14 @@
   },
   {
     "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
-    "Method": "Update",
-    "RelativePath": "api/ProductUnits/{productUnitId}",
-    "HttpMethod": "PUT",
+    "Method": "Create",
+    "RelativePath": "api/products/{productId}/ProductUnits",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productUnitId",
+        "Name": "productId",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -750,8 +744,55 @@
   },
   {
     "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "GetById",
+    "RelativePath": "api/products/{productId}/ProductUnits/{productUnitId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productUnitId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
+    "Method": "Update",
+    "RelativePath": "api/products/{productId}/ProductUnits/{productUnitId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productUnitId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.ProductUnit.Requests.ProductUnitRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.ProductUnitsController",
     "Method": "Delete",
-    "RelativePath": "api/ProductUnits/{productUnitId}",
+    "RelativePath": "api/products/{productId}/ProductUnits/{productUnitId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -759,6 +800,11 @@
       {
         "Name": "productUnitId",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
         "IsRequired": true
       }
     ],

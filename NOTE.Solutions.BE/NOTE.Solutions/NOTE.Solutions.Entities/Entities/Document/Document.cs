@@ -27,7 +27,6 @@ public class Document : AuditableEntity
     public int DocumentTypeId { get; set; }
     public DocumentType DocumentType { get; set; }
 
-
     public ICollection<DocumentDetail> DocumentDetails { get; set; } = new HashSet<DocumentDetail>();
 
 }

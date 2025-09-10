@@ -1,0 +1,129 @@
+﻿using ETA.Consume.Contracts.Error.Responses;
+using ETA.Consume.Interfaces;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using NOTE.Solutions.Abstractions;
+using RestSharp;
+
+namespace ETA.Consume.Services;
+
+public class ApiCall : IApiCall
+{
+    private readonly string _baseUrl;
+    private readonly RestClient _client;
+
+    public ApiCall(IOptions<ETAOptions> options)
+    {
+        _baseUrl = options.Value.ApiBaseUrl;
+        _client = new RestClient(new RestClientOptions(_baseUrl));
+    }
+
+    private void AddHeaders(RestRequest request, Dictionary<string, string>? headers)
+    {
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                request.AddOrUpdateHeader(header.Key, header.Value);
+            }
+        }
+    }
+
+    private Error ParseErrorResponse(RestResponse response)
+    {
+        try
+        {
+            var errorResponse = JsonConvert.DeserializeObject<StandardErrorResponse>(response.Content ?? "");
+            return new Error(errorResponse?.Code ?? response.StatusCode.ToString(), errorResponse?.Message ?? response.Content ?? "", (int)response.StatusCode);
+        }
+        catch
+        {
+            return new Error(response.StatusCode.ToString(), response.Content ?? "", (int)response.StatusCode);
+        }
+    }
+
+    public async Task<Result<IEnumerable<T>>> GetAllAsync<T>(string apiName, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest(apiName, Method.Get);
+        AddHeaders(request, headers);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Content))
+        {
+            var data = JsonConvert.DeserializeObject<IEnumerable<T>>(response.Content);
+            return Result.Success(data);
+        }
+        return Result.Failure<IEnumerable<T>>(ParseErrorResponse(response));
+    }
+
+    public async Task<Result<T>> GetByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest($"{url}/{id}", Method.Get);
+        AddHeaders(request, headers);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Content))
+        {
+            var data = JsonConvert.DeserializeObject<T>(response.Content);
+            return Result.Success(data);
+        }
+        return Result.Failure<T>(ParseErrorResponse(response));
+    }
+
+    public async Task<Result<bool>> CreateAsync(string url, string serializedEntity, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest(url, Method.Post);
+        AddHeaders(request, headers);
+        request.AddStringBody(serializedEntity, ContentType.Json);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful)
+            return Result.Success(true);
+        return Result.Failure<bool>(ParseErrorResponse(response));
+    }
+
+    public async Task<Result<T2>> PostReturnAsync<T2>(string url, string serializedEntity, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest(url, Method.Post);
+        AddHeaders(request, headers);
+        request.AddStringBody(serializedEntity, ContentType.Json);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Content))
+        {
+            var data = JsonConvert.DeserializeObject<T2>(response.Content);
+            return Result.Success(data);
+        }
+        return Result.Failure<T2>(ParseErrorResponse(response));
+    }
+
+    public async Task<Result<bool>> UpdateAsync(string url, int id, string serializedEntity, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest($"{url}/{id}", Method.Put);
+        AddHeaders(request, headers);
+        request.AddStringBody(serializedEntity, ContentType.Json);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful)
+            return Result.Success(true);
+        return Result.Failure<bool>(ParseErrorResponse(response));
+    }
+
+    public async Task<Result<bool>> DeleteAsync(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest($"{url}?id={id}", Method.Delete);
+        AddHeaders(request, headers);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful)
+            return Result.Success(true);
+        return Result.Failure<bool>(ParseErrorResponse(response));
+    }
+
+    public async Task<Result<IEnumerable<T>>> GetAllByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        var request = new RestRequest($"{url}/{id}", Method.Get);
+        AddHeaders(request, headers);
+        var response = await _client.ExecuteAsync(request);
+        if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Content))
+        {
+            var data = JsonConvert.DeserializeObject<IEnumerable<T>>(response.Content);
+            return Result.Success(data);
+        }
+        return Result.Failure<IEnumerable<T>>(ParseErrorResponse(response));
+    }
+}

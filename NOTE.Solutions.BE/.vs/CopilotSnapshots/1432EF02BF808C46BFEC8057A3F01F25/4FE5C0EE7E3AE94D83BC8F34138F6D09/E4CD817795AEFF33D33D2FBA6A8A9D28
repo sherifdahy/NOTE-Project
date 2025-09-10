@@ -1,0 +1,183 @@
+﻿using ETA.Consume.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using OneOf;
+
+namespace ETA.Consume.Services;
+
+public class ApiCall : IApiCall
+{
+    private readonly string baseUrl;
+    private readonly HttpClient client;
+
+    public ApiCall(IConfiguration configuration)
+    {
+        baseUrl = "https://id.preprod.eta.gov.eg/";
+        client = new HttpClient { BaseAddress = new Uri(baseUrl) };
+    }
+
+    private void AddHeaders(Dictionary<string, string>? headers)
+    {
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                if (!client.DefaultRequestHeaders.Contains(header.Key))
+                {
+                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+        }
+    }
+
+    public async Task<OneOf<IEnumerable<T>, (string Error, int StatusCode)>> GetAllAsync<T>(string apiName, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.GetAsync(apiName);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<IEnumerable<T>>(content);
+                return data;
+            }
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<T, (string Error, int StatusCode)>> GetByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.GetAsync($"{url}/{id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<T>(content);
+                return data;
+            }
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<bool, (string Error, int StatusCode)>> CreateAsync<T>(string url, T entity, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PostAsJsonAsync(url, entity);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return true;
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<T2, (string Error, int StatusCode)>> PostReturnAsync<T1, T2>(string url, T1 entity, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PostAsJsonAsync(url, entity);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<T2>(content);
+                return data;
+            }
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<T2, (string Error, int StatusCode)>> PostReturnAsync<T2>(string url, HttpContent content, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PostAsync(url, content);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<T2>(responseContent);
+                return data;
+            }
+            return (responseContent, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<bool, (string Error, int StatusCode)>> UpdateAsync<T>(string url, int id, T entity, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PutAsJsonAsync($"{url}/{id}", entity);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return true;
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<bool, (string Error, int StatusCode)>> DeleteAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.DeleteAsync($"{url}?id={id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return true;
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+
+    public async Task<OneOf<IEnumerable<T>, (string Error, int StatusCode)>> GetAllByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.GetAsync($"{url}/{id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<IEnumerable<T>>(content);
+                return data;
+            }
+            return (content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return (ex.Message, 500);
+        }
+    }
+}

@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NOTE.Solutions.DAL.Abstractions;
+﻿using NOTE.Solutions.BLL.Abstractions;
 
-namespace NOTE.Solutions.API.Abstractions
+namespace NOTE.Solutions.Abstractions
 {
     public static class ResultExtensions
     {

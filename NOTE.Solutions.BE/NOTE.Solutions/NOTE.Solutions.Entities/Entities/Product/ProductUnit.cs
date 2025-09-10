@@ -20,10 +20,10 @@ public class ProductUnit : AuditableEntity
 
 
     public int UnitId { get; set; }
-    public Unit.Unit Unit { get; set; }
+    public Unit.Unit? Unit { get; set; }
 
     public int ProductId { get; set; }
-    public Product Product { get; set; }
+    public Product? Product { get; set; }
 
     public ICollection<DocumentDetail> DocumentDetails { get; set; } = new HashSet<DocumentDetail>();
 }

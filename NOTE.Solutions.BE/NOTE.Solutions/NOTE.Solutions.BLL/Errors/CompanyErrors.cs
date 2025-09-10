@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using NOTE.Solutions.DAL.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

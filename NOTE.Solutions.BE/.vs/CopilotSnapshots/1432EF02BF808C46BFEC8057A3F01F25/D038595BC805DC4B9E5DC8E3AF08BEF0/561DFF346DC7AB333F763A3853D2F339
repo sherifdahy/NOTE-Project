@@ -1,0 +1,18 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using NOTE.Solutions.Abstractions;
+
+namespace ETA.Consume.Interfaces;
+
+public interface IApiCall
+{
+    Task<Result<IEnumerable<T>>> GetAllAsync<T>(string apiName, Dictionary<string, string>? headers = null);
+    Task<Result<IEnumerable<T>>> GetAllByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<Result<T>> GetByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<Result<bool>> CreateAsync<T>(string url, T entity, Dictionary<string, string>? headers = null) where T : class;
+    Task<Result<T2>> PostReturnAsync<T1, T2>(string url, T1 entity, Dictionary<string, string>? headers = null) where T1 : class;
+    Task<Result<bool>> UpdateAsync<T>(string url, int id, T entity, Dictionary<string, string>? headers = null) where T : class;
+    Task<Result<bool>> DeleteAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<Result<T>> ReceiptSubmit<T>(string url, object entity, Dictionary<string, string>? headers = null);
+}
+

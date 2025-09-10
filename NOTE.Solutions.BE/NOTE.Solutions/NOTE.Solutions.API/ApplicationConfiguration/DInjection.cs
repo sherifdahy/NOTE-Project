@@ -1,4 +1,8 @@
-﻿using FluentValidation;
+﻿using ETA.Consume;
+using ETA.Consume.Interfaces;
+using ETA.Consume.Manager;
+using ETA.Consume.Services;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +30,7 @@ public static class DInjection
         services.AddAuthConfig(configuration);
         services.AddCorsConfig(configuration);
         services.AddFluentValidationConfig();
+        services.AddEtaConfig(configuration);
 
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
@@ -101,6 +106,9 @@ public static class DInjection
         services.AddScoped<ITaxService, TaxService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductUnitService, ProductUnitService>();
+        services.AddScoped<IEtaManager, EtaManager>();
+        services.AddScoped<IETAService, ETAService>();
+        services.AddScoped<ICacheService, CacheService>();
 
         return services;
     }
@@ -151,6 +159,11 @@ public static class DInjection
                         }
                 });
         });
+        return services;
+    }
+    private static IServiceCollection AddEtaConfig(this IServiceCollection services,IConfiguration configuration)
+    {
+        services.Configure<ETAOptions>(configuration.GetSection("ETA"));
         return services;
     }
 

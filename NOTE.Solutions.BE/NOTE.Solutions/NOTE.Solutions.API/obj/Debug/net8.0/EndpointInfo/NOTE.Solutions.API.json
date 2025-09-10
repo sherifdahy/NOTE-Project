@@ -837,6 +837,28 @@
         }
       }
     },
+    "/api/ETA": {
+      "get": {
+        "tags": [
+          "ETA"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ETA"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Governates": {
       "get": {
         "tags": [
@@ -1109,10 +1131,21 @@
         }
       }
     },
-    "/api/ProductUnits": {
+    "/api/products/{productId}/ProductUnits": {
       "get": {
         "tags": [
           "ProductUnits"
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1123,6 +1156,17 @@
       "post": {
         "tags": [
           "ProductUnits"
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -1150,7 +1194,7 @@
         }
       }
     },
-    "/api/ProductUnits/{productUnitId}": {
+    "/api/products/{productId}/ProductUnits/{productUnitId}": {
       "get": {
         "tags": [
           "ProductUnits"
@@ -1163,6 +1207,14 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1184,6 +1236,14 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1224,6 +1284,14 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1776,10 +1844,6 @@
             "format": "double"
           },
           "unitId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "productId": {
             "type": "integer",
             "format": "int32"
           }

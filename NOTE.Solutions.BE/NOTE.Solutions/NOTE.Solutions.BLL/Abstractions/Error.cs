@@ -1,4 +1,4 @@
-﻿namespace NOTE.Solutions.DAL.Abstractions;
+﻿namespace NOTE.Solutions.BLL.Abstractions;
 
 public record Error(string Code, string Description, int? StatusCode)
 {

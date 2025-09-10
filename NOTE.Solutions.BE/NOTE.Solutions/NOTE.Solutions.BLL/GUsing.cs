@@ -3,7 +3,6 @@ global using NOTE.Solutions.BLL.Contracts.Role.Requests;
 global using NOTE.Solutions.BLL.Contracts.Role.Responses;
 global using NOTE.Solutions.BLL.Errors;
 global using NOTE.Solutions.BLL.Interfaces;
-global using NOTE.Solutions.DAL.Abstractions;
 global using NOTE.Solutions.Entities.Entities.Identity;
 global using NOTE.Solutions.Entities.Interfaces;
 global using NOTE.Solutions.BLL.Contracts.Company.Requests;
@@ -23,3 +22,7 @@ global using NOTE.Solutions.BLL.Contracts.ProductUnit.Requests;
 global using NOTE.Solutions.BLL.Contracts.ProductUnit.Responses;
 global using NOTE.Solutions.BLL.Contracts.Product.Requests;
 global using NOTE.Solutions.BLL.Contracts.Product.Responses;
+global using NOTE.Solutions.BLL.Abstractions;
+global using NOTE.Solutions.BLL.Contracts.ActiveCode.Requests;
+global using NOTE.Solutions.BLL.Contracts.ActiveCode.Responses;
+

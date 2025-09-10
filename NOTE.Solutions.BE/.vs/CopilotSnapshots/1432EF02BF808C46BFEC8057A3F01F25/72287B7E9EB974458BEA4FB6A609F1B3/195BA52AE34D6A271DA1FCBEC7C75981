@@ -1,0 +1,12 @@
+﻿namespace ETA.Consume.Interfaces;
+public interface IApiCall
+{
+    Task<ApiResult<IEnumerable<T>>> GetAllAsync<T>(string url, Dictionary<string, string>? headers = null);
+    Task<ApiResult<IEnumerable<T>>> GetAllByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<ApiResult<T>> GetByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<ApiResult<bool>> CreateAsync<T>(string url, T entity, Dictionary<string, string>? headers = null);
+    Task<ApiResult<T2>> PostReturnAsync<T1, T2>(string url, T1 entity, Dictionary<string, string>? headers = null);
+    Task<ApiResult<T2>> PostReturnAsync<T2>(string url, HttpContent content, Dictionary<string, string>? headers = null);
+    Task<ApiResult<bool>> UpdateAsync<T>(string url, int id, T entity, Dictionary<string, string>? headers = null);
+    Task<ApiResult<bool>> DeleteAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+}

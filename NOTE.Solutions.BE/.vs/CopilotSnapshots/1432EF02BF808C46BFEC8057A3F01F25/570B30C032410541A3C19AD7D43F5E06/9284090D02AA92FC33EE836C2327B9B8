@@ -1,0 +1,53 @@
+﻿namespace ETA.Consume.Services;
+public class IdentityApiCall : IIdentityApiCall
+{
+    private readonly string _baseUrl;
+    private readonly HttpClient _client;
+    
+    public IdentityApiCall(IOptions<ETAOptions> options)
+    {
+        _baseUrl = options.Value.IdSrvBaseUrl;
+        _client = new HttpClient { BaseAddress = new Uri(_baseUrl) };
+    }
+
+    private void AddHeaders(Dictionary<string, string>? headers)
+    {
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                if (!_client.DefaultRequestHeaders.Contains(header.Key))
+                {
+                    _client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+        }
+    }
+
+    private async Task<Error> ParseErrorResponse(HttpResponseMessage response)
+    {
+        var content = await response.Content.ReadAsStringAsync();
+        try
+        {
+            var errorResponse = JsonConvert.DeserializeObject<AuthErrorResponse>(content);
+            return new Error(response.StatusCode.ToString(), errorResponse.Error, (int)response.StatusCode);
+        }
+        catch
+        {
+            return new Error(response.StatusCode.ToString(), content, (int)response.StatusCode);
+        }
+    }
+
+    public async Task<Result<T2>> PostReturnAsync<T2>(string url, HttpContent content, Dictionary<string, string>? headers = null)
+    {
+        AddHeaders(headers);
+        var response = await _client.PostAsync(url, content);
+        var responseContent = await response.Content.ReadAsStringAsync();
+        if (response.IsSuccessStatusCode)
+        {
+            var data = JsonConvert.DeserializeObject<T2>(responseContent);
+            return Result.Success(data);
+        }
+        return Result.Failure<T2>(await ParseErrorResponse(response));
+    }
+}

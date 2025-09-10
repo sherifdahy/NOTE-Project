@@ -34,3 +34,5 @@ F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\ne
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\refint\NOTE.Solutions.BLL.dll
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\ref\NOTE.Solutions.BLL.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\ETA.Consume.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\ETA.Consume.pdb

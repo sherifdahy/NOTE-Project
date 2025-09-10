@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ETA.Consume\ETA.Consume.csproj" />
     <ProjectReference Include="..\NOTE.Solutions.DAL\NOTE.Solutions.DAL.csproj" />
   </ItemGroup>
 
@@ -14,12 +15,6 @@
     <Folder Include="Contracts\Discount\Requests\" />
     <Folder Include="Contracts\Discount\Responses\" />
     <Folder Include="Contracts\Discount\Validations\" />
-    <Folder Include="Contracts\DocumentDetail\Requests\" />
-    <Folder Include="Contracts\DocumentDetail\Responses\" />
-    <Folder Include="Contracts\DocumentDetail\Validations\" />
-    <Folder Include="Contracts\Document\Requests\" />
-    <Folder Include="Contracts\Document\Responses\" />
-    <Folder Include="Contracts\Document\Validations\" />
     <Folder Include="Contracts\Identity\Requests\" />
     <Folder Include="Contracts\Identity\Responses\" />
     <Folder Include="Contracts\Identity\Validations\" />

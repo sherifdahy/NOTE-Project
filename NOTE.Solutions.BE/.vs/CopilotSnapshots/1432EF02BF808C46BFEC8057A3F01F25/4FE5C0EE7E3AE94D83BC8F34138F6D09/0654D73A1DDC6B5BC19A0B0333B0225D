@@ -1,0 +1,14 @@
+﻿using OneOf;
+
+namespace ETA.Consume.Interfaces;
+public interface IApiCall
+{
+    Task<OneOf<IEnumerable<T>, (string Error, int StatusCode>>> GetAllAsync<T>(string url, Dictionary<string, string>? headers = null);
+    Task<OneOf<IEnumerable<T>, (string Error, int StatusCode>>> GetAllByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<OneOf<T, (string Error, int StatusCode)>> GetByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+    Task<OneOf<bool, (string Error, int StatusCode)>> CreateAsync<T>(string url, T entity, Dictionary<string, string>? headers = null);
+    Task<OneOf<T2, (string Error, int StatusCode)>> PostReturnAsync<T1, T2>(string url, T1 entity, Dictionary<string, string>? headers = null);
+    Task<OneOf<T2, (string Error, int StatusCode)>> PostReturnAsync<T2>(string url, HttpContent content, Dictionary<string, string>? headers = null);
+    Task<OneOf<bool, (string Error, int StatusCode)>> UpdateAsync<T>(string url, int id, T entity, Dictionary<string, string>? headers = null);
+    Task<OneOf<bool, (string Error, int StatusCode)>> DeleteAsync<T>(string url, int id, Dictionary<string, string>? headers = null);
+}

@@ -1,6 +1,4 @@
-﻿using NOTE.Solutions.BLL.Contracts.ActiveCode.Requests;
-using NOTE.Solutions.BLL.Contracts.ActiveCode.Responses;
-
+﻿
 namespace NOTE.Solutions.BLL.Interfaces;
 
 public interface IActiveCodeService

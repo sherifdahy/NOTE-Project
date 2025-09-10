@@ -1,10 +1,9 @@
-﻿namespace NOTE.Solutions.DAL.Abstractions;
-
+﻿namespace NOTE.Solutions.BLL.Abstractions;
 public class Result
 {
     public Result(bool isSuccess, Error error)
     {
-        if ((isSuccess && !error.Equals(Error.None)) || (!isSuccess && error.Equals(Error.None)))
+        if (isSuccess && !error.Equals(Error.None) || !isSuccess && error.Equals(Error.None))
         {
             throw new InvalidOperationException();
         }

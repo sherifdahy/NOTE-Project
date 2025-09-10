@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ETA.Consume")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba41390fe169e8d38fd4b1cf667de37660ebeac3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fef1fc1cb0021bf1c9b5c9663ac9fb5272791c65")]
 [assembly: System.Reflection.AssemblyProductAttribute("ETA.Consume")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ETA.Consume")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

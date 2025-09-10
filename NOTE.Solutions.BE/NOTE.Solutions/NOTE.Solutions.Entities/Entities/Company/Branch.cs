@@ -22,6 +22,7 @@ public class Branch : AuditableEntity
 
     public ICollection<ApplicationUser> ApplicationUsers { get; set; } = new HashSet<ApplicationUser>();
     public ICollection<Product.Product> Products { get; set; } = new HashSet<Product.Product>();
+    public ICollection<POS> POSs { get; set; } = new HashSet<POS>();
 
 
 }

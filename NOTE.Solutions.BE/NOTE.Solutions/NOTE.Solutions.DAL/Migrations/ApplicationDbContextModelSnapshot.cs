@@ -325,6 +325,59 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("CompanyActiveCode");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.POS", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<string>("POSSerial")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.HasIndex("ClientId", "ClientSecret");
+
+                    b.HasIndex("POSSerial", "BranchId");
+
+                    b.ToTable("POS");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.Discount", b =>
                 {
                     b.Property<int>("Id")
@@ -744,11 +797,18 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("CreatedById");
 
-                    b.HasIndex("ProductId");
-
                     b.HasIndex("UnitId");
 
                     b.HasIndex("UpdatedById");
+
+                    b.HasIndex("GlobalCode", "GlobalCodeType")
+                        .IsUnique();
+
+                    b.HasIndex("ProductId", "InternalCode")
+                        .IsUnique();
+
+                    b.HasIndex("ProductId", "UnitId")
+                        .IsUnique();
 
                     b.ToTable("ProductUnits");
                 });
@@ -794,13 +854,13 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("ApplicationUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", null)
                         .WithMany()
                         .HasForeignKey("BranchesId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -815,7 +875,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Address.Governorate", "Governorate")
                         .WithMany("Cities")
                         .HasForeignKey("GovernorateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -853,7 +913,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Address.Country", "Country")
                         .WithMany("Governorates")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
@@ -897,13 +957,13 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Address.City", "City")
                         .WithMany("Branches")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", "Company")
                         .WithMany("Branches")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
@@ -949,13 +1009,13 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.ActiveCode", "ActiveCode")
                         .WithMany("CompanyActiveCodes")
                         .HasForeignKey("ActiveCodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", "Company")
                         .WithMany("CompanyActiveCodes")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ActiveCode");
@@ -963,18 +1023,43 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.POS", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
+                        .WithMany("POSs")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.Discount", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Discount", "DocumentDetail_Discount")
                         .WithMany("Discounts")
                         .HasForeignKey("DocumentDetail_DiscountId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -993,7 +1078,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
@@ -1005,7 +1090,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentType", "DocumentType")
                         .WithMany("Documents")
                         .HasForeignKey("DocumentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -1027,13 +1112,13 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Discount", "DocumentDetail_Discount")
                         .WithMany("DocumentDetails")
                         .HasForeignKey("DocumentDetail_DiscountId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Document.Document", "Document")
                         .WithMany("DocumentDetails")
                         .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Product.ProductUnit", "ProductUnit")
@@ -1073,7 +1158,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -1090,7 +1175,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -1124,7 +1209,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -1143,7 +1228,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Product.Product", "Product")
@@ -1176,7 +1261,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
@@ -1210,6 +1295,8 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Branch", b =>
                 {
+                    b.Navigation("POSs");
+
                     b.Navigation("Products");
                 });
 

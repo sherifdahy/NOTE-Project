@@ -1,10 +1,19 @@
-using NOTE.Solutions.API.ApplicationConfiguration;
+﻿using NOTE.Solutions.API.ApplicationConfiguration;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.DI(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Host.UseSerilog((context,configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +28,7 @@ else
     app.UseSwaggerUI();
 }
 
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

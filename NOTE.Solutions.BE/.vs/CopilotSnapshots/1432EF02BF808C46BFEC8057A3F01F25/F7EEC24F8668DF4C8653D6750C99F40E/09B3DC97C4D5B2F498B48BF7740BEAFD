@@ -1,0 +1,40 @@
+﻿using ETA.Consume.Contracts.Auth.Requests;
+using ETA.Consume.Contracts.Auth.Responses;
+using ETA.Consume.Interfaces;
+using Microsoft.Extensions.Configuration;
+
+namespace ETA.Consume.Services;
+
+public class EtaAuthService : IEtaAuthService
+{
+    private readonly IApiCall _apiCall;
+    public EtaAuthService(IConfiguration configuration)
+    {
+        _apiCall = new ApiCall(configuration);
+    }
+
+    public async Task<AuthPOSResponse> AuthenticatePOS(AuthPOSRequest request)
+    {
+        var headers = new Dictionary<string, string>
+    {
+        { "posserial" , request.POSSerial },
+        { "pososversion" , "Windows"}
+    };
+
+        var values = new Dictionary<string, string>
+    {
+        { "client_id", request.ClientId },
+        { "client_secret", request.ClientSecret },
+        { "grant_type", "client_credentials" }
+    };
+
+        using var content = new FormUrlEncodedContent(values);
+
+        var result = await _apiCall.PostReturnAsync<AuthPOSResponse>("connect/token", content, headers);
+
+        if(res)
+
+       throw new NotImplementedException();
+    }
+
+}

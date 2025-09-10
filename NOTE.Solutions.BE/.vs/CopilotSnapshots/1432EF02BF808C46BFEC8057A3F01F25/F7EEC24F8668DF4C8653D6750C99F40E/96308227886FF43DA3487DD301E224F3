@@ -1,0 +1,183 @@
+﻿using ETA.Consume.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using ETA.Consume.Models;
+
+namespace ETA.Consume.Services;
+
+public class ApiCall : IApiCall
+{
+    private readonly string baseUrl;
+    private readonly HttpClient client;
+
+    public ApiCall(IConfiguration configuration)
+    {
+        baseUrl = "https://id.preprod.eta.gov.eg/";
+        client = new HttpClient { BaseAddress = new Uri(baseUrl) };
+    }
+
+    private void AddHeaders(Dictionary<string, string>? headers)
+    {
+        if (headers != null)
+        {
+            foreach (var header in headers)
+            {
+                if (!client.DefaultRequestHeaders.Contains(header.Key))
+                {
+                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+        }
+    }
+
+    public async Task<ApiResult<IEnumerable<T>>> GetAllAsync<T>(string apiName, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.GetAsync(apiName);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<IEnumerable<T>>(content);
+                return ApiResult<IEnumerable<T>>.Ok(data, (int)response.StatusCode);
+            }
+            return ApiResult<IEnumerable<T>>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<IEnumerable<T>>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<T>> GetByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.GetAsync($"{url}/{id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<T>(content);
+                return ApiResult<T>.Ok(data, (int)response.StatusCode);
+            }
+            return ApiResult<T>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<T>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<bool>> CreateAsync<T>(string url, T entity, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PostAsJsonAsync(url, entity);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return ApiResult<bool>.Ok(true, (int)response.StatusCode);
+            return ApiResult<bool>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<bool>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<T2>> PostReturnAsync<T1, T2>(string url, T1 entity, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PostAsJsonAsync(url, entity);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<T2>(content);
+                return ApiResult<T2>.Ok(data, (int)response.StatusCode);
+            }
+            return ApiResult<T2>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<T2>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<T2>> PostReturnAsync<T2>(string url, HttpContent content, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PostAsync(url, content);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<T2>(responseContent);
+                return ApiResult<T2>.Ok(data, (int)response.StatusCode);
+            }
+            return ApiResult<T2>.Fail(responseContent, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<T2>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<bool>> UpdateAsync<T>(string url, int id, T entity, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.PutAsJsonAsync($"{url}/{id}", entity);
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return ApiResult<bool>.Ok(true, (int)response.StatusCode);
+            return ApiResult<bool>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<bool>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<bool>> DeleteAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.DeleteAsync($"{url}?id={id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return ApiResult<bool>.Ok(true, (int)response.StatusCode);
+            return ApiResult<bool>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<bool>.Fail(ex.Message, 500);
+        }
+    }
+
+    public async Task<ApiResult<IEnumerable<T>>> GetAllByIdAsync<T>(string url, int id, Dictionary<string, string>? headers = null)
+    {
+        try
+        {
+            AddHeaders(headers);
+            var response = await client.GetAsync($"{url}/{id}");
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = JsonConvert.DeserializeObject<IEnumerable<T>>(content);
+                return ApiResult<IEnumerable<T>>.Ok(data, (int)response.StatusCode);
+            }
+            return ApiResult<IEnumerable<T>>.Fail(content, (int)response.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            return ApiResult<IEnumerable<T>>.Fail(ex.Message, 500);
+        }
+    }
+}

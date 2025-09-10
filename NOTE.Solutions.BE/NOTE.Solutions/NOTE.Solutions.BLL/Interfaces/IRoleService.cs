@@ -1,8 +1,4 @@
-﻿using NOTE.Solutions.BLL.Contracts.Role.Requests;
-using NOTE.Solutions.BLL.Contracts.Role.Responses;
-using NOTE.Solutions.DAL.Abstractions;
-using NOTE.Solutions.Entities.Entities.Identity;
-
+﻿
 namespace NOTE.Solutions.BLL.Interfaces;
 public interface IRoleService
 {

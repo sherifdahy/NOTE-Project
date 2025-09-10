@@ -2,18 +2,22 @@ using Microsoft.AspNetCore.Authorization;
 using NOTE.Solutions.BLL.Contracts.ProductUnit.Requests;
 
 namespace NOTE.Solutions.API.Controllers;
-
-[Route("api/[controller]")]
+[Route("api/products/{productId}/[controller]")]
 [ApiController]
 [Authorize]
-public class ProductUnitsController(IProductUnitService productUnitService) : ControllerBase
+public class ProductUnitsController : ControllerBase
 {
-    private readonly IProductUnitService _productUnitService = productUnitService;
+    private readonly IProductUnitService _productUnitService;
 
-    [HttpGet()]
-    public async Task<IActionResult> GetAll()
+    public ProductUnitsController(IProductUnitService productUnitService)
     {
-        var result = await _productUnitService.GetAllAsync();
+        _productUnitService = productUnitService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll(int productId)
+    {
+        var result = await _productUnitService.GetAllAsync(productId);
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 
@@ -25,10 +29,12 @@ public class ProductUnitsController(IProductUnitService productUnitService) : Co
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ProductUnitRequest request)
+    public async Task<IActionResult> Create(int productId, [FromBody] ProductUnitRequest request)
     {
-        var result = await _productUnitService.CreateAsync(request);
-        return result.IsSuccess ? CreatedAtAction(nameof(GetById), new { productUnitId = result.Value.Id }, result.Value) : result.ToProblem();
+        var result = await _productUnitService.CreateAsync(productId, request);
+        return result.IsSuccess
+            ? CreatedAtAction(nameof(GetById), new { productId, productUnitId = result.Value.Id }, result.Value)
+            : result.ToProblem();
     }
 
     [HttpPut("{productUnitId:int}")]

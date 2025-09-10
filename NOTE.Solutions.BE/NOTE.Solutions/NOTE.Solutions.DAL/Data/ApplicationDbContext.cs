@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using NOTE.Solutions.API.Extensions;
 using NOTE.Solutions.Entities.Entities;
 using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
@@ -56,6 +57,11 @@ public class ApplicationDbContext : DbContext
     {
         modelBuilder.ApplyAllConfigurations();
 
+        modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())
+            .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade)
+            .ToList()
+            .ForEach(fk => fk.DeleteBehavior = DeleteBehavior.Restrict);
+
         base.OnModelCreating(modelBuilder);
     }
 
@@ -65,7 +71,7 @@ public class ApplicationDbContext : DbContext
 
         if(entries.Any())
         {
-            var currentUserId = int.Parse(_httpContext.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)!.Value!);
+            var currentUserId = _httpContext.HttpContext.User.GetUserId();
             foreach (var entityEntry in entries)
             {
                 if (entityEntry.State == EntityState.Added)
