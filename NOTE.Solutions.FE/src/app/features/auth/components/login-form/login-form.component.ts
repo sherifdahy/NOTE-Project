@@ -34,7 +34,7 @@ export class LoginFormComponent implements OnInit {
   handleSubmitClick() {
     if (!this.loginForm.valid)
       return;
-6
+
     let loginRequest = this.loginForm.value as LoginRequest;
 
     this.authService.login(loginRequest).subscribe({
