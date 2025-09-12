@@ -1,0 +1,14 @@
+.form-group{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-control{
+  padding: 0.3rem;
+}
+
+
+.form-label{
+  margin-top: 0.5rem;
+}

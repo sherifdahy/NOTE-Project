@@ -1,0 +1,27 @@
+.main-layout{
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+      "header header"
+      "sidebar body"
+      "sidebar footer ";
+  height: 100vh;
+}
+
+.header-area{
+  grid-area: header;
+}
+
+.sidebar-area{
+  grid-area: sidebar;
+}
+
+.body-area{
+  padding: 0.5rem;
+  grid-area: body;
+}
+
+.footer-area{
+  grid-area: footer;
+}

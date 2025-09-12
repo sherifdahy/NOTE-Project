@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: var(--line-height-base);
+}
+
+ul,ol{
+  list-style: none;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}

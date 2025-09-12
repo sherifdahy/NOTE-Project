@@ -1,0 +1,10 @@
+.header-area{
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+

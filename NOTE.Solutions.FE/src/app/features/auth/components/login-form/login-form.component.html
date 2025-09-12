@@ -1,0 +1,24 @@
+<div>
+  <div class="auth-header">
+    <h1>Login Form</h1>
+  </div>
+
+  <div class="auth-body">
+    <form [formGroup]="loginForm" (ngSubmit)="handleSubmitClick()">
+      <div class="form-group">
+        <label class="form-label" for="uEmail">Email</label>
+        <input class="form-control" type="email" id="uEmail" formControlName="email">
+        <span *ngIf="email?.errors">{{email?.errors | json}}</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="uPassword">Password</label>
+        <input class="form-control" type="password" id="uPassword" formControlName="password">
+        <span *ngIf="password?.errors">{{password?.errors | json}}</span>
+      </div>
+
+      <div class="btns">
+        <button class="btn">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
