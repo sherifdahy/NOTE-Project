@@ -6,12 +6,13 @@ namespace NOTE.Solutions.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class CitiesController(ICityService cityService) : ControllerBase
 {
     private readonly ICityService _cityService = cityService;
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll()
     {
         var result = await _cityService.GetAllAsync();

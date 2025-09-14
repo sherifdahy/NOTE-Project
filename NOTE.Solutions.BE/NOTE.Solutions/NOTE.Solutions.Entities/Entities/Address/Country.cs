@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Address;
-public class Country : AuditableEntity
+public class Country 
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

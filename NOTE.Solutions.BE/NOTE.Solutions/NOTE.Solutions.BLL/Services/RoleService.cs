@@ -1,8 +1,40 @@
 ﻿
+using NOTE.Solutions.Entities.Enums;
+
 namespace NOTE.Solutions.BLL.Services;
 public class RoleService(IUnitOfWork unitOfWork) : IRoleService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
+    public async Task<Result> AssignToRoleAsync(ApplicationUser user,RoleType role)
+    {
+        var roleResult = await _unitOfWork.Roles.FindAsync(x => x.Name.ToLower() == role.ToString().ToLower());
+
+        if (roleResult is null)
+            return Result.Failure(RoleErrors.NotFound);
+
+        user.ApplicationRoleId = roleResult.Id;
+
+        _unitOfWork.Users.Update(user);
+        await _unitOfWork.SaveAsync();
+
+        return Result.Success();
+    }
+
+    public async Task<Result> AssignToRoleAsync(List<ApplicationUser> users, RoleType role)
+    {
+        var roleResult = await _unitOfWork.Roles.FindAsync(x => x.Name.ToLower() == role.ToString().ToLower());
+
+        if (roleResult is null)
+            return Result.Failure(RoleErrors.NotFound);
+
+        users.ForEach(x=>x.ApplicationRoleId = roleResult.Id);
+
+        _unitOfWork.Users.UpdateRange(users);
+        await _unitOfWork.SaveAsync();
+
+        return Result.Success();
+    }
 
     public async Task<Result<RoleResponse>> CreateAsync(RoleRequest request, CancellationToken cancellationToken = default)
     {

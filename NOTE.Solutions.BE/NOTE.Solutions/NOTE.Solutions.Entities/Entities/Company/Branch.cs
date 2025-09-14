@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Company;
-public class Branch : AuditableEntity
+public class Branch
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;

@@ -25,16 +25,6 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
             .WithMany(g => g.Cities)
             .HasForeignKey(c => c.GovernorateId);
 
-        builder
-            .HasOne(c => c.CreatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(c => c.UpdatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.UpdatedById)
-            .OnDelete(DeleteBehavior.Restrict);
+        
     }
 }

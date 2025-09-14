@@ -22,16 +22,5 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         builder.HasIndex(c => c.Code).IsUnique();
         builder.Property(c => c.Code).IsRequired().HasMaxLength(10);
 
-        builder
-            .HasOne(c => c.CreatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(c => c.UpdatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.UpdatedById)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

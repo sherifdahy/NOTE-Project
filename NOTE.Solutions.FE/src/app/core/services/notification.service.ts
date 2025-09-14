@@ -14,19 +14,20 @@ export class NotificationService {
       duration:3000,
       horizontalPosition : 'start',
       verticalPosition : 'bottom',
-      panelClass : ['success-snackbar'],
+      panelClass: ['snackbar-success']
     })
   }
 
   showError(errors : Record<string,string[]>)
   {
+    console.log(errors);
     Object.keys(errors).forEach(key=>{
       this.matSnackBar.open(errors[key].join('\n'),key,{
         duration : 3000,
         horizontalPosition : 'start',
         verticalPosition : 'bottom',
-        panelClass : ['error-snackbar'],
+        panelClass: ['snackbar-error']
       })
     })
-  }
+}
 }

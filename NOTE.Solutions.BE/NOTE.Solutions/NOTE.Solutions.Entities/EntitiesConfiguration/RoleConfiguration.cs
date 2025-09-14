@@ -21,8 +21,9 @@ internal class RoleConfiguration : IEntityTypeConfiguration<ApplicationRole>
             new ApplicationRole() 
             {
                 Id = 2,
-                Name = "User",
-            }
+                Name = "Customer",
+            },
         });
+
     }
 }

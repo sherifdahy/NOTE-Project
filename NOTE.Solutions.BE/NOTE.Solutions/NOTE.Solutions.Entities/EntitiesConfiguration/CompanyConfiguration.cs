@@ -15,17 +15,5 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
         builder.Property(c => c.Name).IsRequired().HasMaxLength(200);
         builder.Property(c => c.IsActive);
 
-
-        builder
-            .HasOne(c => c.CreatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(c => c.UpdatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.UpdatedById)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

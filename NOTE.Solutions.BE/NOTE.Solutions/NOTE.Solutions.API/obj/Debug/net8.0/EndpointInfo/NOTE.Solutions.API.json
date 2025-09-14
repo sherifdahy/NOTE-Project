@@ -10,16 +10,6 @@
         "tags": [
           "ActiveCodes"
         ],
-        "parameters": [
-          {
-            "name": "companyId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -29,16 +19,6 @@
       "post": {
         "tags": [
           "ActiveCodes"
-        ],
-        "parameters": [
-          {
-            "name": "companyId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -181,7 +161,7 @@
         }
       }
     },
-    "/api/Auth/register": {
+    "/api/Auth/register-company": {
       "post": {
         "tags": [
           "Auth"
@@ -190,17 +170,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
+                "$ref": "#/components/schemas/RegisterCompanyRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
+                "$ref": "#/components/schemas/RegisterCompanyRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
+                "$ref": "#/components/schemas/RegisterCompanyRequest"
               }
             }
           }
@@ -1697,13 +1677,12 @@
             "type": "string",
             "nullable": true
           },
-          "companyId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "cityId": {
             "type": "integer",
             "format": "int32"
+          },
+          "applicationUser": {
+            "$ref": "#/components/schemas/UserRequest"
           }
         },
         "additionalProperties": false
@@ -1850,28 +1829,23 @@
         },
         "additionalProperties": false
       },
-      "RegisterRequest": {
+      "RegisterCompanyRequest": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "nullable": true
           },
-          "ssn": {
+          "rin": {
             "type": "string",
             "nullable": true
           },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
+          "activeCodeId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
+          "branch": {
+            "$ref": "#/components/schemas/BranchRequest"
           }
         },
         "additionalProperties": false
@@ -1900,6 +1874,32 @@
         "type": "object",
         "properties": {
           "code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ssn": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
             "type": "string",
             "nullable": true
           }

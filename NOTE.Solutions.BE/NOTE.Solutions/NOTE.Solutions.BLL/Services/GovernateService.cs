@@ -5,10 +5,7 @@ namespace NOTE.Solutions.BLL.Services;
 public class GovernateService(IUnitOfWork unitOfWork) : IGovernateService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    private readonly string[] _includes = new string[]
-    {
-        nameof(Governorate.Country),
-    };
+    
     public async Task<Result<GovernateResponse>> CreateAsync(GovernateRequest request, CancellationToken cancellationToken = default)
     {
         if (_unitOfWork.Governorates.IsExist(x => (x.Name == request.Name && x.CountryId == request.CountryId) || (x.Code == request.Code)))
@@ -18,8 +15,6 @@ public class GovernateService(IUnitOfWork unitOfWork) : IGovernateService
 
         await _unitOfWork.Governorates.AddAsync(governate,cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
-
-        governate = await _unitOfWork.Governorates.FindAsync(x => x.Id == governate.Id,_includes,cancellationToken);
 
         return Result.Success(governate.Adapt<GovernateResponse>());
     }
@@ -42,7 +37,7 @@ public class GovernateService(IUnitOfWork unitOfWork) : IGovernateService
 
     public async Task<Result<IEnumerable<GovernateResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var governates = await _unitOfWork.Governorates.FindAllAsync(x => true, _includes,cancellationToken);
+        var governates = await _unitOfWork.Governorates.FindAllAsync(x => true, cancellationToken:cancellationToken);
 
         return Result.Success(governates.Adapt<IEnumerable<GovernateResponse>>());
     }
@@ -52,7 +47,7 @@ public class GovernateService(IUnitOfWork unitOfWork) : IGovernateService
         if (id <= 0)
             return Result.Failure<GovernateResponse>(GovernateErrors.InvalidId);
 
-        var governate = await _unitOfWork.Governorates.FindAsync(x => x.Id == id, _includes,cancellationToken);
+        var governate = await _unitOfWork.Governorates.FindAsync(x => x.Id == id,cancellationToken: cancellationToken);
 
         if (governate is null)
             return Result.Failure<GovernateResponse>(GovernateErrors.NotFound);

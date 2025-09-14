@@ -18,6 +18,7 @@ public class JWTProvider (IOptions<JwtOptions> options): IJWTProvider
     {
         Claim[] claims = [
             new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id.ToString()),
+            new Claim("role",applicationUser.ApplicationRole.Name),
             new Claim(JwtRegisteredClaimNames.Email,applicationUser.Email),
             new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
         ];

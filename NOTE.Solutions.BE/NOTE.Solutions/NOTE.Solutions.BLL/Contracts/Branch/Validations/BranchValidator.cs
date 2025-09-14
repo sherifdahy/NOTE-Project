@@ -1,4 +1,5 @@
 ﻿using NOTE.Solutions.BLL.Contracts.Branch.Requests;
+using NOTE.Solutions.BLL.Contracts.User.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,15 @@ public class BranchValidator : AbstractValidator<BranchRequest>
 {
     public BranchValidator()
     {
-        RuleFor(x => x.Code)
-            .NotEmpty().WithMessage("Code is required.")
-            .MaximumLength(10).WithMessage("Code must not exceed 10 characters.");
-        RuleFor(x => x.CompanyId)
-            .GreaterThan(0).WithMessage("CompanyId must be greater than 0.");
         RuleFor(x => x.CityId)
-            .GreaterThan(0).WithMessage("CityId must be greater than 0.");
+            .NotEmpty().WithMessage("City is required.");
+
+        RuleFor(x => x.Code)
+            .NotEmpty().WithMessage("Branch code is required.")
+            .MaximumLength(50).WithMessage("Branch code must not exceed 50 characters.");
+
+        RuleFor(x => x.ApplicationUser)
+            .NotNull().WithMessage("User information is required.")
+            .SetValidator(new UserValidator());
     }
 }

@@ -17,16 +17,6 @@ public class ActiveCodeConfiguration : IEntityTypeConfiguration<ActiveCode>
         builder.HasIndex(ac => ac.Code).IsUnique();
         builder.Property(ac => ac.Code).IsRequired().HasMaxLength(100);
 
-        builder
-            .HasOne(c => c.CreatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(c => c.UpdatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.UpdatedById)
-            .OnDelete(DeleteBehavior.Restrict);
+       
     }
 }

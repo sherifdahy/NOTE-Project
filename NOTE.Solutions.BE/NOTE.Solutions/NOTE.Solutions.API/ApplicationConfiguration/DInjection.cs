@@ -4,6 +4,8 @@ using ETA.Consume.Manager;
 using ETA.Consume.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -31,12 +33,24 @@ public static class DInjection
         services.AddCorsConfig(configuration);
         services.AddFluentValidationConfig();
         services.AddEtaConfig(configuration);
-
+        services.AddMapsterConfig();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
 
         return services;
     }
+
+    private static IServiceCollection AddMapsterConfig(this IServiceCollection services)
+    {
+        var mappingConfig = TypeAdapterConfig.GlobalSettings;
+        var bllAssembly = Assembly.Load("NOTE.Solutions.BLL");
+
+        mappingConfig.Scan(bllAssembly);
+        services.AddSingleton<IMapper>(new Mapper(mappingConfig));
+
+        return services;
+    }
+
     private static IServiceCollection AddCorsConfig(this IServiceCollection services,IConfiguration configuration)
     {
 

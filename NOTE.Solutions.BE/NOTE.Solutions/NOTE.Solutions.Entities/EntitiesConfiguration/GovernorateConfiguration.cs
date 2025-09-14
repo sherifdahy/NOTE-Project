@@ -19,18 +19,5 @@ public class GovernorateConfiguration : IEntityTypeConfiguration<Governorate>
         builder.HasMany(g => g.Cities)
             .WithOne(c => c.Governorate)
             .HasForeignKey(c => c.GovernorateId);
-
-
-        builder
-            .HasOne(c => c.CreatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(c => c.UpdatedBy)
-            .WithMany()
-            .HasForeignKey(c => c.UpdatedById)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

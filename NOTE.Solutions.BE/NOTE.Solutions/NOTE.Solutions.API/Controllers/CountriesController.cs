@@ -7,12 +7,13 @@ namespace NOTE.Solutions.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class CountriesController(ICountryService countryService) : ControllerBase
 {
     private readonly ICountryService _countryService = countryService;
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll()
     {
         var result = await _countryService.GetAllAsync();

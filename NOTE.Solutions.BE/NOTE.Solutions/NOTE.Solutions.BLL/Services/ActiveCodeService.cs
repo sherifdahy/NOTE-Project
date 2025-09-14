@@ -8,25 +8,15 @@ public class ActiveCodeService(IUnitOfWork unitOfWork): IActiveCodeService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     
-    public async Task<Result<ActiveCodeResponse>> CreateAsync(int companyId,ActiveCodeRequest request, CancellationToken cancellationToken = default)
+    public async Task<Result<ActiveCodeResponse>> CreateAsync(ActiveCodeRequest request, CancellationToken cancellationToken = default)
     {
-        if (!_unitOfWork.Companies.IsExist(x => x.Id == companyId))
-            return Result.Failure<ActiveCodeResponse>(CompanyErrors.NotFound);
-
         if(_unitOfWork.ActiveCodes.IsExist(x => x.Code == request.Code))
             return Result.Failure<ActiveCodeResponse>(ActiveCodeErrors.Duplicated);
 
         var activeCode = request.Adapt<ActiveCode>();
 
-        activeCode.CompanyActiveCodes.Add(new CompanyActiveCode
-        {
-            CompanyId = companyId,
-        });
-
         await _unitOfWork.ActiveCodes.AddAsync(activeCode,cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
-
-        activeCode = await _unitOfWork.ActiveCodes.FindAsync(x => x.Id == activeCode.Id,cancellationToken:cancellationToken);
 
         return Result.Success(activeCode.Adapt<ActiveCodeResponse>());
     }
@@ -47,12 +37,9 @@ public class ActiveCodeService(IUnitOfWork unitOfWork): IActiveCodeService
         return Result.Success();
     }
 
-    public async Task<Result<IEnumerable<ActiveCodeResponse>>> GetAllAsync(int companyId, CancellationToken cancellationToken = default)
+    public async Task<Result<IEnumerable<ActiveCodeResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        if (!_unitOfWork.Companies.IsExist(x => x.Id == companyId))
-            return Result.Failure<IEnumerable<ActiveCodeResponse>>(CompanyErrors.NotFound);
-
-        var activeCodes = await _unitOfWork.ActiveCodes.FindAllAsync(x => x.CompanyActiveCodes.Any(w => w.CompanyId == companyId), cancellationToken: cancellationToken);
+        var activeCodes = await _unitOfWork.ActiveCodes.FindAllAsync(x => true, cancellationToken: cancellationToken);
 
         return Result.Success(activeCodes.Adapt<IEnumerable<ActiveCodeResponse>>());
     }

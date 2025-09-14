@@ -26,7 +26,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAsync(BranchRequest request)
     {
-        var result = await _branchService.CreateAsync(request);
+        var result = await _branchService.CreateAsync(1,request);
         return result.IsSuccess ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value) : result.ToProblem();
     }
 
@@ -34,7 +34,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateAsync(int id, BranchRequest request)
     {
-        var result = await _branchService.UpdateAsync(id, request);
+        var result = await _branchService.UpdateAsync(id,1, request);
         return result.IsSuccess ? NoContent() : result.ToProblem();
     }
 

@@ -2,62 +2,72 @@ import { Injectable } from '@angular/core';
 import { GenericApiHandlerService } from './generic-api-handler.service';
 import { LoginRequest } from '../models/auth/requests/login-request';
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
-import { TokenResponse } from '../models/auth/responses/token-response';
+import { AuthResponse } from '../models/auth/responses/auth-response';
+import { RegisterCompanyRequest } from '../models/auth/requests/register-company-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isLoggedSubject: BehaviorSubject<boolean>;
-  constructor(private apiCall: GenericApiHandlerService) {
-    this.isLoggedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
-  }
+  private roleSubject: BehaviorSubject<string | null>;
+  constructor(
+    private apiCall: GenericApiHandlerService
+  ) {
+    this.roleSubject = new BehaviorSubject<string | null>(null);
 
-  private hasValidToken() : boolean{
-    let token = localStorage.getItem('token');
-    if(!token)
-      return false;
-
-    let expireAt = localStorage.getItem('expireAt');
-    if(!expireAt)
-      return false;
-
-    let currentDateTime = new Date();
-
-    if(currentDateTime >= new Date(expireAt))
-    {
-      localStorage.removeItem('token');
-      localStorage.removeItem('expireAt');
-      return false;
+    const token = this.getAccessToken;
+    if (token) {
+      const payload = this.decodeToken(token);
+      console.log(payload);
+      this.roleSubject.next(payload.role);
     }
-
-    return true;
   }
 
-  login(loginRequest: LoginRequest): Observable<TokenResponse> {
-    return this.apiCall.post<TokenResponse>(`auth/login`, loginRequest).pipe(
-      map(response => response as TokenResponse),
-      tap(response =>{
-        localStorage.setItem('token',response.token),
-        localStorage.setItem('expireAt',(new Date().getTime() + response.expireIn).toString());
-        this.isLoggedSubject.next(true)
+  login(loginRequest: LoginRequest): Observable<AuthResponse> {
+    return this.apiCall.post<AuthResponse>(`auth/login`, loginRequest).pipe(
+      map(response => response as AuthResponse),
+      tap(response => {
+        this.setAccessToken = response.token as string;
       }
       ),
       catchError(response => {
-        this.isLoggedSubject.next(false)
         return throwError(() => response.error.errors);
       })
     );
   }
 
-  logout():void {
-    localStorage.removeItem('token');
-    this.isLoggedSubject.next(false);
+  registerCompany(registerCompanyRequest: RegisterCompanyRequest): Observable<any> {
+    return this.apiCall.post<any>('auth/register-company', registerCompanyRequest).pipe(
+      catchError(response => {
+        return throwError(() => response.error.errors);
+      })
+    );
   }
 
-  get isLogged() : Observable<boolean>
-  {
-    return this.isLoggedSubject.asObservable();
+  logout(): void {
+    localStorage.removeItem('token');
+    this.roleSubject.next(null);
+  }
+  private decodeToken(token: string): any {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch {
+      return {};
+    }
+  }
+
+  get getAccessToken(): string {
+    return localStorage.getItem('token') as string;
+  }
+
+  private set setAccessToken(token: string) {
+    localStorage.setItem('token', token);
+    const payload = this.decodeToken(token);
+    this.roleSubject.next(payload.role);
+  }
+
+  get getRole(): Observable<string | null> {
+    return this.roleSubject.asObservable();
   }
 }

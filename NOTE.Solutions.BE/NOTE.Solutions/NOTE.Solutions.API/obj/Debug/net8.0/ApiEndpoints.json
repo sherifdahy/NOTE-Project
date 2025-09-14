@@ -6,13 +6,7 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "companyId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -23,11 +17,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "companyId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
       {
         "Name": "request",
         "Type": "NOTE.Solutions.BLL.Contracts.ActiveCode.Requests.ActiveCodeRequest",
@@ -108,14 +97,14 @@
   {
     "ContainingType": "NOTE.Solutions.API.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/Auth/register-company",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "NOTE.Solutions.BLL.Contracts.Auth.Requests.RegisterRequest",
+        "Type": "NOTE.Solutions.BLL.Contracts.Auth.Requests.RegisterCompanyRequest",
         "IsRequired": true
       }
     ],

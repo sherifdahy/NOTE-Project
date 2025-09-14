@@ -17,7 +17,7 @@ public class ApplicationUser
 
 
     public int ApplicationRoleId { get; set; }
-    public ApplicationRole ApplicationRole { get; set; }
+    public ApplicationRole ApplicationRole { get; set; } = default!;
 
     public ICollection<Branch> Branches { get; set; } = new HashSet<Branch>();
 }

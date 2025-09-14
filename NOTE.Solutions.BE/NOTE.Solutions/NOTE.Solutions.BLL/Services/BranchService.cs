@@ -12,15 +12,15 @@ public class BranchService(IUnitOfWork unitOfWork) : IBranchService
         $"{nameof(Branch.City)}.{nameof(City.Governorate)}",
         $"{nameof(Branch.City)}.{nameof(City.Governorate)}.{nameof(Governorate.Country)}"
     };
-    public async Task<Result<BranchResponse>> CreateAsync(BranchRequest request, CancellationToken cancellationToken = default)
+    public async Task<Result<BranchResponse>> CreateAsync(int companyId,BranchRequest request, CancellationToken cancellationToken = default)
     {
-        if (!_unitOfWork.Companies.IsExist(x=>x.Id == request.CompanyId))
+        if (!_unitOfWork.Companies.IsExist(x=>x.Id == companyId))
             return Result.Failure<BranchResponse>(CompanyErrors.NotFound);
 
         if (!_unitOfWork.Cities.IsExist(x=>x.Id == request.CityId))
             return Result.Failure<BranchResponse>(CityErrors.NotFound);
 
-        if (_unitOfWork.Branches.IsExist(x =>x.Code == request.Code && x.CompanyId == request.CompanyId && x.CityId == request.CityId))
+        if (_unitOfWork.Branches.IsExist(x =>x.Code == request.Code && x.CompanyId == companyId && x.CityId == request.CityId))
             return Result.Failure<BranchResponse>(BranchErrors.Duplicated);
 
         var branch = request.Adapt<Branch>();
@@ -68,15 +68,15 @@ public class BranchService(IUnitOfWork unitOfWork) : IBranchService
         return Result.Success(branch.Adapt<BranchResponse>());
     }
 
-    public async Task<Result> UpdateAsync(int id, BranchRequest request, CancellationToken cancellationToken = default)
+    public async Task<Result> UpdateAsync(int id,int companyId, BranchRequest request, CancellationToken cancellationToken = default)
     {
         if (id <= 0)
             return Result.Failure(BranchErrors.InvalidId);
 
-        if (_unitOfWork.Branches.IsExist(x => x.Code == request.Code && x.CompanyId == request.CompanyId && x.CityId == request.CityId && x.Id == id))
+        if (_unitOfWork.Branches.IsExist(x => x.Code == request.Code && x.CompanyId == companyId && x.CityId == request.CityId && x.Id == id))
             return Result.Failure(BranchErrors.Duplicated);
 
-        if (!_unitOfWork.Companies.IsExist(x => x.Id == request.CompanyId))
+        if (!_unitOfWork.Companies.IsExist(x => x.Id ==  companyId))
             return Result.Failure(CompanyErrors.NotFound);
 
         if (!_unitOfWork.Cities.IsExist(x => x.Id == request.CityId))

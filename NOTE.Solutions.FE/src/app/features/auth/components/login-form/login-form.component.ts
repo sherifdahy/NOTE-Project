@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup;
-  constructor(private router : Router,private notificationService : NotificationService,private authService: AuthService, fb: FormBuilder,private snackBar : MatSnackBar) {
+  constructor(private router: Router, private notificationService: NotificationService, private authService: AuthService, fb: FormBuilder, private snackBar: MatSnackBar) {
     this.loginForm = fb.group({
       email: fb.control('', Validators.required),
       password: fb.control('', Validators.required)
@@ -32,14 +32,26 @@ export class LoginFormComponent implements OnInit {
   }
 
   handleSubmitClick() {
-    if (!this.loginForm.valid)
+    if (!this.loginForm.valid) {
+      this.loginForm.markAllAsTouched();
       return;
-
+    }
     let loginRequest = this.loginForm.value as LoginRequest;
 
     this.authService.login(loginRequest).subscribe({
       next: (response) => {
-        this.router.navigateByUrl('/');
+        this.authService.getRole.subscribe((role) => {
+            switch (role?.toLowerCase()) {
+              case 'customer': {
+                this.router.navigateByUrl('/');
+                break;
+              }
+              case 'admin': {
+                this.router.navigateByUrl('/admin');
+                break;
+              }
+          }
+        })
       },
       error: (errors) => {
         this.notificationService.showError(errors);

@@ -14,10 +14,12 @@ public class AuthController(IAuthService authService) : ControllerBase
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterRequest request,CancellationToken cancellationToken)
+
+    [HttpPost("register-company")]
+    public async Task<IActionResult> Register(RegisterCompanyRequest request, CancellationToken cancellationToken)
     {
-        var result = await _authService.RegisterAsync(request,cancellationToken);
-        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+        var result = await _authService.RegisterCompanyAsync(request, cancellationToken);
+        return result.IsSuccess ? Created() : result.ToProblem();
     }
+
 }

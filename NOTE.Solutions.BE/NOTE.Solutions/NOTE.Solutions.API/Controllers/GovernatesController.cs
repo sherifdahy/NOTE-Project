@@ -5,12 +5,13 @@ namespace NOTE.Solutions.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class GovernatesController(IGovernateService governateService) : ControllerBase
 {
     private readonly IGovernateService _governateService = governateService;
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll()
     {
         var result = await _governateService.GetAllAsync();

@@ -1,24 +1,43 @@
-<div>
-  <div class="auth-header">
-    <h1>Login Form</h1>
-  </div>
+<div class="d-flex justify-content-center align-items-center vh-100">
 
-  <div class="auth-body">
-    <form [formGroup]="loginForm" (ngSubmit)="handleSubmitClick()">
-      <div class="form-group">
-        <label class="form-label" for="uEmail">Email</label>
-        <input class="form-control" type="email" id="uEmail" formControlName="email">
-        <span *ngIf="email?.errors">{{email?.errors | json}}</span>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="uPassword">Password</label>
-        <input class="form-control" type="password" id="uPassword" formControlName="password">
-        <span *ngIf="password?.errors">{{password?.errors | json}}</span>
-      </div>
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 500px;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4 fw-bold" style="color:var(--blue-color)">
+        لوحة تسجيل الدخول
+      </h3>
+      <form [formGroup]="loginForm" (ngSubmit)="handleSubmitClick()">
 
-      <div class="btns">
-        <button class="btn">Login</button>
-      </div>
-    </form>
+        <div class="mb-3">
+          <label for="uEmail" class="form-label">الإيميل</label>
+          <input type="email" id="uEmail" class="form-control" [class.is-valid]="email?.valid && email?.touched"
+            [class.is-invalid]="email?.invalid && email?.touched" formControlName="email">
+          <div *ngIf="email?.touched && email?.errors" class="text-danger small mt-1">
+            <span *ngIf="email?.errors?.['required']">الإيميل مطلوب</span>
+            <span *ngIf="email?.errors?.['email']">أدخل إيميل صحيح</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="uPassword" class="form-label">كلمة المرور</label>
+          <input type="password" id="uPassword" class="form-control"
+            [class.is-valid]="password?.valid && password?.touched"
+            [class.is-invalid]="password?.invalid && password?.touched" formControlName="password">
+          <div *ngIf="password?.touched && password?.errors" class="text-danger small mt-1">
+            <span *ngIf="password?.errors?.['required']">كلمة المرور مطلوبة</span>
+            <span *ngIf="password?.errors?.['minlength']">كلمة المرور قصيرة</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary w-100 py-2 fw-semibold">
+          <i class="bi bi-box-arrow-in-right me-2"></i> تسجيل الدخول
+        </button>
+
+        <div class="text-center mt-3">
+          <a routerLink='/auth/register-company' class="btn btn-outline-secondary w-100">
+            <i class="bi bi-person-plus me-2"></i> إنشاء حساب جديد
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

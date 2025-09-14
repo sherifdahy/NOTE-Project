@@ -4,15 +4,16 @@ namespace NOTE.Solutions.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ActiveCodesController(IActiveCodeService activeCodeService) : BaseController
     {
         private readonly IActiveCodeService activeCodeService = activeCodeService;
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(int companyId)
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAll()
         {
-            var result = await activeCodeService.GetAllAsync(companyId);
+            var result = await activeCodeService.GetAllAsync();
             return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
         }
 
@@ -24,9 +25,9 @@ namespace NOTE.Solutions.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int companyId,ActiveCodeRequest request)
+        public async Task<IActionResult> Create(ActiveCodeRequest request)
         {
-            var result = await activeCodeService.CreateAsync(companyId, request);
+            var result = await activeCodeService.CreateAsync( request);
             return result.IsSuccess ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value) : result.ToProblem();
         }
 

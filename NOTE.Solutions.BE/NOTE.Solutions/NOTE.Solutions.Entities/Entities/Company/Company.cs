@@ -1,6 +1,6 @@
 ﻿
 namespace NOTE.Solutions.Entities.Entities.Company;
-public class Company : AuditableEntity
+public class Company 
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

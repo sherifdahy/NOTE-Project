@@ -13,16 +13,5 @@ public class BranchConfiguration : IEntityTypeConfiguration<Branch>
         builder.Property(x => x.CityId).IsRequired();
         builder.HasIndex(b => new { b.Code, b.CompanyId, b.CityId }).IsUnique();
 
-        builder
-            .HasOne(b => b.CreatedBy)
-            .WithMany()
-            .HasForeignKey(b => b.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(b => b.UpdatedBy)
-            .WithMany()
-            .HasForeignKey(b => b.UpdatedById)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

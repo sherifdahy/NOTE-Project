@@ -5,11 +5,6 @@ namespace NOTE.Solutions.BLL.Services;
 public class CityService(IUnitOfWork unitOfWork) : ICityService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    private readonly string[] _includes = new string[] 
-    { 
-        nameof(City.Governorate),
-        $"{nameof(City.Governorate)}.{nameof(City.Governorate.Country)}"
-    };
     public async Task<Result<CityResponse>> CreateAsync(CityRequest request, CancellationToken cancellationToken = default)
     {
         if (_unitOfWork.Cities.IsExist(x => (x.Name == request.Name && x.GovernorateId == request.GovernorateId) || x.Code == request.Code))
@@ -19,8 +14,6 @@ public class CityService(IUnitOfWork unitOfWork) : ICityService
 
         await _unitOfWork.Cities.AddAsync(city, cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
-
-        city = await _unitOfWork.Cities.FindAsync(x => x.Id == city.Id, _includes, cancellationToken);
 
         return Result.Success(city.Adapt<CityResponse>());
     }

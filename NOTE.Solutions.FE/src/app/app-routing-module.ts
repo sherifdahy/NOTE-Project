@@ -3,12 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { authGuard } from './core/guards/auth-guard';
 import { alreadyAuthGuard } from './core/guards/already-auth-guard';
+import { customerAuthGuard } from './core/guards/customer-auth-guard';
+import { adminAuthGuard } from './core/guards/admin-auth-guard';
 
 const routes: Routes = [
   {
-    path: '',
-    canActivate: [authGuard],
-    loadChildren : ()=> import('./features/dashboard/dashboard.module').then(m=>m.DashboardModule),
+    path : '',
+    canActivate : [authGuard,customerAuthGuard],
+    loadChildren : ()=> import('./customer/customer.module').then(m=>m.CustomerModule),
+  },
+  {
+    path : 'admin',
+    canActivate : [authGuard,adminAuthGuard],
+    loadChildren : ()=> import('./admin/admin.module').then(m=>m.AdminModule),
   },
   {
     path: 'auth',
