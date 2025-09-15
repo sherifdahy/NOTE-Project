@@ -3,13 +3,11 @@
     <app-header></app-header>
   </div>
   <div class="sidebar-area">
-    <app-sidebar></app-sidebar>
+    <app-admin-sidebar *ngIf="role?.toLowerCase() === 'admin'" ></app-admin-sidebar>
+    <app-customer-sidebar *ngIf="role?.toLowerCase() === 'customer'"></app-customer-sidebar>
+
   </div>
   <div class="body-area">
     <router-outlet></router-outlet>
-  </div>
-
-  <div class="footer-area">
-    <app-footer></app-footer>
   </div>
 </div>

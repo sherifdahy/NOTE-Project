@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SidebarComponent } from './sidebar.component';
+import { ActiveCodesComponent } from './active-codes.component';
 
-describe('SidebarComponent', () => {
-  let component: SidebarComponent;
-  let fixture: ComponentFixture<SidebarComponent>;
+describe('ActiveCodesComponent', () => {
+  let component: ActiveCodesComponent;
+  let fixture: ComponentFixture<ActiveCodesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ]
+      declarations: [ ActiveCodesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SidebarComponent);
+    fixture = TestBed.createComponent(ActiveCodesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

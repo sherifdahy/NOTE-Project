@@ -10,14 +10,16 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 
         builder.HasIndex(x => new { x.Email });
 
-        builder
-            .HasMany(x => x.Branches)
-            .WithMany(x => x.ApplicationUsers);
-
-
-        builder
-            .HasOne(x => x.ApplicationRole)
-            .WithMany(x => x.ApplicationUsers).HasForeignKey(x=>x.ApplicationRoleId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasData(new ApplicationUser()
+        {
+            Id = 1,
+            ApplicationRoleId = 1,
+            Email = "admin@gmail.com",
+            Password = "333Sherif%",
+            Name = "Sherif Dahy",
+            SSN = "30011122102153",
+            PhoneNumber = "01014133874",
+        });
 
     }
 }

@@ -20,11 +20,7 @@ const routes: Routes = [
 
 @NgModule({
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthTokenInterceptor,
-      multi: true
-    },
+
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,8 @@
   --white-color: white;
   --green-color: #009879;
 
+  --dark-text : black;
+  --white-text : white;
 }
 
 * {
@@ -24,11 +26,10 @@ body {
 .main-layout{
   display: grid;
   grid-template-columns: 1fr 7fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
       "header header"
-      "sidebar body   "
-      "sidebar footer ";
+      "sidebar body";
   height: 100vh;
 }
 
@@ -42,10 +43,6 @@ body {
 
 .body-area{
   grid-area: body;
-}
-
-.footer-area{
-  grid-area: footer;
 }
 
 

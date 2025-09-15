@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CityService } from '../../../core/services/city.service';
 
 @Component({
   selector: 'app-home-customer',
@@ -9,15 +8,9 @@ import { CityService } from '../../../core/services/city.service';
 })
 export class HomeCustomerComponent implements OnInit {
 
-  constructor(private cityService : CityService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.cityService.getAll().subscribe({
-      next:(response)=>{
-
-        alert(response.length);
-      }
-    })
   }
 
 }

@@ -16,8 +16,13 @@ public class GovernorateConfiguration : IEntityTypeConfiguration<Governorate>
         builder.HasIndex(g => g.Code).IsUnique();
         builder.Property(g => g.Code).IsRequired().HasMaxLength(50);
 
-        builder.HasMany(g => g.Cities)
-            .WithOne(c => c.Governorate)
-            .HasForeignKey(c => c.GovernorateId);
+
+        builder.HasData(new Governorate()
+        {
+            Id = 1,
+            Code = "Giza",
+            Name = "Giza",
+            CountryId = 1,
+        });
     }
 }

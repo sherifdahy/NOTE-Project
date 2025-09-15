@@ -1853,12 +1853,19 @@
       "RoleRequest": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
+          "role": {
+            "$ref": "#/components/schemas/RoleType"
           }
         },
         "additionalProperties": false
+      },
+      "RoleType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "TaxRequest": {
         "type": "object",

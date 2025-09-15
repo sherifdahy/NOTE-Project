@@ -12,8 +12,8 @@ using NOTE.Solutions.DAL.Data;
 namespace NOTE.Solutions.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250913160500_update-some-policy")]
-    partial class updatesomepolicy
+    [Migration("20250914110055_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -616,6 +616,18 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasIndex("Email");
 
                     b.ToTable("ApplicationUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApplicationRoleId = 1,
+                            Email = "admin@gmail.com",
+                            Name = "Sherif Dahy",
+                            Password = "333Sherif%",
+                            PhoneNumber = "01014133874",
+                            SSN = "30011122102153"
+                        });
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.Product", b =>

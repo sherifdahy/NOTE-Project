@@ -6,6 +6,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Mapster;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -50,10 +52,8 @@ public static class DInjection
 
         return services;
     }
-
     private static IServiceCollection AddCorsConfig(this IServiceCollection services,IConfiguration configuration)
     {
-
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder =>
@@ -81,12 +81,15 @@ public static class DInjection
 
         services.AddAuthentication(options =>
         {
-            // to tell controller ( i use jwt bearer for auth )
-            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(o =>
         {
             o.SaveToken = true;
+
+            // validation 
             o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
             {
                 ValidateIssuerSigningKey = true,

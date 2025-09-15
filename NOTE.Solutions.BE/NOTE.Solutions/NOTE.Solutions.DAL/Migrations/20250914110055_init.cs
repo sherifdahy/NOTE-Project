@@ -14,6 +14,19 @@ namespace NOTE.Solutions.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ActiveCodes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActiveCodes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ApplicationRoles",
                 columns: table => new
                 {
@@ -24,6 +37,35 @@ namespace NOTE.Solutions.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ApplicationRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    RIN = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,7 +91,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SSN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApplicationRoleId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -65,91 +107,46 @@ namespace NOTE.Solutions.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActiveCodes",
+                name: "CompanyActiveCode",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: true)
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    ActiveCodeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActiveCodes", x => x.Id);
+                    table.PrimaryKey("PK_CompanyActiveCode", x => new { x.CompanyId, x.ActiveCodeId });
                     table.ForeignKey(
-                        name: "FK_ActiveCodes_ApplicationUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "ApplicationUsers",
+                        name: "FK_CompanyActiveCode_ActiveCodes_ActiveCodeId",
+                        column: x => x.ActiveCodeId,
+                        principalTable: "ActiveCodes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ActiveCodes_ApplicationUsers_UpdatedById",
-                        column: x => x.UpdatedById,
-                        principalTable: "ApplicationUsers",
+                        name: "FK_CompanyActiveCode_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Companies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    RIN = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Companies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Companies_ApplicationUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Companies_ApplicationUsers_UpdatedById",
-                        column: x => x.UpdatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Countries",
+                name: "Governorates",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: true)
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Countries", x => x.Id);
+                    table.PrimaryKey("PK_Governorates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Countries_ApplicationUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Countries_ApplicationUsers_UpdatedById",
-                        column: x => x.UpdatedById,
-                        principalTable: "ApplicationUsers",
+                        name: "FK_Governorates_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -275,67 +272,6 @@ namespace NOTE.Solutions.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompanyActiveCode",
-                columns: table => new
-                {
-                    CompanyId = table.Column<int>(type: "int", nullable: false),
-                    ActiveCodeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CompanyActiveCode", x => new { x.CompanyId, x.ActiveCodeId });
-                    table.ForeignKey(
-                        name: "FK_CompanyActiveCode_ActiveCodes_ActiveCodeId",
-                        column: x => x.ActiveCodeId,
-                        principalTable: "ActiveCodes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CompanyActiveCode_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Governorates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Governorates", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Governorates_ApplicationUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Governorates_ApplicationUsers_UpdatedById",
-                        column: x => x.UpdatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Governorates_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
@@ -343,27 +279,11 @@ namespace NOTE.Solutions.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    GovernorateId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: true)
+                    GovernorateId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cities_ApplicationUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Cities_ApplicationUsers_UpdatedById",
-                        column: x => x.UpdatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cities_Governorates_GovernorateId",
                         column: x => x.GovernorateId,
@@ -380,27 +300,11 @@ namespace NOTE.Solutions.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedById = table.Column<int>(type: "int", nullable: true)
+                    CityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Branches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Branches_ApplicationUsers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Branches_ApplicationUsers_UpdatedById",
-                        column: x => x.UpdatedById,
-                        principalTable: "ApplicationUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Branches_Cities_CityId",
                         column: x => x.CityId,
@@ -675,21 +579,16 @@ namespace NOTE.Solutions.DAL.Migrations
                     { 2, "Customer" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "ApplicationUsers",
+                columns: new[] { "Id", "ApplicationRoleId", "Email", "Name", "Password", "PhoneNumber", "SSN" },
+                values: new object[] { 1, 1, "admin@gmail.com", "Sherif Dahy", "333Sherif%", "01014133874", "30011122102153" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ActiveCodes_Code",
                 table: "ActiveCodes",
                 column: "Code",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActiveCodes_CreatedById",
-                table: "ActiveCodes",
-                column: "CreatedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActiveCodes_UpdatedById",
-                table: "ActiveCodes",
-                column: "UpdatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationRoles_Name",
@@ -708,6 +607,11 @@ namespace NOTE.Solutions.DAL.Migrations
                 column: "ApplicationRoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ApplicationUsers_Email",
+                table: "ApplicationUsers",
+                column: "Email");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Branches_CityId",
                 table: "Branches",
                 column: "CityId");
@@ -724,25 +628,10 @@ namespace NOTE.Solutions.DAL.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branches_CreatedById",
-                table: "Branches",
-                column: "CreatedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Branches_UpdatedById",
-                table: "Branches",
-                column: "UpdatedById");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cities_Code",
                 table: "Cities",
                 column: "Code",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Cities_CreatedById",
-                table: "Cities",
-                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_GovernorateId",
@@ -756,25 +645,10 @@ namespace NOTE.Solutions.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_UpdatedById",
-                table: "Cities",
-                column: "UpdatedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Companies_CreatedById",
-                table: "Companies",
-                column: "CreatedById");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Companies_RIN",
                 table: "Companies",
                 column: "RIN",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Companies_UpdatedById",
-                table: "Companies",
-                column: "UpdatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CompanyActiveCode_ActiveCodeId",
@@ -788,20 +662,10 @@ namespace NOTE.Solutions.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Countries_CreatedById",
-                table: "Countries",
-                column: "CreatedById");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Countries_Name",
                 table: "Countries",
                 column: "Name",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Countries_UpdatedById",
-                table: "Countries",
-                column: "UpdatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Discounts_CreatedById",
@@ -892,20 +756,10 @@ namespace NOTE.Solutions.DAL.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Governorates_CreatedById",
-                table: "Governorates",
-                column: "CreatedById");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Governorates_Name_CountryId",
                 table: "Governorates",
                 columns: new[] { "Name", "CountryId" },
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Governorates_UpdatedById",
-                table: "Governorates",
-                column: "UpdatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_POS_BranchId",
@@ -1068,22 +922,22 @@ namespace NOTE.Solutions.DAL.Migrations
                 name: "Branches");
 
             migrationBuilder.DropTable(
+                name: "ApplicationUsers");
+
+            migrationBuilder.DropTable(
                 name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Companies");
 
             migrationBuilder.DropTable(
+                name: "ApplicationRoles");
+
+            migrationBuilder.DropTable(
                 name: "Governorates");
 
             migrationBuilder.DropTable(
                 name: "Countries");
-
-            migrationBuilder.DropTable(
-                name: "ApplicationUsers");
-
-            migrationBuilder.DropTable(
-                name: "ApplicationRoles");
         }
     }
 }

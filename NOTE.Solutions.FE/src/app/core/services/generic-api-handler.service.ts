@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -29,13 +29,14 @@ export class GenericApiHandlerService {
   }
 
   post<TResponse>(url : string,body : any,headers?:any) : Observable<TResponse>{
-    return this.httpclient.post<TResponse>(`${environment.baseUrl}/${url}`,body,this.buildHttpOptions(headers)).pipe(
-      retry(3),
-    )
+    return this.httpclient.post<TResponse>(`${environment.baseUrl}/${url}`,body,this.buildHttpOptions(headers))
   }
 
   get<TResponse>(url : string,headers?:any): Observable<TResponse>{
     return this.httpclient.get<TResponse>(`${environment.baseUrl}/${url}`,this.buildHttpOptions(headers));
   }
 
+  delete(url:string,headers?:any):Observable<void>{
+    return this.httpclient.delete<void>(`${environment.baseUrl}/${url}`,this.buildHttpOptions(headers));
+  }
 }

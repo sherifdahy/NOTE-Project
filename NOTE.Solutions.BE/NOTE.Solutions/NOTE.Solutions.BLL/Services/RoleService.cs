@@ -8,7 +8,7 @@ public class RoleService(IUnitOfWork unitOfWork) : IRoleService
 
     public async Task<Result> AssignToRoleAsync(ApplicationUser user,RoleType role)
     {
-        var roleResult = await _unitOfWork.Roles.FindAsync(x => x.Name.ToLower() == role.ToString().ToLower());
+        var roleResult = await _unitOfWork.Roles.FindAsync(x => x.Role == role);
 
         if (roleResult is null)
             return Result.Failure(RoleErrors.NotFound);
@@ -23,7 +23,7 @@ public class RoleService(IUnitOfWork unitOfWork) : IRoleService
 
     public async Task<Result> AssignToRoleAsync(List<ApplicationUser> users, RoleType role)
     {
-        var roleResult = await _unitOfWork.Roles.FindAsync(x => x.Name.ToLower() == role.ToString().ToLower());
+        var roleResult = await _unitOfWork.Roles.FindAsync(x => x.Role == role);
 
         if (roleResult is null)
             return Result.Failure(RoleErrors.NotFound);
@@ -38,7 +38,7 @@ public class RoleService(IUnitOfWork unitOfWork) : IRoleService
 
     public async Task<Result<RoleResponse>> CreateAsync(RoleRequest request, CancellationToken cancellationToken = default)
     {
-        if(_unitOfWork.Roles.IsExist(x=>x.Name.ToLower() == request.Name.ToLower()))
+        if(_unitOfWork.Roles.IsExist(x=>x.Role == request.Role))
             return Result.Failure<RoleResponse>(RoleErrors.Duplicated);
 
         var appRole = request.Adapt<ApplicationRole>();

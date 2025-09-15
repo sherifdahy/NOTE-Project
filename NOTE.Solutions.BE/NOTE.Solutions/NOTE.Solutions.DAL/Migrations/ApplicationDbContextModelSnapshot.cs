@@ -69,6 +69,15 @@ namespace NOTE.Solutions.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "Imbaba",
+                            GovernorateId = 1,
+                            Name = "Imbaba"
+                        });
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Address.Country", b =>
@@ -98,6 +107,14 @@ namespace NOTE.Solutions.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "EGY",
+                            Name = "EGYPT"
+                        });
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Address.Governorate", b =>
@@ -132,6 +149,15 @@ namespace NOTE.Solutions.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Governorates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "Giza",
+                            CountryId = 1,
+                            Name = "Giza"
+                        });
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.ActiveCode", b =>
@@ -550,15 +576,10 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("ApplicationRoles");
 
@@ -566,12 +587,12 @@ namespace NOTE.Solutions.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Admin"
+                            Role = 1
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Customer"
+                            Role = 2
                         });
                 });
 
@@ -613,6 +634,18 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasIndex("Email");
 
                     b.ToTable("ApplicationUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApplicationRoleId = 1,
+                            Email = "admin@gmail.com",
+                            Name = "Sherif Dahy",
+                            Password = "333Sherif%",
+                            PhoneNumber = "01014133874",
+                            SSN = "30011122102153"
+                        });
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.Product", b =>

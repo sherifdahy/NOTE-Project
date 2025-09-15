@@ -21,9 +21,13 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
         builder.HasIndex(c => c.Code).IsUnique();
         builder.Property(c => c.Code).IsRequired().HasMaxLength(50);
 
-        builder.HasOne(c => c.Governorate)
-            .WithMany(g => g.Cities)
-            .HasForeignKey(c => c.GovernorateId);
+        builder.HasData(new City()
+        {
+            Id = 1,
+            Code = "Imbaba",
+            Name = "Imbaba",
+            GovernorateId = 1
+        });
 
         
     }

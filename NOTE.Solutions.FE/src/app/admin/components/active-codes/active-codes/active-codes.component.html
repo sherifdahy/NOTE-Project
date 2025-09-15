@@ -1,0 +1,29 @@
+<div>
+  <div>
+    <button class="btn btn" (click)="handleAddClick()">اضافة جديد</button>
+  </div>
+  <div>
+    <table class="table table-striped table-hover table-responsive">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>Code</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activeCode of activeCodes">
+          <td class="col-1">{{activeCode.id}}</td>
+          <td class="col-11">{{activeCode.code}}</td>
+          <td>
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-primary rounded-0">تعديل</button>
+              <button class="btn btn-danger rounded-0" (click)="handleDeleteButton(activeCode.id)">حذف</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

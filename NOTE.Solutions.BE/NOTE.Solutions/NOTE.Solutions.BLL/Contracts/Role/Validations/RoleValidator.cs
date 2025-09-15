@@ -12,6 +12,6 @@ public class RoleValidator : AbstractValidator<RoleRequest>
 {
     public RoleValidator()
     {
-        RuleFor(x => x.Name).Length(3,50).NotEmpty();
+        RuleFor(x => x.Role).NotEmpty();
     }
 }

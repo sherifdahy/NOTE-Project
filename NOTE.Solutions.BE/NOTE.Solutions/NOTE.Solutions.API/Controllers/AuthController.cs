@@ -1,4 +1,6 @@
-﻿using NOTE.Solutions.BLL.Contracts.Auth.Requests;
+﻿using Microsoft.AspNetCore.Authorization;
+using NOTE.Solutions.BLL.Contracts.Auth.Requests;
+using NOTE.Solutions.BLL.Contracts.Auth.Responses;
 
 namespace NOTE.Solutions.API.Controllers;
 [Route("api/[controller]")]
@@ -11,7 +13,8 @@ public class AuthController(IAuthService authService) : ControllerBase
     public async Task<IActionResult> Login(LoginRequest authRequest,CancellationToken cancellationToken)
     {
         var result = await _authService.LoginAsync(authRequest,cancellationToken);
-        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+
+        return result.IsSuccess ? Ok(result.Value) : result.ToProblem(); 
     }
 
 
@@ -21,5 +24,6 @@ public class AuthController(IAuthService authService) : ControllerBase
         var result = await _authService.RegisterCompanyAsync(request, cancellationToken);
         return result.IsSuccess ? Created() : result.ToProblem();
     }
+
 
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NOTE.Solutions.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace NOTE.Solutions.Entities.Entities.Identity;
 public class ApplicationRole 
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public RoleType Role { get; set; }
 
     public ICollection<ApplicationUser> ApplicationUsers { get; set; } = new HashSet<ApplicationUser>();
 }
