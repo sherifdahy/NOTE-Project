@@ -23,8 +23,10 @@
         </div>
         <div class="col">
           <label class="form-label fw-semibold">كود النشاط</label>
-          <select class="form-select" [class.is-invalid]="activeCodeId?.invalid && activeCodeId?.touched" formControlName="activeCodeId" *ngFor="let activeCode of activeCodes;let i = index">
-            <option value="{{activeCode.id}}">{{activeCode.code}}</option>
+          <select class="form-select" [class.is-invalid]="activeCodeId?.invalid && activeCodeId?.touched" formControlName="activeCodeId">
+            <ng-container *ngFor="let activeCode of activeCodes;let i = index">
+              <option value="{{activeCode.id}}">{{activeCode.code}}</option>
+            </ng-container>
           </select>
           <div class="invalid-feedback">مطلوب كود النشاط</div>
         </div>

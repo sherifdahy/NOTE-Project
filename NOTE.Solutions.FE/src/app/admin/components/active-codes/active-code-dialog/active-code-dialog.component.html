@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmitForm()" class="p-3">
+  <div class="mb-3">
+    <label for="code" class="form-label fw-bold">كود</label>
+    <input
+      id="code"
+      type="text"
+      class="form-control"
+      formControlName="code"
+      [class.is-valid]="code?.valid && code?.touched"
+      [class.is-invalid]="code?.invalid && code?.touched"
+      placeholder="ادخل الكود هنا"
+    />
+
+    <!-- رسائل الأخطاء -->
+    <div *ngIf="code?.invalid && code?.touched" class="form-text text-danger mt-1">
+      <div *ngIf="code?.errors?.['required']">
+        ⚠️ الكود مطلوب
+      </div>
+      <div *ngIf="code?.errors?.['minlength']">
+        ⚠️ الكود لازم يكون على الأقل 4 حروف
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button type="button" (click)="handleCloseClick()" class="btn btn-secondary rounded-0">
+      إلغاء
+    </button>
+    <button class="btn btn-success rounded-0" type="submit" [disabled]="form.invalid">
+      حفظ
+    </button>
+  </div>
+</form>

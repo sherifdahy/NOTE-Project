@@ -1,36 +1,76 @@
-<div class="d-flex flex-column p-3 shadow-sm" style="width: 250px; background-color: #f8f9fa;">
-  <h5 class="mb-4 fw-bold">القائمة</h5>
+<div class="d-flex flex-column p-3 shadow-sm bg-light" >
+  <h5 class="fw-bold text-primary mb-4">لوحة التحكم</h5>
   <ul class="nav nav-pills flex-column mb-auto">
-
     <!-- الرئيسية -->
-    <li class="nav-item">
-      <a routerLink="home" routerLinkActive="active" class="nav-link">
+    <li class="nav-item mb-2">
+      <a routerLink="home" routerLinkActive="active" class="nav-link rounded-3 text-dark">
         <i class="bi bi-house-door me-2"></i>
         الصفحة الرئيسية
       </a>
     </li>
 
-    <!-- اكواد النشاط -->
-     <li class="nav-item">
-      <a routerLink="activecodes" routerLinkActive="active" class="nav-link">
+    <!-- الوحدات -->
+    <li class="nav-item mb-2">
+      <a routerLink="units" routerLinkActive="active" class="nav-link rounded-3 text-dark">
         <i class="bi bi-card-list me-2"></i>
-        اكواد النشاط
+        إدارة الوحدات
       </a>
     </li>
 
-
-    <!-- اكواد النشاط -->
-    <!-- <li>
-      <a class="nav-link text-dark"  data-bs-toggle="collapse" href="#activeCodesMenu" role="button"
-        aria-expanded="false" aria-controls="activeCodesMenu">
-        <i class="bi bi-card-list me-2"></i>
-        اكواد النشاط
+    <!-- أكواد النشاط -->
+    <li class="nav-item mb-2">
+      <a routerLink="activecodes" routerLinkActive="active" class="nav-link rounded-3 text-dark">
+        <i class="bi bi-code-square me-2"></i>
+        أكواد النشاط
       </a>
-      <div class="collapse ps-3" id="activeCodesMenu">
-        <ul class="btn-toggle-nav list-unstyled fw-normal small">
-          <li><a routerLink="activecodes" class="nav-link text-secondary">جميع اكواد النشاط</a></li>
+    </li>
+
+    <!-- نوع الوثائق -->
+    <li class="nav-item mb-2">
+      <a routerLink="documentTypes" routerLinkActive="active" class="nav-link rounded-3 text-dark">
+        <i class="bi bi-file-earmark-text me-2"></i>
+        إدارة نوع الوثائق
+      </a>
+    </li>
+
+    <!-- العنوان (Dropdown) -->
+    <li class="nav-item mb-2">
+      <a
+        class="nav-link text-dark"
+        data-bs-toggle="collapse"
+        href="#addressMenu"
+        role="button"
+        aria-expanded="false"
+        aria-controls="addressMenu"
+      >
+        <i class="bi bi-geo-alt me-2"></i>
+        العنوان
+      </a>
+      <div class="collapse pe-5" id="addressMenu">
+        <ul class="nav flex-column">
+          <!-- البلاد -->
+          <li class="nav-item mb-1">
+            <a routerLink="countries" routerLinkActive="active" class="nav-link text-secondary small">
+              <i class="bi bi-globe me-2" style="font-size: 0.9rem;"></i>
+              إدارة البلاد
+            </a>
+          </li>
+          <!-- المحافظات -->
+          <li class="nav-item mb-1">
+            <a routerLink="governorates" routerLinkActive="active" class="nav-link text-secondary small">
+              <i class="bi bi-map me-2" style="font-size: 0.9rem;"></i>
+              إدارة المحافظات
+            </a>
+          </li>
+          <!-- المدن -->
+          <li class="nav-item mb-1">
+            <a routerLink="cities" routerLinkActive="active" class="nav-link text-secondary small">
+              <i class="bi bi-building me-2" style="font-size: 0.9rem;"></i>
+              إدارة المدن
+            </a>
+          </li>
         </ul>
       </div>
-    </li> -->
+    </li>
   </ul>
 </div>

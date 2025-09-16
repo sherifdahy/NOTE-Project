@@ -4,6 +4,7 @@ import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { ActiveCodeResponse } from '../models/active-code/response/active-code-response';
 import { AuthService } from './auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActiveCodeRequest } from '../models/active-code/request/active-code-request';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ActiveCodeService {
 
   constructor(
-    private authService : AuthService,
     private apiCall: GenericApiHandlerService
   ) {
 
+  }
+
+  create(body : ActiveCodeRequest) : Observable<void>{
+    return this.apiCall.post<void>('activecodes',body).pipe(
+      catchError((response : HttpErrorResponse)=>{
+        return throwError(()=> response.error.errors)
+      })
+    )
   }
 
   getAll () : Observable<ActiveCodeResponse[]>{

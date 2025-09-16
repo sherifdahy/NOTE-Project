@@ -3,7 +3,7 @@ import { ActiveCodeService } from '../../../../core/services/active-code.service
 import { ActiveCodeResponse } from '../../../../core/models/active-code/response/active-code-response';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ActiveCodeDialog } from '../active-code-dialog/active-code-dialog';
+import { ActiveCodeDialogComponent } from '../active-code-dialog/active-code-dialog.component';
 
 @Component({
   selector: 'app-active-codes',
@@ -16,7 +16,7 @@ export class ActiveCodesComponent implements OnInit {
   activeCodes!: ActiveCodeResponse[];
 
   constructor(
-    private dialog : MatDialog,
+    private dialog: MatDialog,
     private notificationService: NotificationService,
     private activeCodeService: ActiveCodeService) { }
 
@@ -36,9 +36,20 @@ export class ActiveCodesComponent implements OnInit {
     });
   }
   handleAddClick() {
-    this.dialog.open(ActiveCodeDialog)
+    this.dialog.open(ActiveCodeDialogComponent).afterClosed().subscribe(result => {
+      if (result)
+        this.loadActiveCodes();
+    });
+
   }
-  handleDeleteButton(id: number) {
+
+  handleEditClick(id : number) {
+    this.dialog.open(ActiveCodeDialogComponent,{
+      data: this.activeCodes.find(x=>x.id === id)
+    });
+  }
+
+  handleDeleteClick(id: number) {
     this.activeCodeService.delete(id).subscribe({
       next: () => {
         this.loadActiveCodes();
