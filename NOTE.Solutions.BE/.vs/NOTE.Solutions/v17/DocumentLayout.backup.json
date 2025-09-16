@@ -3,44 +3,16 @@
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20250915184711_update_address_sead_data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20250915184711_update_address_sead_data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entitiesconfiguration\\cityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entitiesconfiguration\\cityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entitiesconfiguration\\governorateconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entitiesconfiguration\\governorateconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entitiesconfiguration\\countryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entitiesconfiguration\\countryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\applicationconfiguration\\dinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\applicationconfiguration\\dinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\services\\unitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\services\\unitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\contracts\\auth\\responses\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\contracts\\auth\\responses\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\services\\branchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\services\\branchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\services\\documenttypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\services\\documenttypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,127 +27,41 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20250915184711_update_address_sead_data.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20250915184711_update_address_sead_data.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20250915184711_update_address_sead_data.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20250915184711_update_address_sead_data.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20250915184711_update_address_sead_data.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T18:47:12.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CityConfiguration.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CityConfiguration.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CityConfiguration.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CityConfiguration.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CityConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T18:45:55.654Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GovernorateConfiguration.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\GovernorateConfiguration.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\GovernorateConfiguration.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\GovernorateConfiguration.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\GovernorateConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T18:44:51.931Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CountryConfiguration.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CountryConfiguration.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CountryConfiguration.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CountryConfiguration.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\CountryConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T18:43:52.057Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DInjection.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T18:24:27.149Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\appsettings.json",
               "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\appsettings.json",
               "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\appsettings.json",
               "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-15T18:22:40.729Z"
+              "WhenOpened": "2025-09-16T07:34:51.12Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AuthResponse.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Auth\\Responses\\AuthResponse.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Auth\\Responses\\AuthResponse.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Auth\\Responses\\AuthResponse.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Contracts\\Auth\\Responses\\AuthResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UnitService.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\UnitService.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\UnitService.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\UnitService.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\UnitService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T13:04:49.678Z"
+              "WhenOpened": "2025-09-16T00:00:29.167Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBUAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "DocumentTypeService.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\DocumentTypeService.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\DocumentTypeService.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\DocumentTypeService.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\DocumentTypeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T13:04:45.249Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BranchService.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\BranchService.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\BranchService.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\BranchService.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\BranchService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T13:04:44.684Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\AuthController.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T13:04:28.732Z"
+              "WhenOpened": "2025-09-15T23:10:56.288Z",
+              "EditorCaption": ""
             }
           ]
         }
