@@ -15,7 +15,7 @@ public class DocumentDetail_Tax
     public DocumentDetail? DocumentDetail { get; set; }
 
     public int TaxId { get; set; }
-    public Tax? Tax { get; set; }
+    public DocumentTax? Tax { get; set; }
 
     
 }

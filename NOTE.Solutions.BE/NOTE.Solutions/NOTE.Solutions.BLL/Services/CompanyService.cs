@@ -4,6 +4,11 @@ namespace NOTE.Solutions.BLL.Services;
 public class CompanyService(IUnitOfWork unitOfWork) : ICompanyService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly string[] _includes =
+    {
+        nameof(Company.CompanyActiveCodes),
+        $"{nameof(Company.CompanyActiveCodes)}.{nameof(CompanyActiveCode.ActiveCode)}"
+    };
 
     public async Task<Result<CompanyResponse>> CreateAsync(CompanyRequest request, CancellationToken cancellationToken = default)
     {
@@ -36,7 +41,7 @@ public class CompanyService(IUnitOfWork unitOfWork) : ICompanyService
 
     public async Task<Result<IEnumerable<CompanyResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var companies = await _unitOfWork.Companies.GetAllAsync(cancellationToken);
+        var companies = await _unitOfWork.Companies.FindAllAsync(x=> true,_includes,cancellationToken);
 
         return Result.Success(companies.Adapt<IEnumerable<CompanyResponse>>());
     }
@@ -46,7 +51,7 @@ public class CompanyService(IUnitOfWork unitOfWork) : ICompanyService
         if (id <= 0)
             return Result.Failure<CompanyResponse>(CompanyErrors.InvalidId);
 
-        var company = await _unitOfWork.Companies.GetByIdAsync(id,cancellationToken);
+        var company = await _unitOfWork.Companies.FindAsync(x=>x.Id == id,_includes,cancellationToken);
 
         if (company is null)
             return Result.Failure<CompanyResponse>(CompanyErrors.NotFound);

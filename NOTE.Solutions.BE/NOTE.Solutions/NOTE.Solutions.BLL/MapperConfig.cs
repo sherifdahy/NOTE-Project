@@ -8,23 +8,34 @@ public class MapperConfig : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<RegisterCompanyRequest, Company>()
-            .Map(dist => dist.Branches, src => new List<Branch>()
+        .Map(dist => dist.Branches, src => new List<Branch>()
+        {
+            new Branch()
             {
-                new Branch()
+                CityId = src.Branch.CityId,
+                Code = src.Branch.Code,
+                ApplicationUsers = new List<ApplicationUser>()
                 {
-                    CityId = src.Branch.CityId,
-                    Code = src.Branch.Code,
-                    ApplicationUsers = new List<ApplicationUser>()
+                    new ApplicationUser()
                     {
-                        new ApplicationUser()
-                        {
-                            Name = src.Branch.ApplicationUser.Name,
-                            SSN = src.Branch.ApplicationUser.SSN,
-                            Email = src.Branch.ApplicationUser.Email,
-                            Password = src.Branch.ApplicationUser.Password,
-                            PhoneNumber = src.Branch.ApplicationUser.PhoneNumber,
-                        }
-                }
-            }});
+                        Name = src.Branch.ApplicationUser.Name,
+                        SSN = src.Branch.ApplicationUser.SSN,
+                        Email = src.Branch.ApplicationUser.Email,
+                        Password = src.Branch.ApplicationUser.Password,
+                        PhoneNumber = src.Branch.ApplicationUser.PhoneNumber,
+                    }
+            }
+        }});
+
+        config.NewConfig<CompanyRequest, Company>()
+            .Map(dest=> dest.CompanyActiveCodes, src => src.ActiveCodes.Select(codeId => new CompanyActiveCode { ActiveCodeId = codeId }).ToList());
+
+
+        config.NewConfig<Company, CompanyResponse>()
+            .Map(dest => dest.ActiveCodes, src => src.CompanyActiveCodes.Select(x => new ActiveCodeResponse()
+            {
+                Id = x.ActiveCode.Id,
+                Code = x.ActiveCode.Code
+            }).ToList());
     }
 }

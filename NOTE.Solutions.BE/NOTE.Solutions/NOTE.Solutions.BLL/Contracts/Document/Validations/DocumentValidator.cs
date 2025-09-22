@@ -13,25 +13,6 @@ public class DocumentValidator : AbstractValidator<DocumentRequest>
 {
     public DocumentValidator()
     {
-        RuleFor(x => x.DateTime)
-            .NotEmpty().WithMessage("Document date is required.")
-            .LessThanOrEqualTo(DateTime.Now).WithMessage("Document date cannot be in the future.");
-
-        RuleFor(x => x.DocumentNumber)
-            .NotEmpty().WithMessage("Document number is required.")
-            .MaximumLength(50).WithMessage("Document number must not exceed 50 characters.");
-
-        RuleFor(x => x.BuyerName)
-            .NotEmpty().WithMessage("Buyer name is required.")
-            .MaximumLength(200).WithMessage("Buyer name must not exceed 200 characters.");
-
-        RuleFor(x => x.BuyerSSN)
-            .NotEmpty().WithMessage("Buyer SSN is required.")
-            .Matches(@"^\d{14}$").WithMessage("Buyer SSN must be 14 digits.");
-
-        RuleFor(x => x.BuyerType)
-            .IsInEnum().WithMessage("Invalid buyer type.");
-
         RuleFor(x => x.PaymentMethod)
             .IsInEnum().WithMessage("Invalid payment method.");
 
@@ -40,6 +21,9 @@ public class DocumentValidator : AbstractValidator<DocumentRequest>
 
         RuleFor(x => x.DocumentDetails)
             .NotEmpty().WithMessage("Document must have at least one detail.");
+
+        RuleFor(x => x.ActiveCodeId)
+            .NotEmpty().WithMessage("Active Code required.");
 
         RuleForEach(x => x.DocumentDetails)
             .SetValidator(new DocumentDetailValidator());

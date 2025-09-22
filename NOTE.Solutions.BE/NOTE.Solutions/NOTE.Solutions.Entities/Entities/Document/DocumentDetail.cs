@@ -11,16 +11,13 @@ public class DocumentDetail
     public int Id { get; set; }
     public decimal UnitPrice { get; set; }
     public decimal Quantity { get; set; }
-
-    public int DocumentId { get; set; }
-    public Document Document { get; set; }
-
-    public int DocumentDetail_DiscountId { get; set; }
-    public DocumentDetail_Discount DocumentDetail_Discount { get; set; }
-
     public int ProductUnitId { get; set; }
-    public ProductUnit ProductUnit { get; set; }
+    public int DocumentId { get; set; }
 
+
+    public Document Document { get; set; } = default!;
+    public ProductUnit ProductUnit { get; set; } = default!;
+    public ICollection<DocumentDetail_Discount> DocumentDetail_Discounts { get; set; } = new HashSet<DocumentDetail_Discount>();
     public ICollection<DocumentDetail_Tax> DocumentDetail_Taxes { get; set; } = new HashSet<DocumentDetail_Tax>();
 }
 

@@ -6,12 +6,10 @@ namespace NOTE.Solutions.BLL.Contracts.Document.Requests;
 
 public class DocumentRequest 
 {
-    public DateTime DateTime { get; set; }
-    public string DocumentNumber { get; set; } = string.Empty;
-    public string BuyerName { get; set; } = string.Empty;
-    public string BuyerSSN { get; set; } = string.Empty;
-    public BuyerType BuyerType { get; set; }
+    public DocumentHeaderRequest Header { get; set; } = default!;
+    public DocumentBuyerRequest Buyer { get; set; } = default!;
     public PaymentMethodType PaymentMethod { get; set; }
     public int DocumentTypeId { get; set; }
+    public int ActiveCodeId { get; set; }
     public List<DocumentDetailRequest> DocumentDetails { get; set; } = [];
 }

@@ -1,4 +1,6 @@
-﻿namespace ETA.Consume.Contracts.Receipt.Requests;
+﻿using ETA.Consume.Contracts.Header.Requests;
+
+namespace ETA.Consume.Contracts.Receipt.Requests;
 
 public class SubmitReceiptRequest
 {

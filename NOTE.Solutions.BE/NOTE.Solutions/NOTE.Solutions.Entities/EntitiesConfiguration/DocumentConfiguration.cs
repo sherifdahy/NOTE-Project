@@ -15,25 +15,21 @@ public class DocumentConfiguration : IEntityTypeConfiguration<Document>
 {
     public void Configure(EntityTypeBuilder<Document> builder)
     {
-        builder.Property(x => x.DateTime).IsRequired();
-
-        builder.Property(x => x.DocumentNumber).IsRequired();
-
-        builder.Property(x => x.UUID).IsRequired();
-
-        builder.Property(x => x.BuyerName).IsRequired().HasMaxLength(100);
-
-        builder.Property(x => x.BuyerSSN).IsRequired().HasMaxLength(100);
-
-        builder.Property(x => x.BuyerType).IsRequired();
-
+        
         builder.Property(x => x.PaymentMethod).IsRequired();
-        
+
         builder.Property(x => x.BranchId).IsRequired();
-        
+
         builder.Property(x => x.DocumentTypeId).IsRequired();
 
-        builder.HasIndex(x => x.UUID).IsUnique();
+        builder
+            .HasOne(x => x.Buyer)
+            .WithOne(w => w.Document)
+            .HasForeignKey<Document>(w=>w.BuyerId);
 
+        builder
+            .HasOne(w => w.Header)
+            .WithOne(w => w.Document)
+            .HasForeignKey<Document>(w=>w.HeaderId);
     }
 }

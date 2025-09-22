@@ -47,8 +47,9 @@ public class ApplicationDbContext : DbContext
     public virtual DbSet<Document> Documents { get; set; }
     public virtual DbSet<DocumentType> DocumentTypes { get; set; }
     public virtual DbSet<DocumentDetail> DocumentDetails { get; set; }
-    public virtual DbSet<Tax> Taxes { get; set; }
-    public virtual DbSet<Discount> Discounts { get; set; }
+    public virtual DbSet<DocumentTax> Taxes { get; set; }
+    public virtual DbSet<DocumentDiscount> Discounts { get; set; }
+    public virtual DbSet<POS> POSs { get; set; }
 
     #endregion
 

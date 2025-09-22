@@ -29,7 +29,10 @@ public class UnitOfWork : IUnitOfWork
         Products = new Repository<Product>(_context);  
         ProductUnits = new Repository<ProductUnit>(_context);  
         DocumentTypes = new Repository<DocumentType>(_context);  
-        Taxes = new Repository<Tax>(_context);  
+        Taxes = new Repository<DocumentTax>(_context);  
+        Documents = new Repository<Document>(_context);  
+        POSs = new Repository<POS>(_context);  
+
     }
 
 
@@ -45,8 +48,9 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<Product> Products { get; }
     public IRepository<ProductUnit> ProductUnits { get; }
     public IRepository<DocumentType> DocumentTypes { get; }
-    public IRepository<Tax> Taxes { get; }
-
+    public IRepository<DocumentTax> Taxes { get; }
+    public IRepository<Document> Documents { get; }
+    public IRepository<POS> POSs { get; }
 
     public async Task<TResult> ExecuteInTransactionAsync<TResult>(Func<Task<TResult>> action)
     {

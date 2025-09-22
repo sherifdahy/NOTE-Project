@@ -11,7 +11,7 @@ public class BranchResponse
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
-    public CompanyResponse Company { get; set; }
-    public CityResponse City { get; set; }
+    public int CompanyId { get; set; }
+    public int CityId { get; set; }
 
 }

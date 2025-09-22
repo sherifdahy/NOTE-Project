@@ -18,6 +18,14 @@ public class ProductService(IUnitOfWork unitOfWork) : IProductService
         if (_unitOfWork.Products.IsExist(x => x.Name == request.Name && x.BranchId == branchId))
             return Result.Failure<ProductResponse>(ProductErrors.Duplicated);
 
+        foreach(var productUnit in request.ProductUnits)
+        {
+            if (!_unitOfWork.Units.IsExist(x => x.Id == productUnit.UnitId))
+            {
+                return Result.Failure<ProductResponse>(UnitErrors.NotFound);
+            }
+        }
+
         var product = request.Adapt<Product>();
         product.BranchId = branchId;
 

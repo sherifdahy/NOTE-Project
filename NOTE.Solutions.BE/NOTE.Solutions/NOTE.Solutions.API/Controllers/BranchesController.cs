@@ -10,7 +10,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
     private readonly IBranchService _branchService = branchService;
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAll()
     {
         var result = await _branchService.GetAllAsync();
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
@@ -24,7 +24,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(BranchRequest request)
+    public async Task<IActionResult> Create(BranchRequest request)
     {
         var result = await _branchService.CreateAsync(1,request);
         return result.IsSuccess ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value) : result.ToProblem();
@@ -39,7 +39,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         var result = await _branchService.DeleteAsync(id);
         return result.IsSuccess ? NoContent() : result.ToProblem();

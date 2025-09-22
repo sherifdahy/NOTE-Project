@@ -21,7 +21,9 @@ public interface IUnitOfWork : IDisposable
     public IRepository<Product> Products { get; }
     public IRepository<ProductUnit> ProductUnits { get; }
     public IRepository<DocumentType> DocumentTypes { get; }
-    public IRepository<Tax> Taxes { get; }
+    public IRepository<DocumentTax> Taxes { get; }
+    public IRepository<Document> Documents { get; }
+    public IRepository<POS> POSs { get; }
     Task<int> SaveAsync(CancellationToken cancellationToken = default);
     Task<TResult> ExecuteInTransactionAsync<TResult>(Func<Task<TResult>> action);
 }

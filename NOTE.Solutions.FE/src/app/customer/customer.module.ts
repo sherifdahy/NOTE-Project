@@ -3,8 +3,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeCustomerComponent } from './components/home-customer/home-customer.component';
 import { MainLayoutComponent } from '../core/layouts/main-layout/main-layout.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthTokenInterceptor } from '../core/interceptors/auth-token-interceptor';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './components/products/products/products.component';
+import { CreateProductComponent } from './components/products/create-product/create-product.component';
+import { EditProductComponent } from './components/products/edit-product/edit-product.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateProductUnitDialogComponent } from './components/products/create-product-unit-dialog/create-product-unit-dialog.component';
+import { ReceiptsComponent } from './components/receipts/receipts/receipts.component';
+import { CreateReceiptComponent } from './components/receipts/create-receipt/create-receipt.component';
+
+
+
 
 const routes: Routes = [
   {
@@ -12,8 +21,46 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
-        path: '', component: HomeCustomerComponent
+        path: '',
+        redirectTo : 'home',
+        pathMatch : 'full',
+      },
+      {
+        path : 'home',
+        component : HomeCustomerComponent,
+      },
+      {
+        path : 'products',
+        children : [
+          {
+            path : '',
+            component : ProductsComponent,
+          },
+          {
+          path : 'create',
+            component : CreateProductComponent
+          },
+          {
+            path : ':productId',
+            component : EditProductComponent
+          }
+        ]
+      },
+      {
+        path : 'receipts',
+        children : [
+          {
+            path : '',
+            component : ReceiptsComponent,
+          },
+          {
+            path : 'create',
+            component : CreateReceiptComponent,
+          }
+        ]
       }
+
+
     ]
   }
 ]
@@ -25,8 +72,16 @@ const routes: Routes = [
   imports: [
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forChild(routes),
   ],
-  declarations: []
+  declarations: [
+    ProductsComponent,
+    CreateProductComponent,
+    CreateProductUnitDialogComponent,
+    ReceiptsComponent,
+    CreateReceiptComponent,
+  ]
 })
 export class CustomerModule { }

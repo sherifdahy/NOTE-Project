@@ -1,4 +1,4 @@
-﻿namespace ETA.Consume.Contracts.Header.ResRequestsponses;
+﻿namespace ETA.Consume.Contracts.Header.Requests;
 
 public class HeaderRequest
 {

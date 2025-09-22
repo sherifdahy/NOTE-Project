@@ -1,4 +1,5 @@
-﻿using NOTE.Solutions.BLL.Contracts.User.Requests;
+﻿using NOTE.Solutions.BLL.Abstractions.Consts;
+using NOTE.Solutions.BLL.Contracts.User.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,7 @@ public class UserValidator : AbstractValidator<UserRequest>
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required")
-            .MinimumLength(8).WithMessage("Password must be at least 8 characters long")
-            .Matches("[A-Z]").WithMessage("Password must contain at least one uppercase letter")
-            .Matches("[a-z]").WithMessage("Password must contain at least one lowercase letter")
-            .Matches("[0-9]").WithMessage("Password must contain at least one number")
-            .Matches("[^a-zA-Z0-9]").WithMessage("Password must contain at least one special character");
+            .Matches(RegexPatterns.Password).WithMessage("Password should be at least 8 digits and must contain Lowercase , NonAlphanumeric and Uppercase");
     }
 }
 

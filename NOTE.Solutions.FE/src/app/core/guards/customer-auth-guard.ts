@@ -8,7 +8,6 @@ export const customerAuthGuard: CanActivateFn = (route, state) => {
 
   return authService.getRole.pipe(
       map(role=>{
-        alert(role);
         if(role?.toLowerCase() == 'customer')
           return true;
         else

@@ -1,9 +1,9 @@
 ﻿using ETA.Consume;
 using ETA.Consume.Interfaces;
 using ETA.Consume.Manager;
-using ETA.Consume.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authentication;
@@ -38,7 +38,21 @@ public static class DInjection
         services.AddMapsterConfig();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
+        services.AddHangFireConfig(configuration);
+        services.AddHealthChecksConfig(configuration);
 
+        return services;
+    }
+    private static IServiceCollection AddHangFireConfig(this IServiceCollection services,IConfiguration configuration)
+    {
+        services.AddHangfireServer();
+        services.AddHangfire(config =>
+        {
+            config.SetDataCompatibilityLevel(CompatibilityLevel.Version_180);
+            config.UseSimpleAssemblyNameTypeSerializer();
+            config.UseRecommendedSerializerSettings();
+            config.UseSqlServerStorage(configuration.GetConnectionString("HangfireConnection"));
+        });
         return services;
     }
 
@@ -52,6 +66,26 @@ public static class DInjection
 
         return services;
     }
+
+    private static IServiceCollection AddHealthChecksConfig
+        (this IServiceCollection services, IConfiguration configuration)
+    {
+        string connectionString = configuration.GetConnectionString("default")!;
+        if(connectionString is null) throw new Exception("Invalid Connection String");
+
+        services
+            .AddHealthChecks()
+            .AddSqlServer(name: "database", connectionString: connectionString)
+            .AddUrlGroup(name:"external api", uri : new Uri("https://google.com"))
+            .AddHangfire(option =>
+            {
+                option.MinimumAvailableServers = 1;
+                option.MaximumJobsFailed = 5;
+            });
+        
+        return services;
+    }
+
     private static IServiceCollection AddCorsConfig(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddCors(options =>
@@ -124,8 +158,12 @@ public static class DInjection
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductUnitService, ProductUnitService>();
         services.AddScoped<IEtaManager, EtaManager>();
-        services.AddScoped<IETAService, ETAService>();
         services.AddScoped<ICacheService, CacheService>();
+        services.AddScoped<IPOSService, POSService>();
+        services.AddScoped<BLL.Interfaces.IReceiptService, BLL.Services.ReceiptService>();
+
+
+        services.AddDistributedMemoryCache();
 
         return services;
     }

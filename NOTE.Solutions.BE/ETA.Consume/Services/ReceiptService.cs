@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace ETA.Consume.Services;
@@ -26,5 +27,15 @@ public class ReceiptService : IReceiptService
         };
 
         return await _apiCall.PostReturnAsync<SubmitReceiptsRequest,SubmitReceiptsResponse>("api/v1/receiptsubmissions", Documents, headers);
+    }
+
+    public async Task<ApiResult<ReceiptSubmissionResponse>> GetReceiptSubmission(string submissionUuid,string accessToken)
+    {
+        var headers = new Dictionary<string, string>()
+        {
+            { "Authorization" , $"Bearer {accessToken}"},
+            { "Accept-Language" , "ar" }
+        };
+        return await _apiCall.GetAsync<ReceiptSubmissionResponse>($"api/v1/receiptsubmissions/{submissionUuid}/details?PageNo=1&PageSize=100",headers);
     }
 }

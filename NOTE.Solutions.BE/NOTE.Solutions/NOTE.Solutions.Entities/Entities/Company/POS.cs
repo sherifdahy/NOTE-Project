@@ -14,5 +14,5 @@ public class POS : AuditableEntity
     public string POSSerial { get; set; } = string.Empty;
 
     public int BranchId { get; set; }
-    public Branch? Branch { get; set; } 
+    public Branch Branch { get; set; } = default!;
 }

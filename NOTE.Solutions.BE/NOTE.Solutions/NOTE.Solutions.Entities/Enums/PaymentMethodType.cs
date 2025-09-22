@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Enums;
 
-public enum PaymentMethodType
+public enum PaymentMethodType : byte
 {
-    Cash = 'C',
-    Visa = 'V'
+    Cash = 1,
+    Visa = 2
 }

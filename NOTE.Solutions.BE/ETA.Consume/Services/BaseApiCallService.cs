@@ -22,7 +22,7 @@ public class BaseApiCallService
     {
         _client?.Dispose();
     }
-    private  HttpRequestMessage BuildRequest<TContent>(string url,HttpMethod httpMethod,TContent content, Dictionary<string, string>? headers)
+    private  HttpRequestMessage BuildRequest<TContent>(string url,HttpMethod httpMethod,TContent? content, Dictionary<string, string>? headers)
     {
         var request = new HttpRequestMessage(httpMethod, url);
 
@@ -64,7 +64,26 @@ public class BaseApiCallService
         {
             return ApiResult<TResponse>.Failure(JsonConvert.DeserializeObject<ApiError>(responseContent)!,(int)response.StatusCode);
         }
+    }
 
+    public async Task<ApiResult<TResponse>> GetAsync<TResponse>(string url,Dictionary<string,string>? headers = null)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+        if(headers != null)
+        {
+            foreach(var header in headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+        }
+
+        var response = await _client.SendAsync(request);
+        var responseContent = await response.Content.ReadAsStringAsync();
+
+        return response.IsSuccessStatusCode ? 
+            ApiResult<TResponse>.Success(JsonConvert.DeserializeObject<TResponse>(responseContent)!,(int)response.StatusCode) :
+            ApiResult<TResponse>.Failure(JsonConvert.DeserializeObject<ApiError>(responseContent)!, (int)response.StatusCode);
     }
 
 

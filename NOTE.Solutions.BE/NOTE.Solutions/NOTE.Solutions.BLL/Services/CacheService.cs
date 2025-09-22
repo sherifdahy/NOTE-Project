@@ -11,8 +11,7 @@ public class CacheService : ICacheService
     {
         _distributedCache = distributedCache;
     }
-    public async Task<T?> GetAsync<T>(string cacheKey, 
-        CancellationToken cancellationToken = default) where T : class
+    public async Task<T?> GetAsync<T>(string cacheKey, CancellationToken cancellationToken = default) where T : class
     {
         var result = await _distributedCache.GetStringAsync(cacheKey, cancellationToken);
 

@@ -15,7 +15,7 @@ public class ProductUnitResponse
     public string GlobalCode { get; set; } = string.Empty;
     public GlobalCodeType GlobalCodeType { get; set; }
     public decimal UnitPrice { get; set; }
-    public UnitResponse Unit { get; set; }
+    public UnitResponse Unit { get; set; } = default!;
 
     
 }

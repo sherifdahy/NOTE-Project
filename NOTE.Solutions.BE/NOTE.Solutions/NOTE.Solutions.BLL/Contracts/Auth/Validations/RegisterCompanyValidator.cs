@@ -20,7 +20,7 @@ public class RegisterCompanyValidator : AbstractValidator<RegisterCompanyRequest
         // RIN
         RuleFor(x => x.RIN)
             .NotEmpty().WithMessage("RIN is required.")
-            .Matches(@"^\d{9,15}$").WithMessage("RIN must be numeric and between 9 to 15 digits.");
+            .Matches(@"^\d{9}$").WithMessage("RIN must be numeric and 9 digits.");
 
         // ActiveCodeId
         RuleFor(x => x.ActiveCodeId)

@@ -10,12 +10,10 @@ public class POSConfiguration : IEntityTypeConfiguration<POS>
     {
         builder.HasKey(p => p.Id);
 
-        builder.HasIndex(x => new { x.ClientId, x.ClientSecret });
-
         builder.Property(p => p.ClientId).IsRequired().HasMaxLength(100);
         builder.Property(p => p.ClientSecret).IsRequired().HasMaxLength(100);
 
-        builder.HasIndex(x => new { x.POSSerial,x.BranchId });
+        builder.HasIndex(x => new { x.POSSerial,x.BranchId }).IsUnique();
         
         builder.Property(p => p.POSSerial).IsRequired().HasMaxLength(100);
     }

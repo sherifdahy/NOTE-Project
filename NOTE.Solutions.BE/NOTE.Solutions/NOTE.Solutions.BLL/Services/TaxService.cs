@@ -17,7 +17,7 @@ public class TaxService(IUnitOfWork unitOfWork) : ITaxService
         if (_unitOfWork.Taxes.IsExist(x => x.Code == request.Code))
             return Result.Failure<TaxResponse>(TaxErrors.Duplicated);
 
-        var tax = request.Adapt<Tax>();
+        var tax = request.Adapt<DocumentTax>();
         await _unitOfWork.Taxes.AddAsync(tax, cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
         return Result.Success(tax.Adapt<TaxResponse>());

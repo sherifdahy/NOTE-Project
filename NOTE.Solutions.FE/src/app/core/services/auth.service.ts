@@ -19,7 +19,6 @@ export class AuthService {
     const token = this.getAccessToken;
     if (token) {
       const payload = this.decodeToken(token);
-      console.log(payload);
       this.roleSubject.next(payload.role);
     }
   }

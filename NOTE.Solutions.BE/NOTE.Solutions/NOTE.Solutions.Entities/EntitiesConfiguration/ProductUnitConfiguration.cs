@@ -33,10 +33,6 @@ public class ProductUnitConfiguration : IEntityTypeConfiguration<ProductUnit>
             .HasIndex(pu => new { pu.ProductId, pu.InternalCode })
             .IsUnique();
 
-        builder
-            .HasIndex(pu => new { pu.GlobalCode, pu.GlobalCodeType })
-            .IsUnique();
-
 
         builder.HasIndex(x=> new { x.ProductId, x.UnitId }).IsUnique();
 

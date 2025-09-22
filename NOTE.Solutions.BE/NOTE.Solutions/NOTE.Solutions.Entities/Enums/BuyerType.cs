@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Enums;
-public enum BuyerType
+public enum BuyerType : byte
 {
-    Person = 'P',
-    Business = 'B',
-    Foreign = 'F'
+    Person = 1,
+    Business = 2,
+    Foreign = 3
 }

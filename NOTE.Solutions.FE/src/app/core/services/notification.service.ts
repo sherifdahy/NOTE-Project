@@ -20,7 +20,6 @@ export class NotificationService {
 
   showError(errors : Record<string,string[]>)
   {
-    console.log(errors);
     Object.keys(errors).forEach(key=>{
       this.matSnackBar.open(errors[key].join('\n'),key,{
         duration : 3000,

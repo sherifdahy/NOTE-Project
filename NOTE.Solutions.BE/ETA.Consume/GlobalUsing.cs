@@ -1,7 +1,6 @@
 ﻿global using ETA.Consume.Interfaces;
 global using Newtonsoft.Json;
 global using Microsoft.Extensions.Options;
-global using ETA.Consume.Contracts.Error.Responses;
 global using ETA.Consume.Contracts.Auth.Requests;
 global using ETA.Consume.Contracts.Auth.Responses;
 global using ETA.Consume.Services;
@@ -10,7 +9,6 @@ global using ETA.Consume.Contracts.Item.Requests;
 global using ETA.Consume.Contracts.Seller.Requests;
 global using ETA.Consume.Contracts.Buyer.Requests;
 global using ETA.Consume.Contracts.DocumentType.Requests;
-global using ETA.Consume.Contracts.Header.ResRequestsponses;
 global using ETA.Consume.Abstractions;
 global using ETA.Consume.Contracts.Receipt.Requests;
 global using ETA.Consume.Contracts.Receipt.Responses;

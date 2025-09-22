@@ -11,24 +11,18 @@ namespace NOTE.Solutions.Entities.Entities.Document;
 public class Document : AuditableEntity
 {
     public int Id { get; set; }
-    public DateTime DateTime { get; set; }
-    public string DocumentNumber { get; set; } = string.Empty;
-    public string UUID { get; set; } = string.Empty;
-
-    public string BuyerName { get; set; } = string.Empty;
-    public string BuyerSSN {  get; set; } = string.Empty;
-    public BuyerType BuyerType { get; set; }
-
+    public int BranchId { get; set; }
+    public int DocumentTypeId { get; set; }
+    public int HeaderId { get; set; }
+    public int BuyerId { get; set; }
     public PaymentMethodType PaymentMethod { get; set; }
 
-    public int BranchId { get; set; }
-    public Branch Branch { get; set; }
 
-    public int DocumentTypeId { get; set; }
-    public DocumentType DocumentType { get; set; }
-
+    public DocumentHeader Header { get; set; } = default!;
+    public Branch Branch { get; set; } = default!;
+    public DocumentBuyer Buyer { get; set; } = default!;
+    public DocumentType DocumentType { get; set; } = default!;
     public ICollection<DocumentDetail> DocumentDetails { get; set; } = new HashSet<DocumentDetail>();
-
 }
 
 

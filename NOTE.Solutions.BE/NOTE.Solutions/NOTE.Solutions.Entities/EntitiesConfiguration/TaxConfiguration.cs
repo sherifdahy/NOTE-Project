@@ -4,9 +4,9 @@ using NOTE.Solutions.Entities.Entities.Document;
 
 namespace NOTE.Solutions.Entities.EntitiesConfiguration;
 
-public class TaxConfiguration : IEntityTypeConfiguration<Tax>
+public class TaxConfiguration : IEntityTypeConfiguration<DocumentTax>
 {
-    public void Configure(EntityTypeBuilder<Tax> builder)
+    public void Configure(EntityTypeBuilder<DocumentTax> builder)
     {
         builder.HasKey(x => x.Id);
         builder.HasIndex(x=> x.Code).IsUnique();
