@@ -11,4 +11,6 @@ public class AuthResponse
 {
     public string Token { get; set; } = string.Empty;
     public int ExpireIn { get; set; }
+    public string RefreshToken { get; set; } = string.Empty;
+    public DateTime RefreshTokenExpiration { get; set; }
 }

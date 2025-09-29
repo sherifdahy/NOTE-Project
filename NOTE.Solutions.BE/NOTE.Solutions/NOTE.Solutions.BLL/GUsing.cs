@@ -25,4 +25,10 @@ global using NOTE.Solutions.BLL.Contracts.Product.Responses;
 global using NOTE.Solutions.BLL.Abstractions;
 global using NOTE.Solutions.BLL.Contracts.ActiveCode.Requests;
 global using NOTE.Solutions.BLL.Contracts.ActiveCode.Responses;
-
+global using NOTE.Solutions.BLL.Contracts.Auth.Requests;
+global using NOTE.Solutions.BLL.Contracts.Manager.Validations;
+global using NOTE.Solutions.Entities.Entities.Company;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Identity;
+global using NOTE.Solutions.BLL.Authentication;
+global using NOTE.Solutions.BLL.Contracts.Auth.Responses;

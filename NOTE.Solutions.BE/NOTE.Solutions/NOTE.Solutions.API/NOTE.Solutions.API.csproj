@@ -32,8 +32,4 @@
     <ProjectReference Include="..\NOTE.Solutions.BLL\NOTE.Solutions.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Logs\" />
-  </ItemGroup>
-
 </Project>

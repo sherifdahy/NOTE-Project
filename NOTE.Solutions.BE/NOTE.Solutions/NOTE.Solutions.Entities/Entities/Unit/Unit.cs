@@ -6,6 +6,5 @@ public class Unit : AuditableEntity
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
-
     public ICollection<ProductUnit> ProductUnits { get; set; } = new HashSet<ProductUnit>();
 }

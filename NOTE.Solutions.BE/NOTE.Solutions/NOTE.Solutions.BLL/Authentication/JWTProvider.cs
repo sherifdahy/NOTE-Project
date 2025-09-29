@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,19 +11,18 @@ using System.Threading.Tasks;
 
 namespace NOTE.Solutions.BLL.Authentication;
 
-public class JWTProvider (IOptions<JwtOptions> options): IJWTProvider
+public class JWTProvider(IOptions<JwtOptions> options) : IJWTProvider
 {
     private readonly IOptions<JwtOptions> _options = options;
 
-    public (string token, int expiresIn) GeneratedToken(ApplicationUser applicationUser)
+    public (string token, int expiresIn) GeneratedToken(ApplicationUser applicationUser,IList<string> applicationRoles)
     {
-        Claim[] claims = [
+        List<Claim> claims = [
             new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id.ToString()),
-            new Claim("role",applicationUser.ApplicationRole.Role.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email,applicationUser.Email),
-            new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Email,applicationUser.Email!),
+            new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
         ];
-
+        claims.Add(new Claim("roles", JsonConvert.SerializeObject(applicationRoles)));
 
         var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.Key));
 
@@ -41,5 +41,32 @@ public class JWTProvider (IOptions<JwtOptions> options): IJWTProvider
         );
 
         return (token: new JwtSecurityTokenHandler().WriteToken(token),expiresIn:expiresIn * 60);
+    }
+
+    public int? ValidateToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.Key));
+
+        try
+        {
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+                IssuerSigningKey = symetricSecurityKey,
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            },out SecurityToken validatedToken);
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+
+            return int.Parse(jwtToken.Claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value);
+        }
+        catch
+        {
+            return null;
+        }
+
     }
 }

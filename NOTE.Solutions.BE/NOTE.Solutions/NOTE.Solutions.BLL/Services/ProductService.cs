@@ -1,8 +1,4 @@
-using NOTE.Solutions.BLL.Contracts.Product.Requests;
-using NOTE.Solutions.BLL.Contracts.Product.Responses;
 using NOTE.Solutions.Entities.Entities.Product;
-using Mapster;
-using NOTE.Solutions.BLL.Errors;
 
 namespace NOTE.Solutions.BLL.Services;
 
@@ -56,7 +52,7 @@ public class ProductService(IUnitOfWork unitOfWork) : IProductService
         if (!_unitOfWork.Branches.IsExist(x => x.Id == branchId))
             return Result.Failure<IEnumerable<ProductResponse>>(BranchErrors.NotFound);
 
-        var products = await _unitOfWork.Products.FindAllAsync(x => x.BranchId == branchId, null);
+        var products = await _unitOfWork.Products.FindAllAsync(x => x.BranchId == branchId,cancellationToken:cancellationToken);
         return Result.Success(products.Adapt<IEnumerable<ProductResponse>>());
     }
 

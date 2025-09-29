@@ -1,17 +1,35 @@
+using Microsoft.AspNetCore.Http;
+using NOTE.Solutions.API.Extensions;
 using NOTE.Solutions.Entities.Entities.Product;
 
 namespace NOTE.Solutions.BLL.Services;
 
-public class ProductUnitService(IUnitOfWork unitOfWork) : IProductUnitService
+public class ProductUnitService : IProductUnitService
 {
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private string _cachedKey;
+    private int _userId;
+
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheService _cacheService;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    
     private string[] _includes = new string[]
     {
+        nameof(ProductUnit.Product),
         nameof(ProductUnit.Unit)
     };
 
+    public ProductUnitService(IHttpContextAccessor httpContextAccessor,IUnitOfWork unitOfWork,ICacheService cacheService)
+    {
+        _cacheService = cacheService;
+        _unitOfWork = unitOfWork;
+        _httpContextAccessor = httpContextAccessor;
 
-    public async Task<Result<ProductUnitResponse>> CreateAsync(int productId, ProductUnitRequest request, CancellationToken cancellationToken = default)
+        _userId = _httpContextAccessor.HttpContext!.User.GetUserId();
+        _cachedKey = $"productUnits_user_{_userId}";
+    }
+
+    public async Task<Result> CreateAsync(int productId, ProductUnitRequest request, CancellationToken cancellationToken = default)
     {
         if (productId <= 0)
             return Result.Failure<ProductUnitResponse>(ProductUnitErrors.InvalidId);
@@ -22,10 +40,8 @@ public class ProductUnitService(IUnitOfWork unitOfWork) : IProductUnitService
         // Unique constraints checks
         if (_unitOfWork.ProductUnits.IsExist(x => x.ProductId == productId && x.UnitId == request.UnitId))
             return Result.Failure<ProductUnitResponse>(ProductUnitErrors.Duplicated);
-        if (_unitOfWork.ProductUnits.IsExist(x => x.ProductId == productId && x.InternalCode == request.InternalCode))
+        if (_unitOfWork.ProductUnits.IsExist(x => x.ProductId == productId && x.InternalBarcode == request.InternalCode))
             return Result.Failure<ProductUnitResponse>(ProductUnitErrors.DuplicatedInternalCode);
-        if (_unitOfWork.ProductUnits.IsExist(x => x.GlobalCode == request.GlobalCode && x.GlobalCodeType == request.GlobalCodeType))
-            return Result.Failure<ProductUnitResponse>(ProductUnitErrors.DuplicatedGlobalCode);
 
         var productUnit = request.Adapt<ProductUnit>();
         productUnit.ProductId = productId;
@@ -33,9 +49,9 @@ public class ProductUnitService(IUnitOfWork unitOfWork) : IProductUnitService
         await _unitOfWork.ProductUnits.AddAsync(productUnit, cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        productUnit = await _unitOfWork.ProductUnits.FindAsync(x => x.Id == productUnit.Id, _includes, cancellationToken);
+        await _cacheService.RemoveAsync(_cachedKey);
 
-        return Result.Success(productUnit.Adapt<ProductUnitResponse>());
+        return Result.Success();
     }
 
     public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
@@ -51,12 +67,21 @@ public class ProductUnitService(IUnitOfWork unitOfWork) : IProductUnitService
         _unitOfWork.ProductUnits.Delete(productUnit);
         await _unitOfWork.SaveAsync(cancellationToken);
 
+        await _cacheService.RemoveAsync(_cachedKey);
+
         return Result.Success();
     }
 
-    public async Task<Result<IEnumerable<ProductUnitResponse>>> GetAllAsync(int productId, CancellationToken cancellationToken = default)
+    public async Task<Result<IEnumerable<ProductUnitResponse>>> GetAllAsync(int branchId, CancellationToken cancellationToken = default)
     {
-        var productUnits = await _unitOfWork.ProductUnits.FindAllAsync(x => x.ProductId == productId, null);
+        var cachedProductUnits = await _cacheService.GetAsync<IEnumerable<ProductUnitResponse>>(_cachedKey, cancellationToken);
+
+        if (cachedProductUnits is not null)
+            return Result.Success(cachedProductUnits);
+
+        var productUnits = await _unitOfWork.ProductUnits.FindAllAsync(x => x.Product!.BranchId == branchId, _includes, cancellationToken);
+
+        await _cacheService.SetAsync(_cachedKey, productUnits.Adapt<IEnumerable<ProductUnitResponse>>(), TimeSpan.FromDays(10), cancellationToken);
 
         return Result.Success(productUnits.Adapt<IEnumerable<ProductUnitResponse>>());
     }
@@ -86,15 +111,15 @@ public class ProductUnitService(IUnitOfWork unitOfWork) : IProductUnitService
         // Unique constraints checks (exclude current record)
         if (_unitOfWork.ProductUnits.IsExist(x => x.Id != id && x.ProductId == productUnit.ProductId && x.UnitId == request.UnitId))
             return Result.Failure(ProductUnitErrors.Duplicated);
-        if (_unitOfWork.ProductUnits.IsExist(x => x.Id != id && x.ProductId == productUnit.ProductId && x.InternalCode == request.InternalCode))
+        if (_unitOfWork.ProductUnits.IsExist(x => x.Id != id && x.ProductId == productUnit.ProductId && x.InternalBarcode == request.InternalCode))
             return Result.Failure(ProductUnitErrors.DuplicatedInternalCode);
-        if (_unitOfWork.ProductUnits.IsExist(x => x.Id != id && x.GlobalCode == request.GlobalCode && x.GlobalCodeType == request.GlobalCodeType))
-            return Result.Failure(ProductUnitErrors.DuplicatedGlobalCode);
 
         request.Adapt(productUnit);
 
         _unitOfWork.ProductUnits.Update(productUnit);
         await _unitOfWork.SaveAsync(cancellationToken);
+
+        await _cacheService.RemoveAsync(_cachedKey);
 
         return Result.Success();
     }

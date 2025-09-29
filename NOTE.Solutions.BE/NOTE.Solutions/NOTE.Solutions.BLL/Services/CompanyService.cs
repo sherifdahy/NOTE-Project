@@ -6,8 +6,7 @@ public class CompanyService(IUnitOfWork unitOfWork) : ICompanyService
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly string[] _includes =
     {
-        nameof(Company.CompanyActiveCodes),
-        $"{nameof(Company.CompanyActiveCodes)}.{nameof(CompanyActiveCode.ActiveCode)}"
+        nameof(Company.ActiveCodes),
     };
 
     public async Task<Result<CompanyResponse>> CreateAsync(CompanyRequest request, CancellationToken cancellationToken = default)

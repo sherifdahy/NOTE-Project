@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using NOTE.Solutions.API.Extensions;
 
 namespace NOTE.Solutions.API.Controllers;
 
@@ -9,7 +10,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
 {
     private readonly IBranchService _branchService = branchService;
 
-    [HttpGet]
+    [HttpGet("")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _branchService.GetAllAsync();
@@ -23,11 +24,11 @@ public class BranchesController(IBranchService branchService) : ControllerBase
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(BranchRequest request)
+    [HttpPost("~/api/companies/{companyId}/branches")]
+    public async Task<IActionResult> Create(int companyId,BranchRequest request)
     {
-        var result = await _branchService.CreateAsync(1,request);
-        return result.IsSuccess ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value) : result.ToProblem();
+        var result = await _branchService.CreateAsync(companyId,request);
+        return result.IsSuccess ? Created() : result.ToProblem();
     }
 
 

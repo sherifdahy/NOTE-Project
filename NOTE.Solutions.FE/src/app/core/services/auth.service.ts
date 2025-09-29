@@ -10,17 +10,9 @@ import { RegisterCompanyRequest } from '../models/auth/requests/register-company
 })
 export class AuthService {
 
-  private roleSubject: BehaviorSubject<string | null>;
-  constructor(
-    private apiCall: GenericApiHandlerService
-  ) {
-    this.roleSubject = new BehaviorSubject<string | null>(null);
+  constructor(private apiCall: GenericApiHandlerService)
+  {
 
-    const token = this.getAccessToken;
-    if (token) {
-      const payload = this.decodeToken(token);
-      this.roleSubject.next(payload.role);
-    }
   }
 
   login(loginRequest: LoginRequest): Observable<AuthResponse> {
@@ -36,6 +28,7 @@ export class AuthService {
     );
   }
 
+
   registerCompany(registerCompanyRequest: RegisterCompanyRequest): Observable<any> {
     return this.apiCall.post<any>('auth/register-company', registerCompanyRequest).pipe(
       catchError(response => {
@@ -46,7 +39,6 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.roleSubject.next(null);
   }
   private decodeToken(token: string): any {
     try {
@@ -62,11 +54,12 @@ export class AuthService {
 
   private set setAccessToken(token: string) {
     localStorage.setItem('token', token);
-    const payload = this.decodeToken(token);
-    this.roleSubject.next(payload.role);
+
   }
 
-  get getRole(): Observable<string | null> {
-    return this.roleSubject.asObservable();
+  get getRoles(): string[] | null {
+    let token = localStorage.getItem('token') as string;
+    const payload = this.decodeToken(token);
+    return JSON.parse(payload.roles);
   }
 }

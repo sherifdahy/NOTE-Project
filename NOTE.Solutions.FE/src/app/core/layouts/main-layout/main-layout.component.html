@@ -3,8 +3,8 @@
     <app-header></app-header>
   </div>
   <div class="sidebar-area">
-    <app-admin-sidebar *ngIf="role?.toLowerCase() === 'admin'" ></app-admin-sidebar>
-    <app-customer-sidebar *ngIf="role?.toLowerCase() === 'customer'"></app-customer-sidebar>
+    <app-admin-sidebar *ngIf="roles?.includes('Admin')" ></app-admin-sidebar>
+    <app-customer-sidebar *ngIf="roles?.includes('Employee')"></app-customer-sidebar>
 
   </div>
   <div class="body-area">

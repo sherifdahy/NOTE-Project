@@ -15,17 +15,5 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
         builder.HasIndex(x=> x.Name).IsUnique();
-
-        builder.Property(x=>x.BranchId).IsRequired();
-
-        builder
-            .HasMany(x => x.ProductUnits)
-            .WithOne(x => x.Product)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(x=>x.Branch)
-            .WithMany(x => x.Products)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -5,7 +5,7 @@ namespace NOTE.Solutions.BLL.Services;
 
 public class DocumentService : IDocumentService
 {
-    public Task<Result<DocumentResponse>> CreateAsync(DocumentRequest request, CancellationToken cancellationToken = default)
+    public Task<Result<OrderResponse>> CreateAsync(OrderRequest request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
@@ -15,17 +15,17 @@ public class DocumentService : IDocumentService
         throw new NotImplementedException();
     }
 
-    public Task<Result<IEnumerable<DocumentResponse>>> GetAllAsync(int branchId, CancellationToken cancellationToken = default)
+    public Task<Result<IEnumerable<OrderResponse>>> GetAllAsync(int branchId, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Result<DocumentResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public Task<Result<OrderResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Result> UpdateAsync(int id, DocumentRequest request, CancellationToken cancellationToken = default)
+    public Task<Result> UpdateAsync(int id, OrderRequest request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

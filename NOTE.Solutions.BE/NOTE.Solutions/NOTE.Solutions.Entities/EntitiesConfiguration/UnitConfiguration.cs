@@ -15,11 +15,5 @@ public class UnitConfiguration : IEntityTypeConfiguration<Unit>
     {
         builder.Property(x => x.Code).IsRequired();
         builder.HasIndex(x => x.Code).IsUnique();
-
-        builder
-            .HasMany(x => x.ProductUnits)
-            .WithOne(x => x.Unit)
-            .HasForeignKey(x => x.UnitId)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

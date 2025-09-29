@@ -9,5 +9,5 @@ namespace NOTE.Solutions.BLL.Contracts.Role.Requests;
 
 public class RoleRequest
 {
-    public RoleType Role { get; set; }
+    public string Name { get; set; }
 }

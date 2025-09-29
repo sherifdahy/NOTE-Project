@@ -1,0 +1,26 @@
+<div class="p-3">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="row row-cols-1 row-cols-md-2">
+      <div class="form-group mb-3">
+        <label class="form-label">المنتجات</label>
+        <select (change)="handleChangeSelectedProductUnit($event)" class="form-select" formControlName="productUnitId">
+          <option *ngFor="let productUnit of productUnits" [value]="productUnit.id">{{ productUnit.description }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">سعر الوحدة</label>
+        <input type="number" class="form-control" formControlName="unitPrice" />
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">الكمية</label>
+        <input type="number" class="form-control" formControlName="quantity" />
+      </div>
+    </div>
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" class="btn btn-outline-danger px-4" (click)="handleClose()">إلغاء</button>
+      <button type="submit" class="btn btn-primary px-4" [disabled]="form.invalid">إضافة</button>
+    </div>
+  </form>
+
+</div>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Enums;
 
-public enum RoleType 
+public enum RoleType
 {
-    Admin = 1,
-    Customer = 2
+    Manager = 1,
+    Employee = 2
 }

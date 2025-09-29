@@ -10,8 +10,9 @@ namespace NOTE.Solutions.BLL.Interfaces;
 
 public interface IReceiptService
 {
-    Task<Result<DocumentResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default);
-    Task<Result<IEnumerable<DocumentResponse>>> GetAllAsync(int branchId, CancellationToken cancellationToken = default);
-    Task<Result<DocumentResponse>> CreateAsync(int branchId, int activeCodeId, int posId, DocumentRequest documentRequest, CancellationToken cancellationToken = default);
+    Task<Result<string>> GetNextNumberAsync(int branchId, CancellationToken cancellationToken = default);
+    Task<Result<OrderResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+    Task<Result<IEnumerable<OrderResponse>>> GetAllAsync(int branchId, CancellationToken cancellationToken = default);
+    Task<Result<OrderResponse>> CreateAsync(int branchId,OrderRequest documentRequest, CancellationToken cancellationToken = default);
     Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default);
 }

@@ -10,7 +10,7 @@ public static class UserExtension
             throw new ArgumentNullException(nameof(user));
 
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        
+
         int.TryParse(userId, out var id);
 
         return id;

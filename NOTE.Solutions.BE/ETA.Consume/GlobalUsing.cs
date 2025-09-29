@@ -7,7 +7,6 @@ global using ETA.Consume.Services;
 global using ETA.Consume.Contracts.BranchAddress.Requests;
 global using ETA.Consume.Contracts.Item.Requests;
 global using ETA.Consume.Contracts.Seller.Requests;
-global using ETA.Consume.Contracts.Buyer.Requests;
 global using ETA.Consume.Contracts.DocumentType.Requests;
 global using ETA.Consume.Abstractions;
 global using ETA.Consume.Contracts.Receipt.Requests;

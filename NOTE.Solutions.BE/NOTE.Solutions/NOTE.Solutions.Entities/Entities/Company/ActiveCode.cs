@@ -4,5 +4,5 @@ public class ActiveCode
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
 
-    public ICollection<CompanyActiveCode> CompanyActiveCodes { get; set; } = new HashSet<CompanyActiveCode>();
+    public ICollection<Company> Companies { get; set; } = new HashSet<Company>();
 }

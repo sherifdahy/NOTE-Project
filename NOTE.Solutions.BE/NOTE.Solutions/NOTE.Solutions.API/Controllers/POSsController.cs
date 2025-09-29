@@ -4,13 +4,13 @@ using NOTE.Solutions.BLL.Contracts.POS.Requests;
 
 namespace NOTE.Solutions.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/branches/{branchId:int}/[controller]")]
     [ApiController]
     public class POSsController(IPOSService pOSService) : ControllerBase
     {
         private readonly IPOSService _pOSService = pOSService;
 
-        [HttpGet("~/branches/{branchId:int}/POSs")]
+        [HttpGet]
         public async Task<IActionResult> GetAll(int branchId,CancellationToken cancellationToken)
         {
             var result = await _pOSService.GetAllAsync(branchId, cancellationToken);
@@ -18,7 +18,7 @@ namespace NOTE.Solutions.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<IActionResult> Create(int branchId, POSRequest request,CancellationToken cancellationToken)
         {
             var result = await _pOSService.CreateAsync(branchId, request, cancellationToken);

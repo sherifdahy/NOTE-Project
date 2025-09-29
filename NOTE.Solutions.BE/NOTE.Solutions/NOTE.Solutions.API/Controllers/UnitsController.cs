@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NOTE.Solutions.BLL.Contracts.Unit.Requests;
-using NOTE.Solutions.Entities.Entities.Document;
 using System.Threading.Tasks;
 
 namespace NOTE.Solutions.API.Controllers;

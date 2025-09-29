@@ -1,3 +1,207 @@
-<p>
-  create-receipt works!
-</p>
+<div class="m-3">
+  <form [formGroup]="form" (ngSubmit)="handleSubmitForm()">
+
+    <!-- بيانات المستند -->
+    <div class="mb-3">
+      <h5>بيانات المستند</h5>
+      <div formGroupName="header" class="row row-cols-1 row-cols-md-3">
+
+        <!-- رقم المستند -->
+        <div class="mb-2">
+          <label class="form-label">رقم المستند</label>
+          <input type="text" class="form-control" formControlName="documentNumber" />
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('header.documentNumber')?.invalid && (form.get('header.documentNumber')?.touched || form.get('header.documentNumber')?.dirty)">
+            <div *ngIf="form.get('header.documentNumber')?.errors?.['required']">رقم المستند مطلوب</div>
+          </div>
+        </div>
+
+        <!-- تاريخ المستند -->
+        <div class="mb-2">
+          <label class="form-label">تاريخ المستند</label>
+          <input type="datetime-local" class="form-control" formControlName="dateTime" />
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('header.dateTime')?.invalid && (form.get('header.dateTime')?.touched || form.get('header.dateTime')?.dirty)">
+            <div *ngIf="form.get('header.dateTime')?.errors?.['required']">تاريخ المستند مطلوب</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-3">
+        <!-- طريقة الدفع -->
+        <div class="mb-3">
+          <label class="form-label">طريقة الدفع</label>
+          <select class="form-select" formControlName="paymentMethod">
+            <option value="0">اختر طريقة الدفع</option>
+            <option value="1">نقدي</option>
+            <option value="2">بطاقة</option>
+          </select>
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('paymentMethod')?.invalid && (form.get('paymentMethod')?.touched || form.get('paymentMethod')?.dirty)">
+            <div *ngIf="form.get('paymentMethod')?.errors?.['required']">طريقة الدفع مطلوبة</div>
+            <div *ngIf="form.get('paymentMethod')?.errors?.['min']">اختيار طريقة الدفع مطلوب</div>
+          </div>
+        </div>
+
+        <!-- كود التفعيل -->
+        <div class="mb-3">
+          <label class="form-label">كود التفعيل</label>
+          <select class="form-select" formControlName="activeCodeId">
+            <option value="0">اختر كود التفعيل</option>
+            <option *ngFor="let activeCode of activeCodes" [value]="activeCode.id">{{activeCode.code}}</option>
+          </select>
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('activeCodeId')?.invalid && (form.get('activeCodeId')?.touched || form.get('activeCodeId')?.dirty)">
+            <div *ngIf="form.get('activeCodeId')?.errors?.['required']">كود التفعيل مطلوب</div>
+            <div *ngIf="form.get('activeCodeId')?.errors?.['min']">اختيار كود التفعيل مطلوب</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">نوع الوثيقة</label>
+          <select class="form-select" formControlName="documentTypeId" >
+            <option value="0">اختر نوع الوثيقة</option>
+            <option *ngFor="let docType of documentTypes" [value]="docType.id">{{docType.type}}</option>
+          </select>
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('documentTypeId')?.invalid && (form.get('documentTypeId')?.touched || form.get('documentTypeId')?.dirty)">
+            <div *ngIf="form.get('documentTypeId')?.errors?.['required']">الملاحظات مطلوبة</div>
+            <div *ngIf="form.get('documentTypeId')?.errors?.['min']">اختيار نوع الوثيق مطلوب</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- بيانات البائع -->
+    <div class="mb-3">
+      <h5>بيانات البائع</h5>
+      <div class="row row-cols-1 row-cols-md-3">
+        <div class="mb-3">
+          <label class="form-label">الفرع</label>
+          <select class="form-select" (change)="handleChangeBranch()" formControlName="branchId">
+            <option value="0">اختر الفرع</option>
+            <option *ngFor="let branch of branches" [value]="branch.id">{{branch.code}}</option>
+          </select>
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('branchId')?.invalid && (form.get('branchId')?.touched || form.get('branchId')?.dirty)">
+            <div *ngIf="form.get('branchId')?.errors?.['required']">اختيار الفرع مطلوب</div>
+            <div *ngIf="form.get('branchId')?.errors?.['min']">اختيار الفرع مطلوب</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">نقاط البيع</label>
+          <select class="form-select" formControlName="posId">
+            <option value="0">اختر نقطة البيع</option>
+            <option *ngFor="let pos of poss" [value]="pos.id">{{pos.posSerial}}</option>
+          </select>
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('posId')?.invalid && (form.get('posId')?.touched || form.get('posId')?.dirty)">
+            <div *ngIf="form.get('posId')?.errors?.['required']">اختيار نقطة البيع مطلوب</div>
+            <div *ngIf="form.get('posId')?.errors?.['min']">اختيار نقطة البيع مطلوب</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- بيانات المشتري -->
+    <div formGroupName="buyer" class="mb-3">
+      <h5>بيانات المشتري</h5>
+      <div class="row row-cols-1 row-cols-md-3">
+
+        <!-- الاسم -->
+        <div class="mb-2">
+          <label class="form-label">اسم المشتري</label>
+          <input type="text" class="form-control" formControlName="name" />
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('buyer.name')?.invalid && (form.get('buyer.name')?.touched || form.get('buyer.name')?.dirty)">
+            <div *ngIf="form.get('buyer.name')?.errors?.['required']">اسم المشتري مطلوب</div>
+          </div>
+        </div>
+
+        <!-- الرقم القومي -->
+        <div class="mb-2">
+          <label class="form-label">الرقم القومي</label>
+          <input type="text" class="form-control" formControlName="ssn" />
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('buyer.ssn')?.invalid && (form.get('buyer.ssn')?.touched || form.get('buyer.ssn')?.dirty)">
+            <div *ngIf="form.get('buyer.ssn')?.errors?.['required']">الرقم القومي مطلوب</div>
+          </div>
+        </div>
+
+        <!-- النوع -->
+        <div class="mb-2">
+          <label class="form-label">النوع</label>
+          <select class="form-select" formControlName="type">
+            <option value="0">اختر النوع</option>
+            <option value="1">فرد</option>
+            <option value="2">شركة</option>
+          </select>
+          <div class="text-danger small mt-1"
+               *ngIf="form.get('buyer.type')?.invalid && (form.get('buyer.type')?.touched || form.get('buyer.type')?.dirty)">
+            <div *ngIf="form.get('buyer.type')?.errors?.['required']">النوع مطلوب</div>
+            <div *ngIf="form.get('buyer.type')?.errors?.['min']">اختيار النوع مطلوب</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تفاصيل المستند -->
+    <div formArrayName="documentDetails" class="mb-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5>تفاصيل المستند</h5>
+        <button type="button" class="btn btn-sm btn-primary mb-2" (click)="addDocumentDetail()">اضافة منتج</button>
+      </div>
+
+      <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="table-success">
+          <tr>
+            <th class="col-1">ProductUnit Id</th>
+            <th class="col-5">الكمية</th>
+            <th class="col-6">سعر القطعة</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let detail of documentDetails.controls; let i = index" [formGroupName]="i">
+            <td>{{ detail.value.productUnitId }}</td>
+            <td>
+              {{ detail.value.quantity }}
+              <div class="text-danger small mt-1"
+                   *ngIf="detail.get('quantity')?.invalid && (detail.get('quantity')?.touched || detail.get('quantity')?.dirty)">
+                <div *ngIf="detail.get('quantity')?.errors?.['required']">الكمية مطلوبة</div>
+                <div *ngIf="detail.get('quantity')?.errors?.['min']">الكمية يجب أن تكون أكبر من 0</div>
+              </div>
+            </td>
+            <td>
+              {{ detail.value.unitPrice }}
+              <div class="text-danger small mt-1"
+                   *ngIf="detail.get('unitPrice')?.invalid && (detail.get('unitPrice')?.touched || detail.get('unitPrice')?.dirty)">
+                <div *ngIf="detail.get('unitPrice')?.errors?.['required']">السعر مطلوب</div>
+                <div *ngIf="detail.get('unitPrice')?.errors?.['min']">السعر لا يمكن أن يكون أقل من 0</div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm btn-danger" (click)="removeDocumentDetail(i)">حذف</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Error لو الـ array فاضية -->
+      <div class="text-danger small mt-1"
+           *ngIf="form.get('documentDetails')?.invalid && (form.get('documentDetails')?.touched || form.get('documentDetails')?.dirty)">
+        <div *ngIf="form.get('documentDetails')?.errors?.['required']">يجب إضافة منتج واحد على الأقل</div>
+        <div *ngIf="form.get('documentDetails')?.errors?.['minlength']">يجب إضافة منتج واحد على الأقل</div>
+      </div>
+    </div>
+
+    <!-- زر الحفظ -->
+    <button type="submit" class="btn btn-success">حفظ</button>
+  </form>
+
+  <div class="mt-3">
+    {{form.value | json}}
+  </div>
+</div>

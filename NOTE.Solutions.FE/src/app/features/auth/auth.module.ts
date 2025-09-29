@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AuthLayoutComponent } from '../../core/layouts/auth-layout/auth-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,14 +11,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
     children: [
-      { path: 'login', component: LoginFormComponent },
-      { path: 'register-company', component: RegisterCompanyComponent }
+      { path : '', redirectTo : 'login',pathMatch :'full'},
+      { path: 'login', component: LoginComponent },
+      { path: 'register-company', component: RegisterCompanyComponent },
     ]
   }
 ]
@@ -41,8 +42,9 @@ const routes: Routes = [
 
   ],
   declarations: [
-    LoginFormComponent,
     RegisterCompanyComponent,
-  ]
+    LoginComponent,
+  ],
+  bootstrap: [LoginComponent],
 })
 export class AuthModule { }

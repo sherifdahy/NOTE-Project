@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateProductUnitDialogComponent } from './components/products/create-product-unit-dialog/create-product-unit-dialog.component';
 import { ReceiptsComponent } from './components/receipts/receipts/receipts.component';
 import { CreateReceiptComponent } from './components/receipts/create-receipt/create-receipt.component';
+import { AddDocumentDetailDialogComponent } from './components/receipts/add-document-detail-dialog/add-document-detail-dialog.component';
 
 
 
@@ -82,6 +83,7 @@ const routes: Routes = [
     CreateProductUnitDialogComponent,
     ReceiptsComponent,
     CreateReceiptComponent,
+    AddDocumentDetailDialogComponent,
   ]
 })
 export class CustomerModule { }

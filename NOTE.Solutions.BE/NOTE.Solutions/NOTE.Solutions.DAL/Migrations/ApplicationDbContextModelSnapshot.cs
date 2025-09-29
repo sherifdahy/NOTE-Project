@@ -22,19 +22,152 @@ namespace NOTE.Solutions.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ApplicationUserBranch", b =>
+            modelBuilder.Entity("ActiveCodeCompany", b =>
                 {
-                    b.Property<int>("ApplicationUsersId")
+                    b.Property<int>("ActiveCodesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BranchesId")
+                    b.Property<int>("CompaniesId")
                         .HasColumnType("int");
 
-                    b.HasKey("ApplicationUsersId", "BranchesId");
+                    b.HasKey("ActiveCodesId", "CompaniesId");
 
-                    b.HasIndex("BranchesId");
+                    b.HasIndex("CompaniesId");
 
-                    b.ToTable("ApplicationUserBranch");
+                    b.ToTable("ActiveCodeCompany");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Address.City", b =>
@@ -227,9 +360,6 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -246,21 +376,6 @@ namespace NOTE.Solutions.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.CompanyActiveCode", b =>
-                {
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ActiveCodeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CompanyId", "ActiveCodeId");
-
-                    b.HasIndex("ActiveCodeId");
-
-                    b.ToTable("CompanyActiveCode");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.POS", b =>
@@ -315,61 +430,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("POSs");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.Document", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BranchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BuyerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DocumentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HeaderId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("PaymentMethod")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedById")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("BuyerId")
-                        .IsUnique();
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DocumentTypeId");
-
-                    b.HasIndex("HeaderId")
-                        .IsUnique();
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Documents");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentBuyer", b =>
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Customer.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -383,12 +444,12 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("IdentificationNumber")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("SSN")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -408,10 +469,10 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("DocumentBuyer");
+                    b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", b =>
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -419,7 +480,174 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DocumentId")
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IdentifierNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiresOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RevokedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("RefreshToken");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActiveCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("PaymentMethod")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActiveCodeId");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.OrderLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductUnitId")
@@ -433,56 +661,14 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DocumentId");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductUnitId");
 
-                    b.ToTable("DocumentDetails");
+                    b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Discount", b =>
-                {
-                    b.Property<int>("DocumentDetailId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DiscountId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("DocumentDetailId", "DiscountId");
-
-                    b.HasIndex("DiscountId");
-
-                    b.ToTable("DocumentDetail_Discount");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", b =>
-                {
-                    b.Property<int>("DocumentDetailId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaxId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("DocumentDetailId", "TaxId");
-
-                    b.HasIndex("TaxId");
-
-                    b.ToTable("DocumentDetail_Tax");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDiscount", b =>
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.GlobalBarcode", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -500,45 +686,11 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedById")
+                    b.Property<int>("ProductUnitId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Discounts");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentHeader", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DocumentNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UUID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("Type")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -550,168 +702,12 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("CreatedById");
 
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("DocumentHeader");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentTax", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedById")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Code")
+                    b.HasIndex("ProductUnitId")
                         .IsUnique();
 
-                    b.HasIndex("CreatedById");
-
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Taxes");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedById")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Version")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.HasIndex("Type", "Version")
-                        .IsUnique();
-
-                    b.ToTable("DocumentTypes");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicationRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Role = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Role = 2
-                        });
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ApplicationRoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SSN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationRoleId");
-
-                    b.HasIndex("Email");
-
-                    b.ToTable("ApplicationUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ApplicationRoleId = 1,
-                            Email = "admin@gmail.com",
-                            Name = "Sherif Dahy",
-                            Password = "333Sherif%",
-                            PhoneNumber = "01014133874",
-                            SSN = "30011122102153"
-                        });
+                    b.ToTable("GlobalBarcode");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.Product", b =>
@@ -775,18 +771,9 @@ namespace NOTE.Solutions.DAL.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("GlobalCode")
+                    b.Property<string>("InternalBarcode")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<byte>("GlobalCodeType")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("InternalCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -811,7 +798,7 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.HasIndex("ProductId", "InternalCode")
+                    b.HasIndex("ProductId", "InternalBarcode")
                         .IsUnique();
 
                     b.HasIndex("ProductId", "UnitId")
@@ -856,18 +843,69 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("Units");
                 });
 
-            modelBuilder.Entity("ApplicationUserBranch", b =>
+            modelBuilder.Entity("ActiveCodeCompany", b =>
                 {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.ActiveCode", null)
                         .WithMany()
-                        .HasForeignKey("ApplicationUsersId")
+                        .HasForeignKey("ActiveCodesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", null)
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", null)
                         .WithMany()
-                        .HasForeignKey("BranchesId")
+                        .HasForeignKey("CompaniesId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -912,25 +950,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.CompanyActiveCode", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.ActiveCode", "ActiveCode")
-                        .WithMany("CompanyActiveCodes")
-                        .HasForeignKey("ActiveCodeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", "Company")
-                        .WithMany("CompanyActiveCodes")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ActiveCode");
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.POS", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
@@ -956,181 +975,7 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("UpdatedBy");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.Document", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentBuyer", "Buyer")
-                        .WithOne("Document")
-                        .HasForeignKey("NOTE.Solutions.Entities.Entities.Document.Document", "BuyerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentType", "DocumentType")
-                        .WithMany("Documents")
-                        .HasForeignKey("DocumentTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentHeader", "Header")
-                        .WithOne("Document")
-                        .HasForeignKey("NOTE.Solutions.Entities.Entities.Document.Document", "HeaderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("Branch");
-
-                    b.Navigation("Buyer");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("DocumentType");
-
-                    b.Navigation("Header");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentBuyer", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.Document", "Document")
-                        .WithMany("DocumentDetails")
-                        .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Product.ProductUnit", "ProductUnit")
-                        .WithMany("DocumentDetails")
-                        .HasForeignKey("ProductUnitId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Document");
-
-                    b.Navigation("ProductUnit");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Discount", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDiscount", "Discount")
-                        .WithMany("DocumentDetail_Discounts")
-                        .HasForeignKey("DiscountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", "DocumentDetail")
-                        .WithMany("DocumentDetail_Discounts")
-                        .HasForeignKey("DocumentDetailId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Discount");
-
-                    b.Navigation("DocumentDetail");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail_Tax", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", "DocumentDetail")
-                        .WithMany("DocumentDetail_Taxes")
-                        .HasForeignKey("DocumentDetailId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Document.DocumentTax", "Tax")
-                        .WithMany("DocumentDetail_Taxes")
-                        .HasForeignKey("TaxId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("DocumentDetail");
-
-                    b.Navigation("Tax");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDiscount", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentHeader", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentTax", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentType", b =>
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Customer.Customer", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
@@ -1149,13 +994,109 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
                 {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", "ApplicationRole")
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", null)
                         .WithMany("ApplicationUsers")
-                        .HasForeignKey("ApplicationRoleId")
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", null)
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("CompanyId");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("ApplicationRole");
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.ActiveCode", "ActiveCode")
+                        .WithMany()
+                        .HasForeignKey("ActiveCodeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Customer.Customer", "Customer")
+                        .WithOne("Order")
+                        .HasForeignKey("NOTE.Solutions.Entities.Entities.Order.Order", "CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("ActiveCode");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.OrderLine", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Order.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Product.ProductUnit", "ProductUnit")
+                        .WithMany("OrderLines")
+                        .HasForeignKey("ProductUnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("ProductUnit");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.GlobalBarcode", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Product.ProductUnit", "ProductUnit")
+                        .WithOne("GlobalBarcode")
+                        .HasForeignKey("NOTE.Solutions.Entities.Entities.Product.GlobalBarcode", "ProductUnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("ProductUnit");
+
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.Product", b =>
@@ -1248,13 +1189,10 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("Cities");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.ActiveCode", b =>
-                {
-                    b.Navigation("CompanyActiveCodes");
-                });
-
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Branch", b =>
                 {
+                    b.Navigation("ApplicationUsers");
+
                     b.Navigation("POSs");
 
                     b.Navigation("Products");
@@ -1262,53 +1200,25 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Company", b =>
                 {
-                    b.Navigation("Branches");
-
-                    b.Navigation("CompanyActiveCodes");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.Document", b =>
-                {
-                    b.Navigation("DocumentDetails");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentBuyer", b =>
-                {
-                    b.Navigation("Document")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDetail", b =>
-                {
-                    b.Navigation("DocumentDetail_Discounts");
-
-                    b.Navigation("DocumentDetail_Taxes");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentDiscount", b =>
-                {
-                    b.Navigation("DocumentDetail_Discounts");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentHeader", b =>
-                {
-                    b.Navigation("Document")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentTax", b =>
-                {
-                    b.Navigation("DocumentDetail_Taxes");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Document.DocumentType", b =>
-                {
-                    b.Navigation("Documents");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>
-                {
                     b.Navigation("ApplicationUsers");
+
+                    b.Navigation("Branches");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Customer.Customer", b =>
+                {
+                    b.Navigation("Order")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.Product", b =>
@@ -1318,7 +1228,10 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.ProductUnit", b =>
                 {
-                    b.Navigation("DocumentDetails");
+                    b.Navigation("GlobalBarcode")
+                        .IsRequired();
+
+                    b.Navigation("OrderLines");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Unit.Unit", b =>

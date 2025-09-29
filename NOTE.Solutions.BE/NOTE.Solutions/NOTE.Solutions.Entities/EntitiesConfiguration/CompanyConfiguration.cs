@@ -13,7 +13,5 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
         builder.Property(c=>c.RIN).IsRequired().HasMaxLength(9);
         builder.HasIndex(c => c.RIN).IsUnique();
         builder.Property(c => c.Name).IsRequired().HasMaxLength(200);
-        builder.Property(c => c.IsActive);
-
     }
 }

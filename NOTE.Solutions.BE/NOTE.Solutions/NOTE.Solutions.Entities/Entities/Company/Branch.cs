@@ -1,11 +1,5 @@
 ﻿using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Identity;
-using NOTE.Solutions.Entities.Entities.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NOTE.Solutions.Entities.Entities.Company;
 public class Branch

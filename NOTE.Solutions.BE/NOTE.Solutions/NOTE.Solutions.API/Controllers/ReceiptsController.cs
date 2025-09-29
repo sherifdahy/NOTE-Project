@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using NOTE.Solutions.BLL.Contracts.Document.Requests;
+using System.Threading.Tasks;
 
 namespace NOTE.Solutions.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/branches/{branchId:int}/[controller]")]
 [ApiController]
 [Authorize]
 public class ReceiptsController(IReceiptService receiptService) : ControllerBase
 {
     private readonly IReceiptService _receiptService = receiptService;
 
-    [HttpGet("~/branches/{branchId:int}/receipts")]
+    [HttpGet()]
     public async Task<IActionResult> GetAll(int branchId,CancellationToken cancellationToken)
     {
         var result = await _receiptService.GetAllAsync(branchId,cancellationToken);
@@ -27,10 +26,16 @@ public class ReceiptsController(IReceiptService receiptService) : ControllerBase
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 
-    [HttpPost("~/branches/{branchId:int}/pos/{posId}/receipts")]
-    public async Task<IActionResult> Create(int branchId,int activeCodeId,int posId,DocumentRequest request,CancellationToken cancellationToken)
+    [HttpGet("next-number")]
+    public async Task<IActionResult> GetNextNumberAsync(int branchId)
     {
-        var result = await _receiptService.CreateAsync(branchId,activeCodeId,posId,request, cancellationToken);
+        var result = await _receiptService.GetNextNumberAsync(branchId);
+        return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+    }
+    [HttpPost("")]
+    public async Task<IActionResult> Create(int branchId,OrderRequest request,CancellationToken cancellationToken)
+    {
+        var result = await _receiptService.CreateAsync(branchId,request, cancellationToken);
 
         return result.IsSuccess ? Created() : result.ToProblem();
     }

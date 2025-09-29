@@ -8,5 +8,6 @@ namespace NOTE.Solutions.BLL.Authentication;
 
 public interface IJWTProvider
 {
-    (string token, int expiresIn) GeneratedToken(ApplicationUser applicationUser);
+    (string token, int expiresIn) GeneratedToken(ApplicationUser applicationUser,IList<string> applicationRoles);
+    public int ValidateToken(string token);
 }

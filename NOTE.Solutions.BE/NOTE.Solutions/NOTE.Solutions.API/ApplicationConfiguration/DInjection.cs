@@ -9,6 +9,7 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -17,6 +18,7 @@ using NOTE.Solutions.BLL.Interfaces;
 using NOTE.Solutions.BLL.Services;
 using NOTE.Solutions.DAL.Data;
 using NOTE.Solutions.DAL.Repository;
+using NOTE.Solutions.Entities.Entities.Identity;
 using NOTE.Solutions.Entities.Interfaces;
 using System.Reflection;
 using System.Text;
@@ -40,6 +42,7 @@ public static class DInjection
         services.AddProblemDetails();
         services.AddHangFireConfig(configuration);
         services.AddHealthChecksConfig(configuration);
+        services.AddIdentityDbContextConfig(configuration);
 
         return services;
     }
@@ -76,7 +79,7 @@ public static class DInjection
         services
             .AddHealthChecks()
             .AddSqlServer(name: "database", connectionString: connectionString)
-            .AddUrlGroup(name:"external api", uri : new Uri("https://google.com"))
+            .AddUrlGroup(name:"external api", uri : new Uri("https://id.preprod.eta.gov.eg"))
             .AddHangfire(option =>
             {
                 option.MinimumAvailableServers = 1;
@@ -144,7 +147,6 @@ public static class DInjection
     private static IServiceCollection AddServicesConfig(this IServiceCollection services)
     {
         services.AddTransient<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ICompanyService, CompanyService>();
         services.AddScoped<IBranchService, BranchService>();
         services.AddScoped<ICountryService, CountryService>();
@@ -153,8 +155,6 @@ public static class DInjection
         services.AddScoped<IActiveCodeService, ActiveCodeService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUnitService, UnitService>();
-        services.AddScoped<IDocumentTypeService, DocumentTypeService>();
-        services.AddScoped<ITaxService, TaxService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductUnitService, ProductUnitService>();
         services.AddScoped<IEtaManager, EtaManager>();
@@ -221,5 +221,16 @@ public static class DInjection
         services.Configure<ETAOptions>(configuration.GetSection("ETA"));
         return services;
     }
-
+    private static IServiceCollection AddIdentityDbContextConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+        {
+            options.Password.RequiredLength = 6;
+            options.Password.RequireDigit = true;
+            options.Password.RequireNonAlphanumeric = false;
+        })
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+        return services;
+    }
 }

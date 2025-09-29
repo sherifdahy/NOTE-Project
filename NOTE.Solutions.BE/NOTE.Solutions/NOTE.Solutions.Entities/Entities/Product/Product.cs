@@ -7,8 +7,6 @@ public class Product : AuditableEntity
     public string Name { get; set; } = string.Empty;
 
     public int BranchId { get; set; }
-    public Branch? Branch { get; set; }
-
-
+    public Branch Branch { get; set; } = default!;
     public ICollection<ProductUnit> ProductUnits { get; set; } = new HashSet<ProductUnit>();
 }

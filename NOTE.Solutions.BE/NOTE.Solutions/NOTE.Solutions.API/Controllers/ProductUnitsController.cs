@@ -14,10 +14,10 @@ public class ProductUnitsController : ControllerBase
         _productUnitService = productUnitService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll(int productId)
+    [HttpGet("~/api/branches/{branchId}/productUnits")]
+    public async Task<IActionResult> GetAll(int branchId)
     {
-        var result = await _productUnitService.GetAllAsync(productId);
+        var result = await _productUnitService.GetAllAsync(branchId);
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
     }
 
@@ -33,7 +33,7 @@ public class ProductUnitsController : ControllerBase
     {
         var result = await _productUnitService.CreateAsync(productId, request);
         return result.IsSuccess
-            ? CreatedAtAction(nameof(GetById), new { productId, productUnitId = result.Value.Id }, result.Value)
+            ? Created()
             : result.ToProblem();
     }
 

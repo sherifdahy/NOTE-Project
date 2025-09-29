@@ -1,6 +1,6 @@
-﻿namespace ETA.Consume.Contracts.Buyer.Requests;
+﻿namespace ETA.Consume.Contracts.Customer.Requests;
 
-public class BuyerRequest
+public class CustomerRequest
 {
     public string Type { get; set; } = string.Empty;
     public string Id { get; set; } = string.Empty;

@@ -1,8 +1,8 @@
 ﻿using NOTE.Solutions.DAL.Data;
 using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
-using NOTE.Solutions.Entities.Entities.Document;
 using NOTE.Solutions.Entities.Entities.Identity;
+using NOTE.Solutions.Entities.Entities.Order;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
 using NOTE.Solutions.Entities.Interfaces;
@@ -19,7 +19,6 @@ public class UnitOfWork : IUnitOfWork
 
         Companies = new Repository<Company>(_context);
         Users = new Repository<ApplicationUser>(_context);
-        Roles = new Repository<ApplicationRole>(_context);  
         Branches = new Repository<Branch>(_context);  
         Cities = new Repository<City>(_context);  
         Governorates = new Repository<Governorate>(_context);  
@@ -28,17 +27,13 @@ public class UnitOfWork : IUnitOfWork
         Units = new Repository<Unit>(_context);  
         Products = new Repository<Product>(_context);  
         ProductUnits = new Repository<ProductUnit>(_context);  
-        DocumentTypes = new Repository<DocumentType>(_context);  
-        Taxes = new Repository<DocumentTax>(_context);  
-        Documents = new Repository<Document>(_context);  
+        Orders = new Repository<Order>(_context);  
         POSs = new Repository<POS>(_context);  
-
     }
 
 
     public IRepository<Company> Companies { get; }
     public IRepository<ApplicationUser> Users { get; }
-    public IRepository<ApplicationRole> Roles { get; }
     public IRepository<Branch> Branches { get; }
     public IRepository<City> Cities { get; }
     public IRepository<Country> Countries { get; }
@@ -47,9 +42,7 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<Unit> Units { get; }
     public IRepository<Product> Products { get; }
     public IRepository<ProductUnit> ProductUnits { get; }
-    public IRepository<DocumentType> DocumentTypes { get; }
-    public IRepository<DocumentTax> Taxes { get; }
-    public IRepository<Document> Documents { get; }
+    public IRepository<Order> Orders { get; }
     public IRepository<POS> POSs { get; }
 
     public async Task<TResult> ExecuteInTransactionAsync<TResult>(Func<Task<TResult>> action)

@@ -1,10 +1,16 @@
-﻿using NOTE.Solutions.Entities.Entities.Address;
+﻿using Microsoft.AspNetCore.Http;
+using NOTE.Solutions.API.Extensions;
+using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
 
 namespace NOTE.Solutions.BLL.Services;
-public class BranchService(IUnitOfWork unitOfWork) : IBranchService
+public class BranchService : IBranchService
 {
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private string _cachedKey;
+    private int _userId;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheService _cacheService;
     private readonly string[] includes = new string[]
     {
         nameof(Branch.Company),
@@ -12,7 +18,18 @@ public class BranchService(IUnitOfWork unitOfWork) : IBranchService
         $"{nameof(Branch.City)}.{nameof(City.Governorate)}",
         $"{nameof(Branch.City)}.{nameof(City.Governorate)}.{nameof(Governorate.Country)}"
     };
-    public async Task<Result<BranchResponse>> CreateAsync(int companyId,BranchRequest request, CancellationToken cancellationToken = default)
+
+    public BranchService(IUnitOfWork unitOfWork, ICacheService cacheService,IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+        _unitOfWork = unitOfWork;
+        _cacheService = cacheService;
+
+        _userId = _httpContextAccessor.HttpContext!.User.GetUserId();
+        _cachedKey = $"branches_user_{_userId}";
+    }
+
+    public async Task<Result> CreateAsync(int companyId,BranchRequest request, CancellationToken cancellationToken = default)
     {
         if (!_unitOfWork.Companies.IsExist(x=>x.Id == companyId))
             return Result.Failure<BranchResponse>(CompanyErrors.NotFound);
@@ -28,9 +45,9 @@ public class BranchService(IUnitOfWork unitOfWork) : IBranchService
         await _unitOfWork.Branches.AddAsync(branch,cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        branch = await _unitOfWork.Branches.FindAsync(x => x.Id == branch.Id, includes,cancellationToken);
+        await _cacheService.RemoveAsync(_cachedKey, cancellationToken);
 
-        return Result.Success(branch.Adapt<BranchResponse>());
+        return Result.Success();
     }
 
     public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
@@ -46,12 +63,21 @@ public class BranchService(IUnitOfWork unitOfWork) : IBranchService
         _unitOfWork.Branches.Delete(branch);
         await _unitOfWork.SaveAsync(cancellationToken);
 
+        await _cacheService.RemoveAsync(_cachedKey, cancellationToken);
+
         return Result.Success();
     }
     
     public async Task<Result<IEnumerable<BranchResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var branches = await _unitOfWork.Branches.FindAllAsync(x=> true, includes, cancellationToken);
+        var cachedBranches = await _cacheService.GetAsync<IEnumerable<BranchResponse>>(_cachedKey);
+
+        if (cachedBranches is not null)
+            return Result.Success(cachedBranches);
+
+        var branches = await _unitOfWork.Branches.FindAllAsync(x=> x.ApplicationUsers.Any(x=>x.Id == _userId), includes, cancellationToken);
+
+        await _cacheService.SetAsync(_cachedKey, branches.Adapt<IEnumerable<BranchResponse>>(),TimeSpan.FromDays(10));
 
         return Result.Success(branches.Adapt<IEnumerable<BranchResponse>>());
     }
@@ -91,6 +117,8 @@ public class BranchService(IUnitOfWork unitOfWork) : IBranchService
         _unitOfWork.Branches.Update(branch);
         await _unitOfWork.SaveAsync(cancellationToken);
 
+        await _cacheService.RemoveAsync(_cachedKey,cancellationToken);
+        
         return Result.Success();
     }
 

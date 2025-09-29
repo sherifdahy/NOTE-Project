@@ -1,3 +1,40 @@
-<p>
-  receipts works!
-</p>
+<div>
+  <div class="form-control">
+    <label class="form-label">الفرع</label>
+    <select [(ngModel)]="selectedBranchId" (change)="loadReceipts(selectedBranchId)" class="form-select">
+      <option value="0">الكل</option>
+      <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.code }}</option>
+    </select>
+  </div>
+  <table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-success">
+      <tr>
+        <th class="col-1">رقم الايصال</th>
+        <th class="col-2">تاريخ</th>
+        <th class="col-2">اسم</th>
+        <th class="col-2">معرف</th>
+        <th class="col-1">نوع</th>
+        <th class="col-3">تفاصيل</th>
+        <th class="col-1">طريقة الدفع</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let receipt of receipts">
+        <td>{{ receipt.header.documentNumber }}</td>
+        <td>{{ receipt.header.dateTime }}</td>
+        <td>{{ receipt.buyer.name }}</td>
+        <td>{{ receipt.buyer.ssn }}</td>
+        <td>{{ receipt.documentType.type }}</td>
+        <td>
+          {{ receipt.documentDetails | json }}
+        </td>
+        <td>{{ receipt.paymentMethod }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary">عرض</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

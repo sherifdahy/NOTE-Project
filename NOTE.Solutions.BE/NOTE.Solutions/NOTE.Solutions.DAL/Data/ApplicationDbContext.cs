@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NOTE.Solutions.API.Extensions;
 using NOTE.Solutions.Entities.Entities;
 using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
-using NOTE.Solutions.Entities.Entities.Document;
 using NOTE.Solutions.Entities.Entities.Identity;
+using NOTE.Solutions.Entities.Entities.Order;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
 using NOTE.Solutions.Entities.Extensions;
-using System.Security.Claims;
 
 namespace NOTE.Solutions.DAL.Data;
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
 {
     private readonly IHttpContextAccessor _httpContext;
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions,IHttpContextAccessor httpContextAccessor) : base(dbContextOptions)
@@ -21,8 +22,7 @@ public class ApplicationDbContext : DbContext
     }
 
     #region Identity
-    public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
-    public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
+
     #endregion
 
     #region Address
@@ -43,12 +43,9 @@ public class ApplicationDbContext : DbContext
     public virtual DbSet<Unit> Units { get; set; }
     #endregion
 
-    #region Document
-    public virtual DbSet<Document> Documents { get; set; }
-    public virtual DbSet<DocumentType> DocumentTypes { get; set; }
-    public virtual DbSet<DocumentDetail> DocumentDetails { get; set; }
-    public virtual DbSet<DocumentTax> Taxes { get; set; }
-    public virtual DbSet<DocumentDiscount> Discounts { get; set; }
+    #region Order
+    public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<OrderLine> OrderDetails { get; set; }
     public virtual DbSet<POS> POSs { get; set; }
 
     #endregion
