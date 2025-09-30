@@ -27,13 +27,15 @@ public class UnitOfWork : IUnitOfWork
         Units = new Repository<Unit>(_context);  
         Products = new Repository<Product>(_context);  
         ProductUnits = new Repository<ProductUnit>(_context);  
-        Orders = new Repository<Order>(_context);  
+        Orders = new Repository<Order>(_context);
+        RefreshTokens = new Repository<RefreshToken>(_context);  
         POSs = new Repository<POS>(_context);  
     }
 
 
     public IRepository<Company> Companies { get; }
     public IRepository<ApplicationUser> Users { get; }
+    public IRepository<RefreshToken> RefreshTokens { get; }
     public IRepository<Branch> Branches { get; }
     public IRepository<City> Cities { get; }
     public IRepository<Country> Countries { get; }

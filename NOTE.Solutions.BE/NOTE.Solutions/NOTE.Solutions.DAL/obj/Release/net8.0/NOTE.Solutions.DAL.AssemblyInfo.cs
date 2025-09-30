@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NOTE.Solutions.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e349f4222e0bce8dacc2db0506ecc0270c13ed3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42a1dbf43a500ff0603759966ce53152c7422dc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("NOTE.Solutions.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NOTE.Solutions.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -19,8 +19,10 @@ E:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\ne
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.BLL.deps.json
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.BLL.dll
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.BLL.pdb
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\ETA.Consume.dll
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.DAL.dll
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.Entities.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\ETA.Consume.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.DAL.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\NOTE.Solutions.Entities.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.csproj.AssemblyReference.cache
@@ -34,5 +36,3 @@ F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\ne
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\refint\NOTE.Solutions.BLL.dll
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\NOTE.Solutions.BLL.pdb
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\obj\Debug\net8.0\ref\NOTE.Solutions.BLL.dll
-F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\ETA.Consume.dll
-F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.BLL\bin\Debug\net8.0\ETA.Consume.pdb

@@ -80,8 +80,8 @@
   },
   {
     "ContainingType": "NOTE.Solutions.API.Controllers.AuthController",
-    "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "Method": "GetToken",
+    "RelativePath": "api/Auth/get-token",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -89,6 +89,22 @@
       {
         "Name": "authRequest",
         "Type": "NOTE.Solutions.BLL.Contracts.Auth.Requests.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.AuthController",
+    "Method": "Refresh",
+    "RelativePath": "api/Auth/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Auth.Requests.RefreshTokenRequest",
         "IsRequired": true
       }
     ],
@@ -105,6 +121,22 @@
       {
         "Name": "request",
         "Type": "NOTE.Solutions.BLL.Contracts.Auth.Requests.RegisterCompanyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.AuthController",
+    "Method": "Revoke",
+    "RelativePath": "api/Auth/revoke",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NOTE.Solutions.BLL.Contracts.Auth.Requests.RefreshTokenRequest",
         "IsRequired": true
       }
     ],

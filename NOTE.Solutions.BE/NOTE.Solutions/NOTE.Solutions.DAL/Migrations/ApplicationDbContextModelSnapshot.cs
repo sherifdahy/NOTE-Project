@@ -37,36 +37,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("ActiveCodeCompany");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -89,6 +59,15 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "permissions",
+                            ClaimValue = "branches:read",
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -149,6 +128,13 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -472,6 +458,62 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "727F7C04-0A04-4012-9AA0-5BDF83C53788",
+                            IsDefault = false,
+                            IsDeleted = false,
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "10208DE5-8AD0-41E3-BFED-CFD49C46BEDF",
+                            IsDefault = true,
+                            IsDeleted = false,
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        });
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Property<int>("Id")
@@ -547,7 +589,9 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("Email");
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -558,37 +602,26 @@ namespace NOTE.Solutions.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpiresOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("RevokedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("RefreshToken");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "A999212D-E3FE-410C-BEA5-888AD868482C",
+                            Email = "admin@note-solutions.com",
+                            EmailConfirmed = true,
+                            IdentifierNumber = "",
+                            LockoutEnabled = false,
+                            Name = "",
+                            NormalizedEmail = "ADMIN@NOTE-SOLUTIONS.COM",
+                            NormalizedUserName = "ADMIN@NOTE-SOLUTIONS.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFyqrzF6sigXzc7zL9rwDi5zuvvyP46uDLHSOpeQxaxZKb+1nRh656JU0bUZuWUPoQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3F52186E-A158-4F4A-8822-ABEE912135EB",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@note-solutions.com"
+                        });
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
@@ -860,7 +893,7 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -887,7 +920,7 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1001,17 +1034,40 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", null)
                         .WithMany("ApplicationUsers")
                         .HasForeignKey("CompanyId");
-                });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany("RefreshTokens")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.OwnsMany("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", "RefreshTokens", b1 =>
+                        {
+                            b1.Property<int>("ApplicationUserId")
+                                .HasColumnType("int");
 
-                    b.Navigation("ApplicationUser");
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<DateTime>("CreatedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("ExpiresOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime?>("RevokedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Token")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ApplicationUserId", "Id");
+
+                            b1.ToTable("RefreshTokens");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ApplicationUserId");
+                        });
+
+                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
@@ -1209,11 +1265,6 @@ namespace NOTE.Solutions.DAL.Migrations
                 {
                     b.Navigation("Order")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
-                {
-                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>

@@ -13,7 +13,7 @@ using NOTE.Solutions.Entities.Entities.Unit;
 using NOTE.Solutions.Entities.Extensions;
 
 namespace NOTE.Solutions.DAL.Data;
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int>
 {
     private readonly IHttpContextAccessor _httpContext;
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions,IHttpContextAccessor httpContextAccessor) : base(dbContextOptions)
@@ -22,7 +22,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser,IdentityRo
     }
 
     #region Identity
-
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
     #endregion
 
     #region Address

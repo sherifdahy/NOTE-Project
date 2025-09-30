@@ -1,4 +1,5 @@
 ﻿using NOTE.Solutions.BLL.Contracts.Auth.Requests;
+using NOTE.Solutions.Entities.Abstractions.Consts;
 
 namespace NOTE.Solutions.API.Controllers;
 [Route("api/[controller]")]
@@ -7,13 +8,19 @@ public class AuthController(IAuthService authService) : ControllerBase
 {
     private readonly IAuthService _authService = authService;
 
-  
-
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginRequest authRequest, CancellationToken cancellationToken)
+    [HttpPost("get-token")]
+    public async Task<IActionResult> GetToken(LoginRequest authRequest, CancellationToken cancellationToken)
     {
-        var result = await _authService.LoginAsync(authRequest, cancellationToken);
+        var result = await _authService.GetTokenAsync(authRequest, cancellationToken);
         return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+    }
+
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> Refresh(RefreshTokenRequest request ,CancellationToken cancellationToken)
+    {
+        var authResult = await _authService.GetRefreshTokenAsync(request.Token, request.RefreshToken,cancellationToken);
+        return authResult.IsSuccess ? Ok(authResult.Value) : authResult.ToProblem();
     }
 
     [HttpPost("register-company")]
@@ -23,5 +30,12 @@ public class AuthController(IAuthService authService) : ControllerBase
         return result.IsSuccess ? Created() : result.ToProblem();
     }
 
+    [HttpPost("revoke")]
+    public async Task<IActionResult> Revoke(RefreshTokenRequest request,CancellationToken cancellationToken)
+    {
+        var result = await _authService.RevokeAsync(request.Token, request.RefreshToken);
+
+        return result.IsSuccess ? Ok() : result.ToProblem();
+    }
 
 }

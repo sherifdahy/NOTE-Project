@@ -9,12 +9,13 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NOTE.Solutions.BLL.Authentication;
-using NOTE.Solutions.BLL.Interfaces;
+using NOTE.Solutions.BLL.Authentication.Filters;
 using NOTE.Solutions.BLL.Services;
 using NOTE.Solutions.DAL.Data;
 using NOTE.Solutions.DAL.Repository;
@@ -125,7 +126,6 @@ public static class DInjection
         }).AddJwtBearer(o =>
         {
             o.SaveToken = true;
-
             // validation 
             o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
             {
@@ -140,7 +140,9 @@ public static class DInjection
             };
         });
 
-        
+        //services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
+        //services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
+
 
         return services;
     }
@@ -223,7 +225,7 @@ public static class DInjection
     }
     private static IServiceCollection AddIdentityDbContextConfig(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+        services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
         {
             options.Password.RequiredLength = 6;
             options.Password.RequireDigit = true;

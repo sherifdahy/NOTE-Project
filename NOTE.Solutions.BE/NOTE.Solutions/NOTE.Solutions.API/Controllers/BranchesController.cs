@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using NOTE.Solutions.API.Extensions;
+using NOTE.Solutions.BLL.Authentication.Filters;
+using NOTE.Solutions.Entities.Abstractions.Consts;
 
 namespace NOTE.Solutions.API.Controllers;
 
@@ -11,6 +12,7 @@ public class BranchesController(IBranchService branchService) : ControllerBase
     private readonly IBranchService _branchService = branchService;
 
     [HttpGet("")]
+    //[HasPermission(Permissions.GetBranches)]
     public async Task<IActionResult> GetAll()
     {
         var result = await _branchService.GetAllAsync();

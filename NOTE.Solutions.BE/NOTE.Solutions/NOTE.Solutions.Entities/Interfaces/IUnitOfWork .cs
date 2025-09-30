@@ -1,5 +1,6 @@
 ﻿using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
+using NOTE.Solutions.Entities.Entities.Identity;
 using NOTE.Solutions.Entities.Entities.Order;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
@@ -19,6 +20,7 @@ public interface IUnitOfWork : IDisposable
     public IRepository<ProductUnit> ProductUnits { get; }
     public IRepository<Order> Orders { get; }
     public IRepository<POS> POSs { get; }
+    public IRepository<RefreshToken> RefreshTokens { get; }
     Task<int> SaveAsync(CancellationToken cancellationToken = default);
     Task<TResult> ExecuteInTransactionAsync<TResult>(Func<Task<TResult>> action);
 }
