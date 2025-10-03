@@ -1,54 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\branchescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\branchescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\applicationconfiguration\\dinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\applicationconfiguration\\dinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BranchesController.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\BranchesController.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\BranchesController.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\BranchesController.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\BranchesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T22:35:06.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DInjection.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\ApplicationConfiguration\\DInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI8AAABnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T22:34:41.766Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

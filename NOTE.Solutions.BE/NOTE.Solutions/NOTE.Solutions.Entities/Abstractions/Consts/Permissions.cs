@@ -15,6 +15,12 @@ public static class Permissions
     // fields
     public const string GetBranches = "branches:read";
 
+    #region Roles Permissions
+    public const string GetRoles = "roles:read";
+    public const string CreateRoles = "roles:create";
+    public const string UpdateRoles = "roles:update";
+    public const string ToggleStatus = "roles:toggleStatus";
+    #endregion
     public static IList<string> GetAllPermissions() 
     { 
         return typeof(Permissions).GetFields().Select(x=>x.GetValue(x) as string).ToList()!;

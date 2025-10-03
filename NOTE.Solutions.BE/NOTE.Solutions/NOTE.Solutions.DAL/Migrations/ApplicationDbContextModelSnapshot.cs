@@ -67,6 +67,34 @@ namespace NOTE.Solutions.DAL.Migrations
                             ClaimType = "permissions",
                             ClaimValue = "branches:read",
                             RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:toggleStatus",
+                            RoleId = 1
                         });
                 });
 
@@ -616,7 +644,7 @@ namespace NOTE.Solutions.DAL.Migrations
                             Name = "",
                             NormalizedEmail = "ADMIN@NOTE-SOLUTIONS.COM",
                             NormalizedUserName = "ADMIN@NOTE-SOLUTIONS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFyqrzF6sigXzc7zL9rwDi5zuvvyP46uDLHSOpeQxaxZKb+1nRh656JU0bUZuWUPoQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENdCetkHE68ONB2UFAW/Dw2bEiSHhwQZKPFB1p9opc7xy8SYFxYE0pXa7DKuelCTtQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3F52186E-A158-4F4A-8822-ABEE912135EB",
                             TwoFactorEnabled = false,

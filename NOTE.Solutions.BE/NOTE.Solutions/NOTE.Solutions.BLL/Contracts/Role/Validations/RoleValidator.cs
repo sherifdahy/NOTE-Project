@@ -12,6 +12,9 @@ public class RoleValidator : AbstractValidator<RoleRequest>
 {
     public RoleValidator()
     {
-        RuleFor(x => x.Name).NotEmpty();
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Role Name is Required.").Length(3,256);
+        RuleFor(x => x.Permissions).NotNull().NotEmpty();
+        RuleFor(x => x.Permissions).Must(x => x.Distinct().Count() == x.Count).WithMessage("You cannot add DUPLICATED Permissions for the same Role")
+            .When(x => x.Permissions != null);
     }
 }

@@ -6,8 +6,6 @@ using FluentValidation.AspNetCore;
 using Hangfire;
 using Mapster;
 using MapsterMapper;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -119,8 +117,7 @@ public static class DInjection
 
         services.AddAuthentication(options =>
         {
-
-            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(o =>
@@ -140,8 +137,8 @@ public static class DInjection
             };
         });
 
-        //services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
-        //services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
+        services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
+        services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
 
         return services;
@@ -161,6 +158,7 @@ public static class DInjection
         services.AddScoped<IProductUnitService, ProductUnitService>();
         services.AddScoped<IEtaManager, EtaManager>();
         services.AddScoped<ICacheService, CacheService>();
+        services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IPOSService, POSService>();
         services.AddScoped<BLL.Interfaces.IReceiptService, BLL.Services.ReceiptService>();
 
@@ -225,12 +223,13 @@ public static class DInjection
     }
     private static IServiceCollection AddIdentityDbContextConfig(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+        services.AddIdentityCore<ApplicationUser>(options =>
         {
             options.Password.RequiredLength = 6;
             options.Password.RequireDigit = true;
             options.Password.RequireNonAlphanumeric = false;
         })
+        .AddRoles<ApplicationRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
         return services;

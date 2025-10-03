@@ -9,5 +9,6 @@ namespace NOTE.Solutions.BLL.Contracts.Role.Requests;
 
 public class RoleRequest
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public IList<string> Permissions { get; set; } = [];
 }
