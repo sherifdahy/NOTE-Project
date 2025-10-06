@@ -892,6 +892,18 @@
         }
       }
     },
+    "/api/Permissions": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/branches/{branchId}/POSs": {
       "get": {
         "tags": [

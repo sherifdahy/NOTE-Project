@@ -1,37 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\appsettings.Development.json",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\appsettings.Development.json",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-03T20:36:23.932Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

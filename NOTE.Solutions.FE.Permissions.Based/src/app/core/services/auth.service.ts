@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { ApiCallService } from './api-call.service';
 import { AuthResponse } from '../models/authentication/responses/auth-response';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { User } from '../../authentication/models/user';
-import { Router } from '@angular/router';
+import { AuthenticatedUserResponse } from '../models/authentication/responses/authenticated-user-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private localStorageKey = 'auth-obj';
-  private user: BehaviorSubject<User | null>;
-
+  private userSubject: BehaviorSubject<AuthenticatedUserResponse | null>;
+  private isLoggedInSubject : BehaviorSubject<boolean>;
   constructor(private apiCall: ApiCallService) {
-    this.user = new BehaviorSubject<User | null>(null);
+    this.userSubject = new BehaviorSubject<AuthenticatedUserResponse | null>(null);
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
     this.loadUserFromToken();
   }
 
@@ -24,12 +24,14 @@ export class AuthService {
     }).pipe(
       tap(response => {
         localStorage.setItem(this.localStorageKey, JSON.stringify(response));
+        this.loadUserFromToken();
       })
     );
   }
 
   logout() {
     localStorage.removeItem(this.localStorageKey);
+    this.isLoggedInSubject.next(false);
   }
 
   private loadUserFromToken() {
@@ -39,13 +41,14 @@ export class AuthService {
 
     try {
       const payload = JSON.parse(atob(authObj.token.split('.')[1]));
-      const user: User = {
+      const user: AuthenticatedUserResponse = {
         id: payload.sub,
         email: payload.email,
         roles: payload.roles,
         permissions: payload.permissions
       };
-      this.user.next(user);
+      this.userSubject.next(user);
+      this.isLoggedInSubject.next(true);
     } catch {
       this.logout();
     }
@@ -56,12 +59,11 @@ export class AuthService {
     return authObj?.token;
   }
 
-  get currentUser(): User | null {
-    return this.user.value;
+  get currentUser(): AuthenticatedUserResponse | null {
+    return this.userSubject.value;
   }
 
-  get isLoggedIn(): boolean {
-    return this.user.value !== null;
+  get isLoggedIn() : Observable<boolean>{
+    return this.isLoggedInSubject.asObservable();
   }
-
 }

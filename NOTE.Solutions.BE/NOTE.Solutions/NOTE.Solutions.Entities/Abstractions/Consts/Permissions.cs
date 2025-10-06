@@ -16,6 +16,8 @@ public static class Permissions
     public const string GetBranches = "branches:read";
 
     #region Roles Permissions
+
+    public const string GetPermissions = "permissions:read";
     public const string GetRoles = "roles:read";
     public const string CreateRoles = "roles:create";
     public const string UpdateRoles = "roles:update";

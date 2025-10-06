@@ -4,7 +4,7 @@ namespace NOTE.Solutions.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ActiveCodesController(IActiveCodeService activeCodeService) : ControllerBase
     {
         private readonly IActiveCodeService activeCodeService = activeCodeService;

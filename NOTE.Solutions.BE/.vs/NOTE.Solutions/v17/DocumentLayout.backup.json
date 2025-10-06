@@ -1,12 +1,53 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\governatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\governatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GovernatesController.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T02:28:38.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CountriesController.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T02:23:14.661Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,27 @@
+<div>
+  <div class="form-group mb-3">
+    <label class="form-label" for="deletedFilter">عرض المحذوف</label>
+    <select (ngModelChange)="handleChangeDeletedFilter($event)" id="deletedFilter" class="form-select" [(ngModel)]="showDeleted">
+      <option [ngValue]="true">نعم</option>
+      <option [ngValue]="false">لا</option>
+    </select>
+
+  </div>
+
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>الاسم</th>
+        <th>محذوف؟</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roles; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ role.name }}</td>
+        <td>{{ role.isDeleted ? 'نعم' : 'لا' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
