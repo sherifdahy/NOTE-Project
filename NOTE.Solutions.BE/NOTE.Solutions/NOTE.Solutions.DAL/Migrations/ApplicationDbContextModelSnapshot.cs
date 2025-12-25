@@ -17,24 +17,24 @@ namespace NOTE.Solutions.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "10.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ActiveCodeCompany", b =>
+            modelBuilder.Entity("CompanyManager", b =>
                 {
-                    b.Property<int>("ActiveCodesId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CompaniesId")
                         .HasColumnType("int");
 
-                    b.HasKey("ActiveCodesId", "CompaniesId");
+                    b.Property<int>("ManagersId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CompaniesId");
+                    b.HasKey("CompaniesId", "ManagersId");
 
-                    b.ToTable("ActiveCodeCompany");
+                    b.HasIndex("ManagersId");
+
+                    b.ToTable("CompanyManager");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -72,35 +72,196 @@ namespace NOTE.Solutions.DAL.Migrations
                         {
                             Id = 2,
                             ClaimType = "permissions",
-                            ClaimValue = "permissions:read",
+                            ClaimValue = "branches:create",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 3,
                             ClaimType = "permissions",
-                            ClaimValue = "roles:read",
+                            ClaimValue = "branches:update",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 4,
                             ClaimType = "permissions",
-                            ClaimValue = "roles:create",
+                            ClaimValue = "branches:toggleStatus",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 5,
                             ClaimType = "permissions",
-                            ClaimValue = "roles:update",
+                            ClaimValue = "activeCodes:read",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 6,
                             ClaimType = "permissions",
+                            ClaimValue = "activeCodes:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClaimType = "permissions",
+                            ClaimValue = "activeCodes:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ClaimType = "permissions",
+                            ClaimValue = "activeCodes:toggleStatus",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ClaimType = "permissions",
+                            ClaimValue = "counties:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ClaimType = "permissions",
+                            ClaimValue = "counties:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ClaimType = "permissions",
+                            ClaimValue = "counties:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ClaimType = "permissions",
+                            ClaimValue = "counties:toggleStatus",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ClaimType = "permissions",
+                            ClaimValue = "governorates:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ClaimType = "permissions",
+                            ClaimValue = "governorates:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ClaimType = "permissions",
+                            ClaimValue = "governorates:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ClaimType = "permissions",
+                            ClaimValue = "governorates:toggleStatus",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ClaimType = "permissions",
+                            ClaimValue = "cities:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ClaimType = "permissions",
+                            ClaimValue = "cities:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ClaimType = "permissions",
+                            ClaimValue = "cities:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ClaimType = "permissions",
+                            ClaimValue = "cities:toggleStatus",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ClaimType = "permissions",
+                            ClaimValue = "permissions:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ClaimType = "permissions",
+                            ClaimValue = "roles:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ClaimType = "permissions",
                             ClaimValue = "roles:toggleStatus",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ClaimType = "permissions",
+                            ClaimValue = "pointOfSales:read",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            ClaimType = "permissions",
+                            ClaimValue = "pointOfSales:create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ClaimType = "permissions",
+                            ClaimValue = "pointOfSales:update",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ClaimType = "permissions",
+                            ClaimValue = "pointOfSales:toggleStatus",
                             RoleId = 1
                         });
                 });
@@ -169,6 +330,11 @@ namespace NOTE.Solutions.DAL.Migrations
                         {
                             UserId = 1,
                             RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 5
                         });
                 });
 
@@ -327,12 +493,30 @@ namespace NOTE.Solutions.DAL.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Code")
                         .IsUnique();
 
                     b.ToTable("ActiveCodes");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.ActiveCodeCompany", b =>
+                {
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActiveCodeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CompanyId", "ActiveCodeId");
+
+                    b.HasIndex("ActiveCodeId");
+
+                    b.ToTable("ActiveCodeCompany");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Branch", b =>
@@ -352,10 +536,13 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -367,9 +554,6 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("Code", "CompanyId", "CityId")
-                        .IsUnique();
-
                     b.ToTable("Branches");
                 });
 
@@ -380,6 +564,9 @@ namespace NOTE.Solutions.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -425,6 +612,9 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("POSSerial")
                         .IsRequired()
@@ -493,6 +683,74 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.BranchEmployee", b =>
+                {
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("BranchId", "EmployeeId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("BranchEmployee");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedById")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("Employees");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>
                 {
                     b.Property<int>("Id")
@@ -546,6 +804,33 @@ namespace NOTE.Solutions.DAL.Migrations
                             IsDeleted = false,
                             Name = "Member",
                             NormalizedName = "MEMBER"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ConcurrencyStamp = "B8EF8D04-CA96-49D2-AB38-A1645EA8E7BB",
+                            IsDefault = false,
+                            IsDeleted = false,
+                            Name = "Support",
+                            NormalizedName = "SUPPORT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "34CA1036-7202-46C1-8C0D-D278841CECD8",
+                            IsDefault = false,
+                            IsDeleted = false,
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "D5CD1328-D599-4608-B5B0-C00056B6E7D7",
+                            IsDefault = false,
+                            IsDeleted = false,
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
                         });
                 });
 
@@ -558,12 +843,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -580,6 +859,12 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Property<string>("IdentifierNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -620,10 +905,6 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("CompanyId");
-
                     b.HasIndex("Email")
                         .IsUnique()
                         .HasFilter("[Email] IS NOT NULL");
@@ -647,16 +928,59 @@ namespace NOTE.Solutions.DAL.Migrations
                             Email = "admin@note-solutions.com",
                             EmailConfirmed = true,
                             IdentifierNumber = "",
+                            IsDeleted = false,
+                            IsDisabled = false,
                             LockoutEnabled = false,
                             Name = "",
                             NormalizedEmail = "ADMIN@NOTE-SOLUTIONS.COM",
                             NormalizedUserName = "ADMIN@NOTE-SOLUTIONS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEtQIZAVuzZF1s31w4gCGq61d/mwk26VtX5vmQwcH7zEy2wzutlkJkeEbxkwuGqPVg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF+Pt4tc0R+fWhwPlI8gsMtFvQbZWpTQ+8LAIul+So3DIpYKvIvI1hxS7zfCOSSQIA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3F52186E-A158-4F4A-8822-ABEE912135EB",
                             TwoFactorEnabled = false,
                             UserName = "admin@note-solutions.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "AC520F1A-4737-44F8-9DED-D8D0FEDD4CF4",
+                            Email = "Support@note-solutions.com",
+                            EmailConfirmed = true,
+                            IdentifierNumber = "",
+                            IsDeleted = false,
+                            IsDisabled = false,
+                            LockoutEnabled = false,
+                            Name = "",
+                            NormalizedEmail = "SUPPORT@NOTE-SOLUTIONS.COM",
+                            NormalizedUserName = "SUPPORT@NOTE-SOLUTIONS.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF+Pt4tc0R+fWhwPlI8gsMtFvQbZWpTQ+8LAIul+So3DIpYKvIvI1hxS7zfCOSSQIA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "D735ECFC-2A3F-4D90-A64A-9608F4720B36",
+                            TwoFactorEnabled = false,
+                            UserName = "Support@note-solutions.com"
                         });
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Manager.Manager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Managers");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
@@ -911,17 +1235,17 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("Units");
                 });
 
-            modelBuilder.Entity("ActiveCodeCompany", b =>
+            modelBuilder.Entity("CompanyManager", b =>
                 {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.ActiveCode", null)
-                        .WithMany()
-                        .HasForeignKey("ActiveCodesId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", null)
                         .WithMany()
                         .HasForeignKey("CompaniesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Manager.Manager", null)
+                        .WithMany()
+                        .HasForeignKey("ManagersId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -999,6 +1323,25 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.ActiveCodeCompany", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.ActiveCode", "ActiveCode")
+                        .WithMany("ActiveCodeCompanies")
+                        .HasForeignKey("ActiveCodeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", "Company")
+                        .WithMany("ActiveCodeCompanies")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ActiveCode");
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Branch", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Address.City", "City")
@@ -1021,7 +1364,7 @@ namespace NOTE.Solutions.DAL.Migrations
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.POS", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
-                        .WithMany("POSs")
+                        .WithMany("PointOfSales")
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1060,16 +1403,66 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("UpdatedBy");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.BranchEmployee", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
+                        .WithMany("BranchEmplyees")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Employee.Employee", "Employee")
+                        .WithMany("BranchEmplyees")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.Employee", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
                 {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", null)
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("BranchId");
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", null)
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("CompanyId");
-
                     b.OwnsMany("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<int>("ApplicationUserId")
@@ -1103,6 +1496,17 @@ namespace NOTE.Solutions.DAL.Migrations
                         });
 
                     b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Manager.Manager", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>
@@ -1280,18 +1684,23 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("Cities");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.ActiveCode", b =>
+                {
+                    b.Navigation("ActiveCodeCompanies");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Branch", b =>
                 {
-                    b.Navigation("ApplicationUsers");
+                    b.Navigation("BranchEmplyees");
 
-                    b.Navigation("POSs");
+                    b.Navigation("PointOfSales");
 
                     b.Navigation("Products");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Company", b =>
                 {
-                    b.Navigation("ApplicationUsers");
+                    b.Navigation("ActiveCodeCompanies");
 
                     b.Navigation("Branches");
                 });
@@ -1300,6 +1709,11 @@ namespace NOTE.Solutions.DAL.Migrations
                 {
                     b.Navigation("Order")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.Employee", b =>
+                {
+                    b.Navigation("BranchEmplyees");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>

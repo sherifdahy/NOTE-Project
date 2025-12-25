@@ -12,6 +12,5 @@ public interface IAuthService
 {
     Task<Result<AuthResponse>> GetRefreshTokenAsync(string token,string refreshToken,CancellationToken cancellationToken = default);
     Task<Result<AuthResponse>> GetTokenAsync(LoginRequest authRequest, CancellationToken cancellationToken = default);
-    Task<Result<bool>> RegisterCompanyAsync(RegisterCompanyRequest request, CancellationToken cancellationToken = default);
     Task<Result> RevokeAsync(string token,string refreshToken, CancellationToken cancellationToken = default);
 }

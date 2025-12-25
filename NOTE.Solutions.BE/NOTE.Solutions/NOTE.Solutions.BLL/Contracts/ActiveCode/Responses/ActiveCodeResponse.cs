@@ -10,4 +10,5 @@ public class ActiveCodeResponse
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
+    public bool IsDeleted { get; set; }
 }

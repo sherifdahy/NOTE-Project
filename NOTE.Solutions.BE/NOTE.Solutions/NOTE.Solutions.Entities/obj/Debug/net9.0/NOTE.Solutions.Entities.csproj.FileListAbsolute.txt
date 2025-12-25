@@ -1,0 +1,13 @@
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\bin\Debug\net9.0\NOTE.Solutions.Entities.deps.json
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\bin\Debug\net9.0\NOTE.Solutions.Entities.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\bin\Debug\net9.0\NOTE.Solutions.Entities.pdb
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.csproj.AssemblyReference.cache
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.GeneratedMSBuildEditorConfig.editorconfig
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.AssemblyInfoInputs.cache
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.AssemblyInfo.cs
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.csproj.CoreCompileInputs.cache
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.sourcelink.json
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\refint\NOTE.Solutions.Entities.dll
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\NOTE.Solutions.Entities.pdb
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.Entities\obj\Debug\net9.0\ref\NOTE.Solutions.Entities.dll

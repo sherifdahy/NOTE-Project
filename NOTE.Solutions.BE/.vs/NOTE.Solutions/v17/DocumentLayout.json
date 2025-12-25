@@ -1,12 +1,154 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\views\\windows\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\views\\windows\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\views\\windows\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\views\\windows\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\.filenesting.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:NOTE.Solutions\\NOTE.Solutions.Entities\\.filenesting.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93B1D516-5647-FF79-4054-E61FD3C62307}|NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.dal\\note.solutions.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{93B1D516-5647-FF79-4054-E61FD3C62307}|NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj|solutionrelative:note.solutions\\note.solutions.dal\\note.solutions.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\note.solutions.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\note.solutions.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\note.solutions.wpf.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\note.solutions.wpf.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginWindow.xaml.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml.cs",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T06:51:43.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\Views\\Windows\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-10T06:48:02.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\App.xaml.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\App.xaml.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\App.xaml.cs",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\App.xaml.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIAwwA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T06:45:58.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\MainWindow.xaml.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\MainWindow.xaml.cs",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T06:45:55.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": ".filenesting.json",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\.filenesting.json",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\.filenesting.json",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\.filenesting.json",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\.filenesting.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-10T06:45:24.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NOTE.Solutions.DAL",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:43:56.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "NOTE.Solutions.BLL",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:43:52.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NOTE.Solutions.WPF",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:42:09.245Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,26 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using NOTE.Solutions.API.Extensions;
-using NOTE.Solutions.Entities.Entities.Company;
+﻿using NOTE.Solutions.BLL.Contracts.Common;
+using System.Linq.Expressions;
 
 namespace NOTE.Solutions.BLL.Services;
 
-public class ActiveCodeService : IActiveCodeService
+public class ActiveCodeService : IActiveCodesService
 {
-    private string _cachedKey;
-    private int _userId;
-
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ICacheService _cacheService;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    public ActiveCodeService(IUnitOfWork unitOfWork,ICacheService cacheService,IHttpContextAccessor httpContextAccessor)
+    public ActiveCodeService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _cacheService = cacheService;
-        _httpContextAccessor = httpContextAccessor;
-
-        _userId = _httpContextAccessor.HttpContext!.User.GetUserId();
-        _cachedKey = $"activecodes_user_{_userId}";
-
     }
     public async Task<Result<ActiveCodeResponse>> CreateAsync(ActiveCodeRequest request, CancellationToken cancellationToken = default)
     {
@@ -32,47 +20,36 @@ public class ActiveCodeService : IActiveCodeService
         await _unitOfWork.ActiveCodes.AddAsync(activeCode,cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        await _cacheService.RemoveAsync(_cachedKey, cancellationToken);
-
         return Result.Success(activeCode.Adapt<ActiveCodeResponse>());
     }
-
-    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
+   
+    public async Task<Result> ToggleStatusAsync(int id, CancellationToken cancellationToken = default)
     {
-        if (id <= 0)
-            return Result.Failure(ActiveCodeErrors.InvalidId);
-
         var activeCode = await _unitOfWork.ActiveCodes.GetByIdAsync(id, cancellationToken);
 
         if (activeCode is null)
             return Result.Failure(ActiveCodeErrors.NotFound);
 
-        _unitOfWork.ActiveCodes.Delete(activeCode);
-        await _unitOfWork.SaveAsync(cancellationToken);
+        activeCode.IsDeleted = !activeCode.IsDeleted;
 
-        await _cacheService.RemoveAsync(_cachedKey, cancellationToken);
+        _unitOfWork.ActiveCodes.Update(activeCode);
+        await _unitOfWork.SaveAsync(cancellationToken);
 
         return Result.Success();
     }
 
-    public async Task<Result<IEnumerable<ActiveCodeResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<PaginatedList<ActiveCodeResponse>>> GetAllAsync(RequestFilters filters, bool? includeDisabled, CancellationToken cancellationToken = default)
     {
-        var cachedActiveCodes = await _cacheService.GetAsync<IEnumerable<ActiveCodeResponse>>(_cachedKey);
+        Expression<Func<ActiveCode, bool>> query = x => (string.IsNullOrEmpty(filters.SearchValue) || x.Code.Contains(filters.SearchValue)) && (includeDisabled.HasValue && x.IsDeleted == includeDisabled);
 
-        if (cachedActiveCodes is not null)
-            return Result.Success(cachedActiveCodes);
+        var count = await _unitOfWork.ActiveCodes.CountAsync(query);
 
-        var activeCodes = await _unitOfWork.ActiveCodes.FindAllAsync(x => true, cancellationToken: cancellationToken);
+        var activeCodes = await _unitOfWork.ActiveCodes.FindAllAsync(query, (filters.PageNumber - 1) * filters.PageSize,filters.PageSize,filters.SortColumn,filters.SortDirection,cancellationToken: cancellationToken);
 
-        await _cacheService.SetAsync(_cachedKey, activeCodes.Adapt<IEnumerable<ActiveCodeResponse>>(), TimeSpan.FromDays(10));
-
-        return Result.Success(activeCodes.Adapt<IEnumerable<ActiveCodeResponse>>());
+        return Result.Success(PaginatedList<ActiveCodeResponse>.Create(activeCodes.Adapt<List<ActiveCodeResponse>>(),count,filters.PageNumber,filters.PageNumber));
     }
     public async Task<Result<ActiveCodeResponse>> GetById(int id, CancellationToken cancellationToken = default)
     {
-        if (id <= 0)
-            return Result.Failure<ActiveCodeResponse>(ActiveCodeErrors.InvalidId);
-
         var activeCode = await _unitOfWork.ActiveCodes.FindAsync(x => x.Id == id, cancellationToken: cancellationToken);
 
         if (activeCode is null)
@@ -83,10 +60,8 @@ public class ActiveCodeService : IActiveCodeService
 
     public async Task<Result> UpdateAsync(int id, ActiveCodeRequest request, CancellationToken cancellationToken = default)
     {
-        if (id <= 0)
-            return Result.Failure(ActiveCodeErrors.InvalidId);
-
         var activeCode = await _unitOfWork.ActiveCodes.GetByIdAsync(id,cancellationToken);
+        
         if (activeCode is null)
             return Result.Failure(ActiveCodeErrors.NotFound);
 
@@ -95,8 +70,8 @@ public class ActiveCodeService : IActiveCodeService
         _unitOfWork.ActiveCodes.Update(activeCode);
         await _unitOfWork.SaveAsync(cancellationToken);
 
-        await _cacheService.RemoveAsync(_cachedKey, cancellationToken);
-
         return Result.Success();
     }
+
+    
 }

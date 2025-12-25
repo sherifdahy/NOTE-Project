@@ -9,5 +9,4 @@ namespace NOTE.Solutions.BLL.Contracts.Product.Requests;
 public class ProductRequest
 {
     public string Name { get; set; } = string.Empty;
-    public List<ProductUnitRequest> ProductUnits { get; set; } = [];
 }

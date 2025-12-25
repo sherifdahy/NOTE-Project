@@ -16,16 +16,5 @@ public class ProductUnitConfiguration : IEntityTypeConfiguration<ProductUnit>
 
         builder.Property(pu => pu.UnitPrice)
                .IsRequired();
-
-        builder
-            .HasIndex(pu => new { pu.ProductId, pu.UnitId })
-            .IsUnique();
-
-        builder
-            .HasIndex(pu => new { pu.ProductId, pu.InternalBarcode })
-            .IsUnique();
-
-        builder.HasIndex(x=> new { x.ProductId, x.UnitId }).IsUnique();
-
     }
 }

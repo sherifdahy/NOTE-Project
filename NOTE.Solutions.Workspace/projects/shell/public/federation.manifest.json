@@ -1,0 +1,7 @@
+{
+	"nOTESolutionsWorkspace": "http://localhost:4200/remoteEntry.json",
+	"landing": "http://localhost:4201/remoteEntry.json",
+	"auth": "http://localhost:4202/remoteEntry.json",
+	"systemAdmin": "http://localhost:4203/remoteEntry.json",
+	"client": "http://localhost:4204/remoteEntry.json"
+}

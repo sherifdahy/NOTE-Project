@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
+﻿
 namespace NOTE.Solutions.BLL.Errors;
 
 public static class ActiveCodeErrors

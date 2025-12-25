@@ -346,6 +346,7 @@ F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\ne
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\staticwebassets.build.json.cache
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\staticwebassets.development.json
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\swae.build.ex.cache
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\NOTE.Sol.34F7C07D.Up2Date
 F:\NOTE-Project\NOTE.Solutions.BE\NOTE.Solutions\NOTE.Solutions.API\obj\Debug\net8.0\NOTE.Solutions.API.dll

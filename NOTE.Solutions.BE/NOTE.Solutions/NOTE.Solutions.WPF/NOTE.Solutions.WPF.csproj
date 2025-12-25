@@ -1,0 +1,148 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>NOTE.Solutions.WPF</RootNamespace>
+    <EnableDefaultItems>False</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+	<PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Refit" Version="9.0.2" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="9.0.2" />
+    <PackageReference Include="Refit.Newtonsoft.Json" Version="9.0.2" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageReference Include="Telerik.UI.for.Wpf.70.Xaml" Version="2023.1.117" />
+  </ItemGroup>
+  
+  <ItemGroup>
+  <ApplicationDefinition Include="App.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    <SubType>Designer</SubType>
+  </ApplicationDefinition>
+  <Page Include="Views\UserControls\AccountControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\CustomersControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\HomeControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\NewCustomerControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\NewProductControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\NewReceiptControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\ProductsControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\UserControls\ReceiptsControl.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="Views\Windows\MainWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    <SubType>Designer</SubType>
+  </Page>
+  <Page Include="Views\Windows\LoginWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Compile Include="Abstractions\Consts\KeyStorageConsts.cs" />
+  <Compile Include="Abstractions\Consts\RegexPatterns.cs" />
+  <Compile Include="Abstractions\Error.cs" />
+  <Compile Include="Abstractions\PaginatedList.cs" />
+  <Compile Include="Abstractions\Result.cs" />
+  <Compile Include="App.xaml.cs">
+    <DependentUpon>App.xaml</DependentUpon>
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="Configurations\ConfigurationExtensions.cs" />
+  <Compile Include="Configurations\ServiceCollectionExtensions.cs" />
+  <Compile Include="DTOs\Auth\Requests\LoginRequest.cs" />
+  <Compile Include="DTOs\Auth\Responses\LoginResponse.cs" />
+  <Compile Include="DTOs\Error\Responses\ErrorResponse.cs" />
+  <Compile Include="DTOs\Product\Requests\ProductRequest.cs" />
+  <Compile Include="DTOs\Product\Responses\ProductResponse.cs" />
+  <Compile Include="Handlers\AuthHeaderHandler.cs" />
+  <Compile Include="Interfaces\IAuthService.cs" />
+  <Compile Include="Interfaces\ICashService.cs" />
+  <Compile Include="Interfaces\IProductService.cs" />
+  <Compile Include="Options\NoteOptions.cs" />
+  <Compile Include="Services\AuthService.cs" />
+  <Compile Include="Services\CacheService.cs" />
+  <Compile Include="Services\ProductService.cs" />
+  <Compile Include="ViewModels\AccountViewModel.cs" />
+  <Compile Include="ViewModels\CustomersViewModel.cs" />
+  <Compile Include="ViewModels\CustomerViewModel.cs" />
+  <Compile Include="ViewModels\LoginViewModel.cs" />
+  <Compile Include="ViewModels\MainWindowViewModel.cs" />
+  <Compile Include="ViewModels\ProductsViewModel.cs" />
+  <Compile Include="ViewModels\ProductViewModel.cs" />
+  <Compile Include="ViewModels\ReceiptsViewModel.cs" />
+  <Compile Include="ViewModels\ReceiptViewModel.cs" />
+  <Compile Include="Views\UserControls\AccountControl.xaml.cs" />
+  <Compile Include="Views\UserControls\CustomersControl.xaml.cs" />
+  <Compile Include="Views\UserControls\HomeControl.xaml.cs" />
+  <Compile Include="Views\UserControls\NewCustomerControl.xaml.cs" />
+  <Compile Include="Views\UserControls\NewProductControl.xaml.cs" />
+  <Compile Include="Views\UserControls\NewReceiptControl.xaml.cs" />
+  <Compile Include="Views\UserControls\ProductsControl.xaml.cs" />
+  <Compile Include="Views\UserControls\ReceiptsControl.xaml.cs" />
+  <Compile Include="Views\Windows\MainWindow.xaml.cs">
+    <DependentUpon>MainWindow.xaml</DependentUpon>
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="Views\Windows\LoginWindow.xaml.cs" />
+</ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-delete-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-excel-50.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-lock-64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-search-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Images\erp-image.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Images\logo1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Errors\" />
+  </ItemGroup>
+
+</Project>

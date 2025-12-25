@@ -14,7 +14,6 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
         builder.OwnsMany(x => x.RefreshTokens).WithOwner();
 
 
-        var passwordHasher = new PasswordHasher<ApplicationUser>();
 
         builder.HasData(new ApplicationUser()
         {
@@ -26,7 +25,19 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
             ConcurrencyStamp = DefaultUsers.AdminConcurrencyStamp,
             SecurityStamp = DefaultUsers.AdminSecurityStamp,
             EmailConfirmed = true,
-            PasswordHash = passwordHasher.HashPassword(null!, DefaultUsers.AdminPassword),
+            PasswordHash = DefaultUsers.AdminPassword
+        },
+        new ApplicationUser()
+        {
+            Id = DefaultUsers.SupportId,
+            UserName = DefaultUsers.SupportEmail,
+            Email = DefaultUsers.SupportEmail,
+            NormalizedEmail = DefaultUsers.SupportEmail.ToUpper(),
+            NormalizedUserName = DefaultUsers.SupportEmail.ToUpper(),
+            ConcurrencyStamp = DefaultUsers.SupportConcurrencyStamp,
+            SecurityStamp = DefaultUsers.SupportSecurityStamp,
+            EmailConfirmed = true,
+            PasswordHash = DefaultUsers.AdminPassword
         });
     }
 }

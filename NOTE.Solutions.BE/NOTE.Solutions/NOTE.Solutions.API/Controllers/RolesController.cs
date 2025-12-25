@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NOTE.Solutions.BLL.Authentication.Filters;
+﻿using NOTE.Solutions.BLL.Authentication.Filters;
 using NOTE.Solutions.Entities.Abstractions.Consts;
 
 namespace NOTE.Solutions.API.Controllers;

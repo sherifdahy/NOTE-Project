@@ -12,6 +12,7 @@ public class ApplicationRoleConfiguration : IEntityTypeConfiguration<Application
         {
             Id = DefaultRoles.AdminRoleId,
             Name = DefaultRoles.Admin,
+            IsDefault = false,
             NormalizedName = DefaultRoles.Admin.ToUpper(),
             ConcurrencyStamp = DefaultRoles.AdminRoleConcurrencyStamp,
         },
@@ -22,6 +23,30 @@ public class ApplicationRoleConfiguration : IEntityTypeConfiguration<Application
             Name = DefaultRoles.Member,
             NormalizedName= DefaultRoles.Member.ToUpper(),
             ConcurrencyStamp= DefaultRoles.MemberRoleConcurrencyStamp
+        },
+        new ApplicationRole()
+        {
+            Id= DefaultRoles.SupportRoleId,
+            Name = DefaultRoles.Support,
+            IsDefault = false,
+            NormalizedName = DefaultRoles.Support.ToUpper(),
+            ConcurrencyStamp = DefaultRoles.SupportRoleConcurrencyStamp
+        },
+        new ApplicationRole()
+        {
+            Id = DefaultRoles.ManagerRoleId,
+            Name = DefaultRoles.Manager,
+            IsDefault = false,
+            NormalizedName = DefaultRoles.Manager.ToUpper(),
+            ConcurrencyStamp = DefaultRoles.ManagerRoleConcurrencyStamp
+        },
+        new ApplicationRole()
+        {
+            Id = DefaultRoles.EmployeeRoleId,
+            Name = DefaultRoles.Employee,
+            IsDefault = false,
+            NormalizedName = DefaultRoles.Employee.ToUpper(),
+            ConcurrencyStamp = DefaultRoles.EmployeeRoleConcurrencyStamp
         });
     }
 }

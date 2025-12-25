@@ -36,7 +36,7 @@ public class CountryService(IUnitOfWork unitOfWork) : ICountryService
 
     public async Task<Result<IEnumerable<CountryResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var countries = await _unitOfWork.Countries.FindAllAsync(x => true,cancellationToken:cancellationToken);
+        var countries = await _unitOfWork.Countries.FindAllAsync(x => true,null,cancellationToken:cancellationToken);
 
         return Result.Success(countries.Adapt<IEnumerable<CountryResponse>>());
     }

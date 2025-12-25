@@ -3,6 +3,8 @@ using NOTE.Solutions.API.Extensions;
 using NOTE.Solutions.BLL.Contracts.Document.Requests;
 using NOTE.Solutions.BLL.Contracts.Document.Responses;
 using NOTE.Solutions.Entities.Entities.Order;
+using NOTE.Solutions.Entities.Entities.Receipt;
+using System.Linq.Expressions;
 
 namespace NOTE.Solutions.BLL.Services;
 
@@ -14,12 +16,11 @@ public class ReceiptService : IReceiptService
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICacheService _cacheService;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly string[] _includes =
+    private readonly Expression<Func<Order,object>>[] _includes =
     {
-        $"{nameof(Order.OrderDetails)}",
-        $"{nameof(Order.Customer)}",
-        $"{nameof(Order.OrderDetails)}.{nameof(OrderLine.ProductUnit)}"
-
+        x=>x.OrderDetails,
+        x=>x.Customer,
+        //$"{nameof(Order.OrderDetails)}.{nameof(OrderLine.ProductUnit)}"
     };
     public ReceiptService (IHttpContextAccessor httpContextAccessor,ICacheService cacheService,IUnitOfWork unitOfWork)
     {
@@ -44,10 +45,10 @@ public class ReceiptService : IReceiptService
         if (!_unitOfWork.Branches.IsExist(x => x.Id == branchId))
             return Result.Failure<OrderResponse>(BranchErrors.NotFound);
 
-        if (!_unitOfWork.Branches.IsExist(x => (x.Id == branchId) && (x.POSs.Any(x => x.Id == documentRequest.PosId))))
+        if (!_unitOfWork.Branches.IsExist(x => (x.Id == branchId) && (x.PointOfSales.Any(x => x.Id == documentRequest.PosId))))
             return Result.Failure<OrderResponse>(POSErrors.NotFound);
 
-        if(!_unitOfWork.Companies.IsExist(x=>x.ActiveCodes.Any(X=>X.Id == documentRequest.ActiveCodeId)))
+        if(!_unitOfWork.Companies.IsExist(x=>x.ActiveCodeCompanies.Any(X=>X.ActiveCodeId == documentRequest.ActiveCodeId)))
             return Result.Failure<OrderResponse>(ActiveCodeErrors.NotFound);
 
         foreach (var documentDetails in documentRequest.OrderLines)
@@ -84,7 +85,7 @@ public class ReceiptService : IReceiptService
         if(cachedReceipts is not null)
             return Result.Success(cachedReceipts);
 
-        var documents = await _unitOfWork.Orders.FindAllAsync(x=>x.BranchId == branchId,includes: _includes, cancellationToken: cancellationToken);
+        var documents = await _unitOfWork.Orders.FindAllAsync(x=>x.BranchId == branchId,includes: null, cancellationToken: cancellationToken);
 
         var receipts = documents.Adapt<IEnumerable<OrderResponse>>();
 

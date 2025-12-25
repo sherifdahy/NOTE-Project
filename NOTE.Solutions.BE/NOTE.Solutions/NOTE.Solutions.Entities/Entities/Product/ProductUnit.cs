@@ -5,12 +5,11 @@ public class ProductUnit : AuditableEntity
 {
     public int Id { get; set; }
     public string Description { get; set; } = string.Empty;
-    public string InternalBarcode { get; set; } = string.Empty;
     public decimal UnitPrice { get; set; }
     public int UnitId { get; set; }
     public int ProductId { get; set; }
 
-
+    public bool IsDeleted { get; set; }
     public Unit.Unit Unit { get; set; } = default!;
     public Product Product { get; set; } = default!;
     public GlobalBarcode GlobalBarcode { get; set; } = default!;

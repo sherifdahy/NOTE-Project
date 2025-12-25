@@ -6,7 +6,4 @@ using System.Threading.Tasks;
 
 namespace NOTE.Solutions.BLL.Contracts.ActiveCode.Requests;
 
-public class ActiveCodeRequest
-{
-    public string Code { get; set; } = string.Empty;
-}
+public record ActiveCodeRequest(string Code);

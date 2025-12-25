@@ -6,7 +6,5 @@ public class CompanyValidator : AbstractValidator<CompanyRequest>
     {
         RuleFor(x => x.Name).NotEmpty().Length(3,100);
         RuleFor(x => x.RIN).NotEmpty().Must(x=>x.Length == 9);
-        RuleFor(x=> x.IsActive).NotEmpty();
-        RuleFor(x => x.ActiveCodes).NotEmpty();
     }
 }

@@ -1,11 +1,13 @@
 ﻿using NOTE.Solutions.Entities.Entities.Address;
+using NOTE.Solutions.Entities.Entities.Manager;
+using System.Linq.Expressions;
 
 namespace NOTE.Solutions.BLL.Services;
 
 public class GovernateService(IUnitOfWork unitOfWork) : IGovernateService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    
+   
     public async Task<Result<GovernateResponse>> CreateAsync(GovernateRequest request, CancellationToken cancellationToken = default)
     {
         if (_unitOfWork.Governorates.IsExist(x => (x.Name == request.Name && x.CountryId == request.CountryId) || (x.Code == request.Code)))
@@ -37,23 +39,30 @@ public class GovernateService(IUnitOfWork unitOfWork) : IGovernateService
 
     public async Task<Result<IEnumerable<GovernateResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var governates = await _unitOfWork.Governorates.FindAllAsync(x => true, cancellationToken:cancellationToken);
+        var governates = await _unitOfWork.Governorates.FindAllAsync(x => true,null, cancellationToken:cancellationToken);
 
         return Result.Success(governates.Adapt<IEnumerable<GovernateResponse>>());
     }
+    public async Task<Result<IEnumerable<GovernateResponse>>> GetRelatedAsync(int countryId, CancellationToken cancellationToken = default)
+    {
+        var governates = await _unitOfWork.Governorates.FindAllAsync(x => x.CountryId == countryId, null, cancellationToken: cancellationToken);
 
+        return Result.Success(governates.Adapt<IEnumerable<GovernateResponse>>());
+    }
     public async Task<Result<GovernateResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         if (id <= 0)
             return Result.Failure<GovernateResponse>(GovernateErrors.InvalidId);
 
-        var governate = await _unitOfWork.Governorates.FindAsync(x => x.Id == id,cancellationToken: cancellationToken);
+        var governate = await _unitOfWork.Governorates.FindAsync(x => x.Id == id, null, cancellationToken: cancellationToken);
 
         if (governate is null)
             return Result.Failure<GovernateResponse>(GovernateErrors.NotFound);
 
         return Result.Success(governate.Adapt<GovernateResponse>());
     }
+
+    
 
     public async Task<Result> UpdateAsync(int id, GovernateRequest request, CancellationToken cancellationToken = default)
     {

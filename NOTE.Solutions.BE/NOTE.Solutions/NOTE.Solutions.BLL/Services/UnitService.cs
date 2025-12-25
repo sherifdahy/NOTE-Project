@@ -14,7 +14,7 @@ public class UnitService(IUnitOfWork unitOfWork) : IUnitService
 
     public async Task<Result<UnitResponse>> CreateAsync(UnitRequest request, CancellationToken cancellationToken = default)
     {
-        if (_unitOfWork.Units.IsExist(x => x.Code.ToLower() == request.Code.ToLower()))
+        if (_unitOfWork.Units.IsExist(x => x.Code == request.Code))
             return Result.Failure<UnitResponse>(UnitErrors.Duplicated);
 
         var unit = request.Adapt<Unit>();
@@ -25,17 +25,15 @@ public class UnitService(IUnitOfWork unitOfWork) : IUnitService
         return Result.Success(unit.Adapt<UnitResponse>());
     }
 
-    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Result> ToggleStatusAsync(int id, CancellationToken cancellationToken = default)
     {
-        if (id <= 0)
-            return Result.Failure(UnitErrors.InvalidId);
-
         var unit = await _unitOfWork.Units.GetByIdAsync(id, cancellationToken);
 
         if (unit is null)
             return Result.Failure(UnitErrors.NotFound);
 
-        _unitOfWork.Units.Delete(unit);
+        unit.IsDeleted = !unit.IsDeleted;
+
         await _unitOfWork.SaveAsync(cancellationToken);
 
         return Result.Success();
@@ -50,9 +48,6 @@ public class UnitService(IUnitOfWork unitOfWork) : IUnitService
 
     public async Task<Result<UnitResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        if (id <= 0)
-            return Result.Failure<UnitResponse>(UnitErrors.InvalidId);
-
         var unit = await _unitOfWork.Units.GetByIdAsync(id, cancellationToken);
 
         if (unit is null)
@@ -63,13 +58,13 @@ public class UnitService(IUnitOfWork unitOfWork) : IUnitService
 
     public async Task<Result> UpdateAsync(int id, UnitRequest request, CancellationToken cancellationToken = default)
     {
-        if (id <= 0)
-            return Result.Failure<UnitResponse>(UnitErrors.InvalidId);
-
         var unit = await _unitOfWork.Units.GetByIdAsync(id, cancellationToken);
 
         if (unit is null)
             return Result.Failure<UnitResponse>(UnitErrors.NotFound);
+
+        if (_unitOfWork.Units.IsExist(x => x.Code == request.Code))
+            return Result.Failure<UnitResponse>(UnitErrors.Duplicated);
 
         request.Adapt(unit);
 

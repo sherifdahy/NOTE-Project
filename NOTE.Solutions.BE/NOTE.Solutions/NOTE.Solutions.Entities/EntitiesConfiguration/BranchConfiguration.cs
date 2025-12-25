@@ -13,7 +13,5 @@ public class BranchConfiguration : IEntityTypeConfiguration<Branch>
         builder.Property(x => x.Street).IsRequired();
         builder.Property(x => x.CompanyId).IsRequired();
         builder.Property(x => x.CityId).IsRequired();
-        builder.HasIndex(b => new { b.Code, b.CompanyId, b.CityId }).IsUnique();
-
     }
 }

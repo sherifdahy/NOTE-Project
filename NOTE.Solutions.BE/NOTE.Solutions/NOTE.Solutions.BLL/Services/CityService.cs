@@ -1,10 +1,12 @@
 ﻿using NOTE.Solutions.Entities.Entities.Address;
+using System.Linq.Expressions;
 
 namespace NOTE.Solutions.BLL.Services;
 
 public class CityService(IUnitOfWork unitOfWork) : ICityService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    
     public async Task<Result<CityResponse>> CreateAsync(CityRequest request, CancellationToken cancellationToken = default)
     {
         if (_unitOfWork.Cities.IsExist(x => (x.Name == request.Name && x.GovernorateId == request.GovernorateId) || x.Code == request.Code))
@@ -33,10 +35,14 @@ public class CityService(IUnitOfWork unitOfWork) : ICityService
 
         return Result.Success();
     }
-
+    public async Task<Result<IEnumerable<CityResponse>>> GetRelatedAsync(int governorateId, CancellationToken cancellationToken = default)
+    {
+        var cities = await _unitOfWork.Cities.FindAllAsync(x => x.GovernorateId == governorateId, null, cancellationToken: cancellationToken);
+        return Result.Success(cities.Adapt<IEnumerable<CityResponse>>());
+    }
     public async Task<Result<IEnumerable<CityResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var cities = await _unitOfWork.Cities.FindAllAsync(x => true,cancellationToken:cancellationToken);
+        var cities = await _unitOfWork.Cities.FindAllAsync(x => true, null, cancellationToken:cancellationToken);
 
         return Result.Success(cities.Adapt<IEnumerable<CityResponse>>());
     }
@@ -46,13 +52,15 @@ public class CityService(IUnitOfWork unitOfWork) : ICityService
         if (id <= 0)
             return Result.Failure<CityResponse>(CityErrors.InvalidId);
 
-        var city = await _unitOfWork.Cities.FindAsync(x => x.Id == id,cancellationToken:cancellationToken);
+        var city = await _unitOfWork.Cities.FindAsync(x => x.Id == id, null, cancellationToken:cancellationToken);
 
         if (city is null)
             return Result.Failure<CityResponse>(CityErrors.NotFound);
 
         return Result.Success(city.Adapt<CityResponse>());
     }
+
+    
 
     public async Task<Result> UpdateAsync(int id, CityRequest request, CancellationToken cancellationToken = default)
     {

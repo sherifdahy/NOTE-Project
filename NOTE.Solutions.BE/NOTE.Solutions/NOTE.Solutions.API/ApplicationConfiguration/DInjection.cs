@@ -1,7 +1,4 @@
-﻿using ETA.Consume;
-using ETA.Consume.Interfaces;
-using ETA.Consume.Manager;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
 using Mapster;
@@ -11,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using NOTE.Solutions.BLL.Authentication;
 using NOTE.Solutions.BLL.Authentication.Filters;
 using NOTE.Solutions.BLL.Services;
@@ -29,19 +25,31 @@ public static class DInjection
     public static IServiceCollection DI(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
-        services.AddSwaggerConfig();
         services.AddDbConfig(configuration);
         services.AddServicesConfig();
         services.AddAuthConfig(configuration);
         services.AddCorsConfig(configuration);
         services.AddFluentValidationConfig();
-        services.AddEtaConfig(configuration);
         services.AddMapsterConfig();
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
         services.AddHangFireConfig(configuration);
         services.AddHealthChecksConfig(configuration);
         services.AddIdentityDbContextConfig(configuration);
+        services.AddScalerConfig();
+        services.AddHttpContextAccessor();
+
+        return services;
+    }
+
+    private static IServiceCollection AddScalerConfig(this IServiceCollection services)
+    {
+        services.AddSingleton<BearerSecuritySchemeTransformer>();
+
+        services.AddOpenApi("v1", options =>
+        {
+            options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
+        });
 
         return services;
     }
@@ -111,7 +119,12 @@ public static class DInjection
     {
         services.AddSingleton<IJWTProvider, JWTProvider>();
 
-        services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+        //services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+
+        services.AddOptions<JwtOptions>()
+            .BindConfiguration("Jwt")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
 
         var jwtSettings = configuration.GetSection("Jwt").Get<JwtOptions>();
 
@@ -135,6 +148,11 @@ public static class DInjection
                 ValidIssuer = jwtSettings.Issuer,
                 ValidAudience = jwtSettings.Audience,
             };
+        }).AddCookie(IdentityConstants.ApplicationScheme, options =>
+        {
+            options.Cookie.HttpOnly = true;
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            options.SlidingExpiration = false;
         });
 
         services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
@@ -147,19 +165,21 @@ public static class DInjection
     {
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICompanyService, CompanyService>();
-        services.AddScoped<IBranchService, BranchService>();
         services.AddScoped<ICountryService, CountryService>();
         services.AddScoped<ICityService, CityService>();
         services.AddScoped<IGovernateService, GovernateService>();
-        services.AddScoped<IActiveCodeService, ActiveCodeService>();
+        services.AddScoped<IActiveCodesService, ActiveCodeService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IManagerService, ManagerService>();
         services.AddScoped<IUnitService, UnitService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductUnitService, ProductUnitService>();
-        services.AddScoped<IEtaManager, EtaManager>();
         services.AddScoped<ICacheService, CacheService>();
         services.AddScoped<IRoleService, RoleService>();
-        services.AddScoped<IPOSService, POSService>();
+        services.AddScoped<IPointOfSaleService,PointOfSaleService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IBranchService, BranchService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<BLL.Interfaces.IReceiptService, BLL.Services.ReceiptService>();
 
 
@@ -176,61 +196,33 @@ public static class DInjection
 
         services.AddDbContext<ApplicationDbContext>(x =>
         {
-            x.UseSqlServer(connectionString);
+            x.UseSqlServer(connectionString).EnableSensitiveDataLogging();
         });
+        
         return services;
     }
-    private static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
-    {
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(options =>
-        {
-            options.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "NOTE.Solutions API",
-                Version = "v1",
-            });
-
-            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
-                Scheme = "Bearer"
-            });
-
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                        {
-                            new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference
-                                {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
-                                }
-                            },
-                            Array.Empty<string>()
-                        }
-                });
-        });
-        return services;
-    }
-    private static IServiceCollection AddEtaConfig(this IServiceCollection services,IConfiguration configuration)
-    {
-        services.Configure<ETAOptions>(configuration.GetSection("ETA"));
-        return services;
-    }
+    
     private static IServiceCollection AddIdentityDbContextConfig(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddIdentityCore<ApplicationUser>(options =>
         {
+            // password options
             options.Password.RequiredLength = 6;
             options.Password.RequireDigit = true;
             options.Password.RequireNonAlphanumeric = false;
+
+            // requird confirmation
+            //options.SignIn.RequireConfirmedEmail = true;
+
+            // lockout options
+            options.Lockout.AllowedForNewUsers = true;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+
         })
         .AddRoles<ApplicationRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddSignInManager<SignInManager<ApplicationUser>>()
         .AddDefaultTokenProviders();
         return services;
     }

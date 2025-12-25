@@ -10,9 +10,12 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
     private readonly RoleManager<ApplicationRole> _roleManager = roleManager;
 
 
-    public async Task<Result> UpdateAsync(int id, RoleRequest request, CancellationToken cancellationToken = default)
+    public async Task<Result> UpdateAsync(
+        int id, RoleRequest request,
+        CancellationToken cancellationToken = default)
     {
-        var roleIsExists = await _roleManager.Roles.AnyAsync(x=>x.Name == request.Name && x.Id != id);
+        var roleIsExists = await _roleManager
+            .Roles.AnyAsync(x=>x.Name == request.Name && x.Id != id);
         
         if(roleIsExists)
             return Result.Failure<RoleDetailResponse>(RoleErrors.Duplicated);
@@ -33,7 +36,8 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
         {
             var currentPermissions = await _roleManager.GetClaimsAsync(role);
 
-            var newPermissions = request.Permissions.Except(currentPermissions.Select(x => x.Value));
+            var newPermissions = request
+                .Permissions.Except(currentPermissions.Select(x => x.Value));
 
             foreach (var permission in newPermissions)
             {
@@ -41,7 +45,8 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
                 await _roleManager.AddClaimAsync(role, claim);
             }
 
-            var removedPermissions = currentPermissions.Select(x=>x.Value).Except(request.Permissions);
+            var removedPermissions = currentPermissions
+                .Select(x=>x.Value).Except(request.Permissions);
 
             foreach(var permission in removedPermissions)
             {
@@ -51,12 +56,15 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
 
             return Result.Success();
         }
-
         var error = result.Errors.First();
-
-        return Result.Failure(new Error(error.Code, error.Description, StatusCodes.Status400BadRequest));
+        return Result.Failure(
+            new Error(error.Code,
+            error.Description, 
+            StatusCodes.Status400BadRequest));
     }
-    public async Task<Result<RoleDetailResponse>> CreateAsync(RoleRequest request, CancellationToken cancellationToken = default)
+    public async Task<Result<RoleDetailResponse>> CreateAsync(
+        RoleRequest request, 
+        CancellationToken cancellationToken = default)
     {
         var roleIsExists = await _roleManager.RoleExistsAsync(request.Name);
         
@@ -96,7 +104,10 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
         }
 
         var error = result.Errors.First();
-        return Result.Failure<RoleDetailResponse>(new Error(error.Code,error.Description,StatusCodes.Status400BadRequest));
+        return Result.Failure<RoleDetailResponse>(
+            new Error(error.Code,
+            error.Description,
+            StatusCodes.Status400BadRequest));
     }
     public async Task<Result<IEnumerable<RoleResponse>>> GetAllAsync(bool? includeDisabled = false,CancellationToken cancellationToken = default)
     {
@@ -104,7 +115,8 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
         return Result.Success<IEnumerable<RoleResponse>>(roles);
     }
 
-    public async Task<Result<RoleDetailResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Result<RoleDetailResponse>>
+        GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         if (await _roleManager.FindByIdAsync(id.ToString()) is not { } role)
             return Result.Failure<RoleDetailResponse>(RoleErrors.NotFound);
@@ -122,7 +134,9 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
         return Result.Success(response);
     }
 
-    public async Task<Result> ToggleStatus(int id, CancellationToken cancellationToken = default)
+    public async Task<Result> ToggleStatus(
+        int id,
+        CancellationToken cancellationToken = default)
     {
         if(await _roleManager.FindByIdAsync(id.ToString()) is not { } role)
             return Result.Failure<RoleDetailResponse>(RoleErrors.NotFound);
@@ -136,6 +150,9 @@ public class RoleService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
 
         var error = result.Errors.First();
 
-        return Result.Failure(new Error(error.Code, error.Description, StatusCodes.Status400BadRequest));
+        return Result.Failure(new
+            Error(error.Code,
+            error.Description,
+            StatusCodes.Status400BadRequest));
     }
 }

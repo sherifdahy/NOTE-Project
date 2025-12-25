@@ -1,18 +1,14 @@
-﻿using ETA.Consume.Interfaces;
-using ETA.Consume.Services;
-using Hangfire;
+﻿using Hangfire;
 using HangfireBasicAuthenticationFilter;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using NOTE.Solutions.API.ApplicationConfiguration;
+using Scalar.AspNetCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.DI(builder.Configuration);
-builder.Services.AddHttpContextAccessor();
-
 
 builder.Host.UseSerilog((context,configuration) =>
 {
@@ -22,16 +18,14 @@ builder.Host.UseSerilog((context,configuration) =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-else
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if(app.Environment.IsDevelopment())
+//{
+    app.MapOpenApi();
+    app.MapScalarApiReference(options =>
+    {
+        options.AddPreferredSecuritySchemes("Bearer");
+    });
+//}
 
 app.UseHangfireDashboard("/jobs", new DashboardOptions
 {

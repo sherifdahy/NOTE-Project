@@ -23,12 +23,5 @@ public class ManagerValidator : AbstractValidator<ManagerRequest>
             .NotEmpty().WithMessage("Phone number is required")
             .Matches(@"^01[0-9]{9}$").WithMessage("Phone number must be a valid Egyptian number (11 digits starting with 01)");
 
-        RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required")
-            .EmailAddress().WithMessage("Invalid email format");
-
-        RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("Password is required")
-            .Matches(RegexPatterns.Password).WithMessage("Password should be at least 8 digits and must contain Lowercase , NonAlphanumeric and Uppercase");
     }
 }

@@ -1,70 +1,0 @@
-<div class="p-3">
-  <h4 class="fw-bold text-primary">➕ إضافة منتج جديد</h4>
-  <hr>
-
-  <form [formGroup]="form" (ngSubmit)="handleSubmitForm()">
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <label class="form-label">الفرع</label>
-        <select class="form-select" formControlName="branchId">
-          <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.code}}</option>
-        </select>
-        <span class="text-danger" *ngIf="branchId?.invalid && branchId?.touched">يجب اختيار الفرع</span>
-      </div>
-      <div class="col-md-4 mb-4">
-        <label class="form-label">اسم المنتج</label>
-        <input type="text" class="form-control" formControlName="name">
-        <span class="text-danger" *ngIf="name?.invalid && name?.touched">اسم المنتج مطلوب</span>
-      </div>
-
-    </div>
-    <!-- Units Table -->
-    <div>
-      <div class="d-flex justify-content-between align-items-center">
-        <h5 class="fw-bold text-secondary">الوحدات</h5>
-        <button class="btn btn-success" type="button" (click)="openCreateProductUnitDialog()">اضافة وحدة</button>
-      </div>
-      <table class="table table-striped table-hover mt-3" formArrayName="productUnits">
-        <thead class="table-primary">
-          <tr>
-            <th class="col-1">#</th>
-            <th class="col-4">الوصف</th>
-            <th class="col-2">الكود الداخلي</th>
-            <th class="col-2">الكود العالمي</th>
-            <th class="col-1">نوع الكود</th>
-            <th class="col-1">السعر</th>
-            <th class="col-1">الوحدة</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let unit of productUnits.controls; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ unit.value.description }}</td>
-            <td>{{ unit.value.internalCode }}</td>
-            <td>{{ unit.value.globalCode }}</td>
-            <td>{{ unit.value.globalCodeType }}</td>
-            <td>{{ unit.value.unitPrice }}</td>
-            <td>{{ unit.value.unitId }}</td>
-            <td>
-              <button type="button" (click)="handleDeleteProductUnit(i)" class="btn btn-sm btn-danger">🗑️</button>
-            </td>
-          </tr>
-          <!-- حالة فاضية -->
-          <tr *ngIf="!productUnits || productUnits.length === 0">
-            <td colspan="8" class="text-center text-muted py-4">
-              لا يوجد وحدات حالياً
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="text-start">
-      <button type="submit" class="btn btn-primary px-4">
-        ✅ حفظ المنتج
-      </button>
-    </div>
-  </form>
-
-
-</div>

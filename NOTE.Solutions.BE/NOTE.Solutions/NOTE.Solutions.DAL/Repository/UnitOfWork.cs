@@ -1,7 +1,10 @@
-﻿using NOTE.Solutions.DAL.Data;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using NOTE.Solutions.DAL.Data;
 using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
+using NOTE.Solutions.Entities.Entities.Employee;
 using NOTE.Solutions.Entities.Entities.Identity;
+using NOTE.Solutions.Entities.Entities.Manager;
 using NOTE.Solutions.Entities.Entities.Order;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
@@ -29,11 +32,15 @@ public class UnitOfWork : IUnitOfWork
         ProductUnits = new Repository<ProductUnit>(_context);  
         Orders = new Repository<Order>(_context);
         RefreshTokens = new Repository<RefreshToken>(_context);  
-        POSs = new Repository<POS>(_context);  
+        POSs = new Repository<POS>(_context);
+        ActiveCodeCompanies = new Repository<ActiveCodeCompany>(_context);
+        BranchEmployees = new Repository<BranchEmployee>(_context);
+        Employees = new Repository<Employee>(_context);
+        Managers = new Repository<Manager>(_context);
     }
 
-
     public IRepository<Company> Companies { get; }
+    public IRepository<ActiveCodeCompany> ActiveCodeCompanies { get; }
     public IRepository<ApplicationUser> Users { get; }
     public IRepository<RefreshToken> RefreshTokens { get; }
     public IRepository<Branch> Branches { get; }
@@ -46,22 +53,11 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<ProductUnit> ProductUnits { get; }
     public IRepository<Order> Orders { get; }
     public IRepository<POS> POSs { get; }
-
-    public async Task<TResult> ExecuteInTransactionAsync<TResult>(Func<Task<TResult>> action)
-    {
-        using var transaction = await _context.Database.BeginTransactionAsync();
-        try
-        {
-            var result = await action();
-            await transaction.CommitAsync();
-            return result;
-        }
-        catch
-        {
-            await transaction.RollbackAsync();
-            throw;
-        }
-    }
+    public IRepository<BranchEmployee> BranchEmployees { get; }
+    public IRepository<Employee> Employees { get; }
+    public IRepository<Manager> Managers { get; }
+    public async Task<IDbContextTransaction> BeginTransactionAsync()
+        => await _context.Database.BeginTransactionAsync();
     public void Dispose()
     {
         _context.Dispose();

@@ -14,7 +14,7 @@ public class OrderResponse
     public List<OrderLineResponse> OrderLines { get; set; } = [];
     public DocumentHeaderResponse Header { get; set; } = default!;
     public CustomerResponse Customer { get; set; } = default!;
-    public POSResponse POS { get; set; } = default!;
+    public PointOfSaleResponse POS { get; set; } = default!;
     public PaymentMethodType PaymentMethod { get; set; }
 
 }

@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\governatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\governatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\note.solutions.wpf.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\note.solutions.wpf.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93B1D516-5647-FF79-4054-E61FD3C62307}|NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.dal\\note.solutions.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{93B1D516-5647-FF79-4054-E61FD3C62307}|NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj|solutionrelative:note.solutions\\note.solutions.dal\\note.solutions.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\note.solutions.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\note.solutions.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|f:\\note-project\\note.solutions.be\\note.solutions.wpf\\note.solutions.wpf.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B2E153A7-5386-4E28-AA0A-F5AD7F89A984}|NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj|solutionrelative:note.solutions.wpf\\note.solutions.wpf.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GovernatesController.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\GovernatesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-06T02:28:38.35Z",
+              "DocumentIndex": 1,
+              "Title": "NOTE.Solutions.DAL",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:43:56.201Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CountriesController.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\CountriesController.cs",
+              "DocumentIndex": 2,
+              "Title": "NOTE.Solutions.BLL",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-06T02:23:14.661Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:43:52.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NOTE.Solutions.WPF",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:43:50.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NOTE.Solutions.WPF",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "RelativeDocumentMoniker": "NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "RelativeToolTip": "NOTE.Solutions.WPF\\NOTE.Solutions.WPF.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T06:42:09.245Z",
+              "EditorCaption": ""
             }
           ]
         }

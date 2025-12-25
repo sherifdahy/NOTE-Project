@@ -11,7 +11,7 @@ namespace NOTE.Solutions.API.Controllers;
 public class PermissionsController : ControllerBase
 {
     [HttpGet]
-    [HasPermission(Permissions.GetPermissions)]
+    //[HasPermission(Permissions.GetPermissions)]
     public IActionResult GetAll()
     {
         var permissions = Permissions.GetAllPermissions();

@@ -1,4 +1,7 @@
 ﻿using NOTE.Solutions.BLL.Contracts.City.Responses;
+using NOTE.Solutions.BLL.Contracts.Employee.Responses;
+using NOTE.Solutions.BLL.Contracts.POS.Requests;
+using NOTE.Solutions.BLL.Contracts.POS.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +14,8 @@ public class BranchResponse
 {
     public int Id { get; set; }
     public string Code { get; set; } = string.Empty;
-    public int CompanyId { get; set; }
+    public string BuildingNumber { get; set; } = string.Empty;
+    public string Street { get; set; } = string.Empty;
     public int CityId { get; set; }
-
+    public bool IsDeleted { get; set; }
 }
