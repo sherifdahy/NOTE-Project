@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "run:all": "ng serve auth --port 4201 & ng serve core-lib --port 4202 & ng serve dashboard --port 4203"
+    "run:all": "npx concurrently \"ng serve shell --project=shell --port 4200\" \"ng serve landing --project=landing --port 4201\" \"ng serve auth --project=auth --port 4202\" \"ng serve system-admin --project=system-admin --port 4203\" \"ng serve client --project=client --port 4204\""
   },
   "prettier": {
     "printWidth": 100,
@@ -32,9 +32,18 @@
     "@angular/forms": "^21.0.0",
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "8.0.0",
     "@softarc/native-federation-node": "^3.3.4",
+    "bootstrap": "^5.3.8",
     "es-module-shims": "^1.5.12",
+    "fontawesome": "^5.6.3",
+    "ngx-spinner": "^19.0.0",
+    "ngx-toastr": "^19.1.0",
+    "ngx-translate-messageformat-compiler": "^7.0.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.26.17",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -42,6 +51,7 @@
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
+    "concurrently": "^8.2.0",
     "jsdom": "^27.1.0",
     "ng-packagr": "^21.0.0",
     "typescript": "~5.9.2",

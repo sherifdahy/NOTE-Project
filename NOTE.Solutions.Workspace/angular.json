@@ -1,599 +1,373 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"version": 1,
-	"cli": {
-		"packageManager": "npm",
-		"analytics": "6df07634-0508-4d25-b7ea-565bb23b6130"
-	},
-	"newProjectRoot": "projects",
-	"projects": {
-		"NOTE.Solutions.Workspace": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"standalone": false
-				},
-				"@schematics/angular:directive": {
-					"standalone": false
-				},
-				"@schematics/angular:pipe": {
-					"standalone": false
-				}
-			},
-			"root": "",
-			"sourceRoot": "src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular/build:application",
-					"options": {
-						"browser": "src/main.ts",
-						"tsConfig": "tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "public"
-							}
-						],
-						"styles": [
-							"src/styles.css"
-						]
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular/build:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "NOTE.Solutions.Workspace:build:production"
-						},
-						"development": {
-							"buildTarget": "NOTE.Solutions.Workspace:build:development"
-						}
-					},
-					"defaultConfiguration": "development"
-				},
-				"test": {
-					"builder": "@angular/build:unit-test"
-				}
-			}
-		},
-		"landing": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"standalone": false
-				},
-				"@schematics/angular:directive": {
-					"standalone": false
-				},
-				"@schematics/angular:pipe": {
-					"standalone": false
-				}
-			},
-			"root": "projects/landing",
-			"sourceRoot": "projects/landing/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {},
-					"configurations": {
-						"production": {
-							"target": "landing:esbuild:production"
-						},
-						"development": {
-							"target": "landing:esbuild:development",
-							"dev": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {
-						"target": "landing:serve-original:development",
-						"rebuildDelay": 500,
-						"dev": true,
-						"cacheExternalArtifacts": false,
-						"port": 0
-					}
-				},
-				"test": {
-					"builder": "@angular/build:unit-test"
-				},
-				"esbuild": {
-					"builder": "@angular/build:application",
-					"options": {
-						"browser": "projects/landing/src/main.ts",
-						"tsConfig": "projects/landing/tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/landing/public"
-							}
-						],
-						"styles": [
-							"projects/landing/src/styles.css"
-						],
-						"polyfills": [
-							"es-module-shims"
-						]
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve-original": {
-					"builder": "@angular/build:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "landing:esbuild:production"
-						},
-						"development": {
-							"buildTarget": "landing:esbuild:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4201
-					}
-				}
-			}
-		},
-		"auth": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"standalone": false
-				},
-				"@schematics/angular:directive": {
-					"standalone": false
-				},
-				"@schematics/angular:pipe": {
-					"standalone": false
-				}
-			},
-			"root": "projects/auth",
-			"sourceRoot": "projects/auth/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {},
-					"configurations": {
-						"production": {
-							"target": "auth:esbuild:production"
-						},
-						"development": {
-							"target": "auth:esbuild:development",
-							"dev": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {
-						"target": "auth:serve-original:development",
-						"rebuildDelay": 500,
-						"dev": true,
-						"cacheExternalArtifacts": false,
-						"port": 0
-					}
-				},
-				"test": {
-					"builder": "@angular/build:unit-test"
-				},
-				"esbuild": {
-					"builder": "@angular/build:application",
-					"options": {
-						"browser": "projects/auth/src/main.ts",
-						"tsConfig": "projects/auth/tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/auth/public"
-							}
-						],
-						"styles": [
-							"projects/auth/src/styles.css"
-						],
-						"polyfills": [
-							"es-module-shims"
-						]
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve-original": {
-					"builder": "@angular/build:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "auth:esbuild:production"
-						},
-						"development": {
-							"buildTarget": "auth:esbuild:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4202
-					}
-				}
-			}
-		},
-		"system-admin": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"standalone": false
-				},
-				"@schematics/angular:directive": {
-					"standalone": false
-				},
-				"@schematics/angular:pipe": {
-					"standalone": false
-				}
-			},
-			"root": "projects/system-admin",
-			"sourceRoot": "projects/system-admin/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {},
-					"configurations": {
-						"production": {
-							"target": "system-admin:esbuild:production"
-						},
-						"development": {
-							"target": "system-admin:esbuild:development",
-							"dev": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {
-						"target": "system-admin:serve-original:development",
-						"rebuildDelay": 500,
-						"dev": true,
-						"cacheExternalArtifacts": false,
-						"port": 0
-					}
-				},
-				"test": {
-					"builder": "@angular/build:unit-test"
-				},
-				"esbuild": {
-					"builder": "@angular/build:application",
-					"options": {
-						"browser": "projects/system-admin/src/main.ts",
-						"tsConfig": "projects/system-admin/tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/system-admin/public"
-							}
-						],
-						"styles": [
-							"projects/system-admin/src/styles.css"
-						],
-						"polyfills": [
-							"es-module-shims"
-						]
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve-original": {
-					"builder": "@angular/build:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "system-admin:esbuild:production"
-						},
-						"development": {
-							"buildTarget": "system-admin:esbuild:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4203
-					}
-				}
-			}
-		},
-		"client": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"standalone": false
-				},
-				"@schematics/angular:directive": {
-					"standalone": false
-				},
-				"@schematics/angular:pipe": {
-					"standalone": false
-				}
-			},
-			"root": "projects/client",
-			"sourceRoot": "projects/client/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {},
-					"configurations": {
-						"production": {
-							"target": "client:esbuild:production"
-						},
-						"development": {
-							"target": "client:esbuild:development",
-							"dev": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {
-						"target": "client:serve-original:development",
-						"rebuildDelay": 500,
-						"dev": true,
-						"cacheExternalArtifacts": false,
-						"port": 0
-					}
-				},
-				"test": {
-					"builder": "@angular/build:unit-test"
-				},
-				"esbuild": {
-					"builder": "@angular/build:application",
-					"options": {
-						"browser": "projects/client/src/main.ts",
-						"tsConfig": "projects/client/tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/client/public"
-							}
-						],
-						"styles": [
-							"projects/client/src/styles.css"
-						],
-						"polyfills": [
-							"es-module-shims"
-						]
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve-original": {
-					"builder": "@angular/build:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "client:esbuild:production"
-						},
-						"development": {
-							"buildTarget": "client:esbuild:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4204
-					}
-				}
-			}
-		},
-		"shell": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"standalone": false
-				},
-				"@schematics/angular:directive": {
-					"standalone": false
-				},
-				"@schematics/angular:pipe": {
-					"standalone": false
-				}
-			},
-			"root": "projects/shell",
-			"sourceRoot": "projects/shell/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {},
-					"configurations": {
-						"production": {
-							"target": "shell:esbuild:production"
-						},
-						"development": {
-							"target": "shell:esbuild:development",
-							"dev": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-architects/native-federation:build",
-					"options": {
-						"target": "shell:serve-original:development",
-						"rebuildDelay": 500,
-						"dev": true,
-						"cacheExternalArtifacts": false,
-						"port": 0
-					}
-				},
-				"test": {
-					"builder": "@angular/build:unit-test"
-				},
-				"esbuild": {
-					"builder": "@angular/build:application",
-					"options": {
-						"browser": "projects/shell/src/main.ts",
-						"tsConfig": "projects/shell/tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/shell/public"
-							}
-						],
-						"styles": [
-							"projects/shell/src/styles.css"
-						],
-						"polyfills": [
-							"es-module-shims"
-						]
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve-original": {
-					"builder": "@angular/build:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "shell:esbuild:production"
-						},
-						"development": {
-							"buildTarget": "shell:esbuild:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4200
-					}
-				}
-			}
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": { "packageManager": "npm", "analytics": "6df07634-0508-4d25-b7ea-565bb23b6130" },
+  "newProjectRoot": "projects",
+  "projects": {
+    "NOTE.Solutions.Workspace": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "public" }],
+            "styles": ["src/styles.css"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "NOTE.Solutions.Workspace:build:production" },
+            "development": { "buildTarget": "NOTE.Solutions.Workspace:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": { "builder": "@angular/build:unit-test" }
+      }
+    },
+    "landing": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/landing",
+      "sourceRoot": "projects/landing/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {},
+          "configurations": {
+            "production": { "target": "landing:esbuild:production" },
+            "development": { "target": "landing:esbuild:development", "dev": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "landing:serve-original:development",
+            "rebuildDelay": 500,
+            "dev": true,
+            "cacheExternalArtifacts": false,
+            "port": 0
+          }
+        },
+        "test": { "builder": "@angular/build:unit-test" },
+        "esbuild": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/landing/src/main.ts",
+            "tsConfig": "projects/landing/tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "projects/landing/public" }],
+            "styles": ["projects/landing/src/styles.css"],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+            "polyfills": ["es-module-shims"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-original": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "landing:esbuild:production" },
+            "development": { "buildTarget": "landing:esbuild:development" }
+          },
+          "defaultConfiguration": "development",
+          "options": { "port": 4201 }
+        }
+      }
+    },
+    "auth": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/auth",
+      "sourceRoot": "projects/auth/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {},
+          "configurations": {
+            "production": { "target": "auth:esbuild:production" },
+            "development": { "target": "auth:esbuild:development", "dev": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "auth:serve-original:development",
+            "rebuildDelay": 500,
+            "dev": true,
+            "cacheExternalArtifacts": false,
+            "port": 0
+          }
+        },
+        "test": { "builder": "@angular/build:unit-test" },
+        "esbuild": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/auth/src/main.ts",
+            "tsConfig": "projects/auth/tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "projects/auth/public" }],
+            "styles": ["projects/auth/src/styles.css"],
+            "polyfills": ["es-module-shims"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-original": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "auth:esbuild:production" },
+            "development": { "buildTarget": "auth:esbuild:development" }
+          },
+          "defaultConfiguration": "development",
+          "options": { "port": 4202 }
+        }
+      }
+    },
+    "system-admin": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/system-admin",
+      "sourceRoot": "projects/system-admin/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {},
+          "configurations": {
+            "production": { "target": "system-admin:esbuild:production" },
+            "development": { "target": "system-admin:esbuild:development", "dev": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "system-admin:serve-original:development",
+            "rebuildDelay": 500,
+            "dev": true,
+            "cacheExternalArtifacts": false,
+            "port": 0
+          }
+        },
+        "test": { "builder": "@angular/build:unit-test" },
+        "esbuild": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/system-admin/src/main.ts",
+            "tsConfig": "projects/system-admin/tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "projects/system-admin/public" }],
+            "styles": ["projects/system-admin/src/styles.css"],
+            "polyfills": ["es-module-shims"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-original": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "system-admin:esbuild:production" },
+            "development": { "buildTarget": "system-admin:esbuild:development" }
+          },
+          "defaultConfiguration": "development",
+          "options": { "port": 4203 }
+        }
+      }
+    },
+    "client": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/client",
+      "sourceRoot": "projects/client/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {},
+          "configurations": {
+            "production": { "target": "client:esbuild:production" },
+            "development": { "target": "client:esbuild:development", "dev": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "client:serve-original:development",
+            "rebuildDelay": 500,
+            "dev": true,
+            "cacheExternalArtifacts": false,
+            "port": 0
+          }
+        },
+        "test": { "builder": "@angular/build:unit-test" },
+        "esbuild": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/client/src/main.ts",
+            "tsConfig": "projects/client/tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "projects/client/public" }],
+            "styles": ["projects/client/src/styles.css"],
+            "polyfills": ["es-module-shims"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-original": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "client:esbuild:production" },
+            "development": { "buildTarget": "client:esbuild:development" }
+          },
+          "defaultConfiguration": "development",
+          "options": { "port": 4204 }
+        }
+      }
+    },
+    "shell": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/shell",
+      "sourceRoot": "projects/shell/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {},
+          "configurations": {
+            "production": { "target": "shell:esbuild:production" },
+            "development": { "target": "shell:esbuild:development", "dev": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "shell:serve-original:development",
+            "rebuildDelay": 500,
+            "dev": true,
+            "cacheExternalArtifacts": false,
+            "port": 0
+          }
+        },
+        "test": { "builder": "@angular/build:unit-test" },
+        "esbuild": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/shell/src/main.ts",
+            "tsConfig": "projects/shell/tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "projects/shell/public" }],
+            "styles": [
+              "node_modules/ngx-spinner/animations/ball-clip-rotate.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "projects/shell/src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+            "polyfills": ["es-module-shims"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-original": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "shell:esbuild:production" },
+            "development": { "buildTarget": "shell:esbuild:development" }
+          },
+          "defaultConfiguration": "development",
+          "options": { "port": 4200 }
+        }
+      }
     },
     "core-lib": {
       "projectType": "library",
@@ -604,22 +378,16 @@
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
-            "production": {
-              "tsConfig": "projects/core-lib/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/core-lib/tsconfig.lib.json"
-            }
+            "production": { "tsConfig": "projects/core-lib/tsconfig.lib.prod.json" },
+            "development": { "tsConfig": "projects/core-lib/tsconfig.lib.json" }
           },
           "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular/build:unit-test",
-          "options": {
-            "tsConfig": "projects/core-lib/tsconfig.spec.json"
-          }
+          "options": { "tsConfig": "projects/core-lib/tsconfig.spec.json" }
         }
       }
     }
-	}
+  }
 }

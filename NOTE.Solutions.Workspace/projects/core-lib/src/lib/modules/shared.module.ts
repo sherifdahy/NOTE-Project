@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule} from '@ngx-translate/core';
+import { ErrorComponent } from '../components/error/error.component';
+import { AccessDeniedComponent } from '../components/access-denied/access-denied.component';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { ServerErrorComponent } from '../components/server-error/server-error.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    TranslateModule,
+  ],
+  declarations: [
+    ErrorComponent,
+    AccessDeniedComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+  ],
+  exports: [
+    ErrorComponent,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ]
+})
+export class SharedModule {
+}
