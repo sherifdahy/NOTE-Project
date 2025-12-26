@@ -9,7 +9,9 @@ import { ForgetPasswordFormComponent } from './features/forget-password/componen
 import { ResetPasswordFormComponent } from './features/reset-password/components/reset-password-form/reset-password-form.component';
 import { ResetPasswordPageComponent } from './features/reset-password/pages/reset-password-page/reset-password-page.component';
 import { ForgetPasswordPageComponent } from './features/forget-password/pages/forget-password-page/forget-password-page.component';
-import { SharedModule } from 'core-lib';
+import { ErrorComponent, SharedModule } from 'core-lib';
+
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { SharedModule } from 'core-lib';
   imports: [
     CommonModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ErrorComponent
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

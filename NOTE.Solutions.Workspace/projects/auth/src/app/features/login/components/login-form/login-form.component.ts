@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService, ErrorHandlerService} from 'core-lib';
 import { LoginRequest } from 'core-lib/lib/models/auth/requests/login-request';
 
@@ -19,6 +19,14 @@ export class LoginFormComponent implements OnInit {
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(6)]]
     });
+  }
+
+  get email() :FormControl {
+    return this.form.get('email') as FormControl;
+  }
+
+  get password() :FormControl {
+    return this.form.get('password') as FormControl;
   }
 
   onSubmit() {
