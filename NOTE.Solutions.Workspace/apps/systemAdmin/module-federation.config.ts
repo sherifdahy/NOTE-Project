@@ -1,12 +1,12 @@
 import type { ModuleFederationConfig } from '@nx/module-federation';
 
-const sharedPackages: Record<string, string> = {
-  '@angular/core': '21.0.0',
-  '@angular/common': '21.0.0',
-  '@angular/common/http': '21.0.0',
-  '@angular/router': '21.0.0',
-  'rxjs': '7.8.0',
-};
+// const sharedPackages: Record<string, string> = {
+//   '@angular/core': '21.0.0',
+//   '@angular/common': '21.0.0',
+//   '@angular/common/http': '21.0.0',
+//   '@angular/router': '21.0.0',
+//   'rxjs': '7.8.0',
+// };
 
 const config: ModuleFederationConfig = {
   name: 'systemAdmin',
