@@ -1,5 +1,5 @@
 import nx from '@nx/eslint-plugin';
-import baseConfig from '../../../eslint.config.mjs';
+import baseConfig from '../../eslint.config.mjs';
 
 export default [
   ...baseConfig,
@@ -12,7 +12,7 @@ export default [
         'error',
         {
           type: 'attribute',
-          prefix: 'lib',
+          prefix: 'app',
           style: 'camelCase',
         },
       ],
@@ -20,20 +20,15 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'app',
           style: 'kebab-case',
         },
       ],
     },
   },
   {
-    files: ['**/*.*'],
+    files: ['**/*.html'],
     // Override or add rules here
-    rules: {
-      '@angular-eslint/prefer-standalone': 'off',
-      '@angular-eslint/prefer-inject': 'off',
-      "@typescript-eslint/no-empty-function": "off",
-      "@angular-eslint/no-empty-lifecycle-method": "off"
-    },
+    rules: {},
   },
 ];

@@ -1,10 +1,106 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { JwtService } from './jwt.service';
+import { AuthStorageService } from './auth-storage.service';
+import { ApiClientService } from '../api/api-client.service';
+import { AuthResponse, AuthenticatedUserResponse, LoginRequest, ForgetPasswordRequest} from '@invoicing-system/shared/models';
+import { API_ENDPOINTS_CONSTS } from '../../constants/end-point-consts';
 
-@Injectable({ 'providedIn': 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
 
-  login() {
-    alert('Login successful!');
-    return true;
+  private currentUserSubject = new BehaviorSubject<AuthenticatedUserResponse | null>(null);
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+
+  constructor(private apiCall: ApiClientService, private authStorageService: AuthStorageService, private jwtService: JwtService) {
+    {
+      this.currentUserSubject = new BehaviorSubject<AuthenticatedUserResponse | null>(null);
+      this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
+      this.checkOnInit();
+    }
+
+  }
+
+  checkOnInit() {
+    this.authStorageService.getAuthData$().subscribe(() => {
+      this.authStorageService.getAuthData$().subscribe((response) => {
+        if (response) {
+          this.currentUserSubject.next(this.jwtService.decodeToken(response?.token));
+          this.isLoggedInSubject.next(true);
+        } else {
+          this.isLoggedInSubject.next(false);
+        }
+      });
+    })
+  }
+
+
+  login(request: LoginRequest): Observable<AuthResponse> {
+    return this.apiCall.post<AuthResponse>(API_ENDPOINTS_CONSTS.AUTH.LOGIN, request).pipe(
+      tap(response => {
+        this.authStorageService.saveAuthData(response);
+      }),
+      tap((response) => {
+        this.authStorageService.saveAuthData(response);
+      })
+    );
+  }
+
+
+
+  logout(): Observable<any> {
+    return this.apiCall.post(API_ENDPOINTS_CONSTS.AUTH.REVOKE, {
+      token: this.authStorageService.getAuthData()?.token,
+      refreshToken: this.authStorageService.getAuthData()?.refreshToken
+    }).pipe((response) => {
+      this.authStorageService.clearAuthData();
+      return response;
+    }
+    )
+  }
+
+  forgetPassword(request: ForgetPasswordRequest): Observable<void> {
+    return this.apiCall.post<void>(API_ENDPOINTS_CONSTS.AUTH.FORGET_PASSWORD, request);
+  }
+
+  refreshToken(): Observable<AuthResponse> {
+    return this.apiCall
+      .post<AuthResponse>(API_ENDPOINTS_CONSTS.AUTH.REFRESH_TOKEN, {
+        token: this.authStorageService.getAuthData()?.token,
+        refreshToken: this.authStorageService.getAuthData()?.refreshToken,
+      })
+      .pipe(
+        tap((response) => {
+          this.authStorageService.saveAuthData(response);
+        })
+      );
+  }
+
+  // resetPassword(request: NewPasswordRequest): Observable<void> {
+  //   return this.apiCall.post<void>(API_ENDPOINTS_CONSTS.AUTH.RESET_PASSWORD, request);
+  // }
+
+  get currentUser(): AuthenticatedUserResponse | null {
+    return this.currentUserSubject.value;
+  }
+
+  get currentUser$(): Observable<AuthenticatedUserResponse | null> {
+    return this.currentUserSubject.asObservable();
+  }
+
+  get isLoggedIn$(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+  }
+
+  get isLoggedIn(): boolean {
+    return this.isLoggedInSubject.value;
   }
 }
+
+
+
+
+
+

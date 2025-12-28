@@ -1,7 +1,10 @@
-import { NxWelcome } from './nx-welcome';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
+  {
+    path : 'auth',
+    loadChildren : ()=> import('./features/auth/auth.module').then(m=>m.AuthModule)
+  },
   {
     path: 'systemAdmin',
     loadChildren: () =>
@@ -13,7 +16,12 @@ export const appRoutes: Route[] = [
       import('admin/Module').then((m) => m.RemoteEntryModule),
   },
   {
-    path: '',
-    component: NxWelcome,
+    path: 'client',
+    loadChildren: () =>
+      import('client/Module').then((m) => m.RemoteEntryModule),
   },
+  {
+    path : '**',
+    redirectTo : ''
+  }
 ];

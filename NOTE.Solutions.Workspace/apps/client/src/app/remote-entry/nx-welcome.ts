@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AuthService } from '@invoicing-system/shared/data-access';
 
 @Component({
   selector: 'app-nx-welcome',
@@ -511,7 +510,7 @@ import { AuthService } from '@invoicing-system/shared/data-access';
         <div id="welcome">
           <h1>
             <span> Hello there, </span>
-            Welcome systemAdmin 👋
+            Welcome client 👋
           </h1>
         </div>
         <!--  HERO  -->
@@ -848,13 +847,13 @@ import { AuthService } from '@invoicing-system/shared/data-access';
               Build, test and lint your app
             </summary>
             <pre><span># Build</span>
-nx build systemAdmin
+nx build client
 <span># Test</span>
-nx test systemAdmin
+nx test client
 <span># Lint</span>
-nx lint systemAdmin
+nx lint client
 <span># Run them together!</span>
-nx run-many -p systemAdmin -t build test lint</pre>
+nx run-many -p client -t build test lint</pre>
           </details>
           <details>
             <summary>
@@ -873,7 +872,7 @@ nx run-many -p systemAdmin -t build test lint</pre>
               </svg>
               View project details
             </summary>
-            <pre>nx show project systemAdmin</pre>
+            <pre>nx show project client</pre>
           </details>
 
           <details>
@@ -941,8 +940,4 @@ nx g &#64;nx/angular:component ui/src/lib/button</pre>
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
-export class NxWelcome {
-  constructor(private authService : AuthService){
-    this.authService.login();
-  }
-}
+export class NxWelcome {}
