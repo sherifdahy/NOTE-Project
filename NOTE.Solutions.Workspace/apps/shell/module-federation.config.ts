@@ -18,23 +18,21 @@ const config: ModuleFederationConfig = {
     ['systemAdmin', 'https://note-system-admin.vercel.app/remoteEntry.mjs']
   ],
   disableNxRuntimeLibraryControlPlugin: true,
-  shared: (name, config) => {
-    const sharedLibraries: { [key: string]: string } = {
-      // '@angular/core': '21.0.6',
-      // '@angular/common': '21.0.6',
-      // '@angular/common/http': '21.0.6',
-      // '@angular/router': '21.0.6',
-      // 'rxjs': '7.8.2'
-    };
-
-    if (name in sharedLibraries) {
+  shared: (name) => {
+    if (
+      name === '@angular/core' ||
+      name === '@angular/common' ||
+      name === '@angular/common/http' ||
+      name === '@angular/router' ||
+      name === 'rxjs'
+    ) {
       return {
         singleton: true,
-        strictVersion: false,
-        requiredVersion: sharedLibraries[name]
+        strictVersion: true,
+        requiredVersion: '21.0.0',
       };
     }
-    return config;
+    return undefined;
   },
 
 };
