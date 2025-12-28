@@ -20,11 +20,11 @@ const config: ModuleFederationConfig = {
 
   shared: (name, config) => {
     const sharedLibraries : { [key: string]: string } = {
-      '@angular/core': '21.0.6',
-      '@angular/common': '21.0.6',
-      '@angular/common/http': '21.0.6',
-      '@angular/router': '21.0.6',
-      'rxjs': '7.8.2'
+      // '@angular/core': '21.0.6',
+      // '@angular/common': '21.0.6',
+      // '@angular/common/http': '21.0.6',
+      // '@angular/router': '21.0.6',
+      // 'rxjs': '7.8.2'
     };
 
     if (name in sharedLibraries) {
