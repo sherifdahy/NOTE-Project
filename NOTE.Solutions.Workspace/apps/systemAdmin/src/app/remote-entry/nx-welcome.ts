@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { AuthService } from '@invoicing-system/shared/data-access';
 
 @Component({
   selector: 'app-nx-welcome',
@@ -940,4 +941,8 @@ nx g &#64;nx/angular:component ui/src/lib/button</pre>
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
-export class NxWelcome {}
+export class NxWelcome {
+  constructor(private authService : AuthService){
+    this.authService.login();
+  }
+}
