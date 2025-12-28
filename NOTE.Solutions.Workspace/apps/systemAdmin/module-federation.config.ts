@@ -1,5 +1,13 @@
 import type { ModuleFederationConfig } from '@nx/module-federation';
 
+const sharedPackages: Record<string, string> = {
+  '@angular/core': '21.0.0',
+  '@angular/common': '21.0.0',
+  '@angular/common/http': '21.0.0',
+  '@angular/router': '21.0.0',
+  'rxjs': '7.8.0',
+};
+
 const config: ModuleFederationConfig = {
   name: 'systemAdmin',
 
@@ -10,17 +18,11 @@ const config: ModuleFederationConfig = {
   disableNxRuntimeLibraryControlPlugin: true,
 
   shared: (name) => {
-    if (
-      name === '@angular/core' ||
-      name === '@angular/common' ||
-      name === '@angular/common/http' ||
-      name === '@angular/router' ||
-      name === 'rxjs'
-    ) {
+    if (sharedPackages[name]) {
       return {
         singleton: true,
         strictVersion: true,
-        requiredVersion: '21.0.0', // ✅ ممنوع auto
+        requiredVersion: sharedPackages[name],
       };
     }
     return undefined;
