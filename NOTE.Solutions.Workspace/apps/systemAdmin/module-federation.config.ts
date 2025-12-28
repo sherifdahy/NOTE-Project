@@ -1,18 +1,28 @@
-const config = {
+import type { ModuleFederationConfig } from '@nx/module-federation';
+
+const config: ModuleFederationConfig = {
   name: 'systemAdmin',
   exposes: {
     './Module': 'apps/systemAdmin/src/app/remote-entry/entry-module.ts',
   },
-  shared: {
-    '@angular/core': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    'rxjs': { singleton: true, strictVersion: false, requiredVersion: 'auto' }
+  shared: (name, config) => {
+    const sharedLibraries = [
+      '@angular/core',
+      '@angular/common',
+      '@angular/common/http',
+      '@angular/router',
+      'rxjs'
+    ];
+
+    if (sharedLibraries.includes(name)) {
+      return {
+        singleton: true,
+        strictVersion: name !== 'rxjs',
+        requiredVersion: 'auto',
+      };
+    }
+    return config;
   },
 };
 
-/**
- * Nx requires a default export of the config to allow correct resolution of the module federation graph.
- **/
 export default config;

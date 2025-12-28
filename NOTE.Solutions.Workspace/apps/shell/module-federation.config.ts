@@ -1,5 +1,6 @@
+import { ModuleFederationConfig } from '@nx/module-federation';
 
-const config  = {
+const config: ModuleFederationConfig = {
   name: 'shell',
   /**
    * To use a remote that does not exist in your current Nx Workspace
@@ -17,13 +18,24 @@ const config  = {
     ['systemAdmin', 'https://note-system-admin.vercel.app/remoteEntry.mjs']
   ],
 
-  shared: {
-    '@angular/core': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-    'rxjs': { singleton: true, strictVersion: false, requiredVersion: 'auto' }
-  }
+  shared: (name, config) => {
+    const sharedLibraries = [
+      '@angular/core',
+      '@angular/common',
+      '@angular/common/http',
+      '@angular/router',
+      'rxjs'
+    ];
+
+    if (sharedLibraries.includes(name)) {
+      return {
+        singleton: true,
+        strictVersion: name !== 'rxjs',
+        requiredVersion: 'auto',
+      };
+    }
+    return config;
+  },
 
 };
 /**
