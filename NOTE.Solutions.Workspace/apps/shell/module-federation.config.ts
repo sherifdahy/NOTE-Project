@@ -18,6 +18,21 @@ const config: ModuleFederationConfig = {
     ['systemAdmin', 'https://note-system-admin.vercel.app/remoteEntry.mjs']
   ],
 
+  shared: (name, config) => {
+    if (
+      name === '@angular/core' ||
+      name === '@angular/common' ||
+      name === '@angular/router' ||
+      name === 'rxjs'
+    ) {
+      return {
+        singleton: true,
+        strictVersion: true,
+        requiredVersion: config?.requiredVersion ?? false,
+      };
+    }
+    return config;
+  },
 };
 
 /**
