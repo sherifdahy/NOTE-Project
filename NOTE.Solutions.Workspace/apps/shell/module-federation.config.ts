@@ -29,7 +29,7 @@ const config: ModuleFederationConfig = {
       return {
         singleton: true,
         strictVersion: true,
-        requiredVersion: '21.0.0',
+        requiredVersion: 'auto',
       };
     }
     return undefined;
