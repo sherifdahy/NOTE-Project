@@ -2,10 +2,13 @@ import type { ModuleFederationConfig } from '@nx/module-federation';
 
 const config: ModuleFederationConfig = {
   name: 'systemAdmin',
+
   exposes: {
     './Module': 'apps/systemAdmin/src/app/remote-entry/entry-module.ts',
   },
+
   disableNxRuntimeLibraryControlPlugin: true,
+
   shared: (name) => {
     if (
       name === '@angular/core' ||
@@ -17,7 +20,7 @@ const config: ModuleFederationConfig = {
       return {
         singleton: true,
         strictVersion: true,
-        requiredVersion: 'auto',
+        requiredVersion: '21.0.0', // ✅ ممنوع auto
       };
     }
     return undefined;
