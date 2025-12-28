@@ -1,12 +1,13 @@
 import type { ModuleFederationConfig } from '@nx/module-federation';
 
+
 const config: ModuleFederationConfig = {
-  name: 'systemAdmin',
+  name: 'shell',
 
-  exposes: {
-    './Module': 'apps/systemAdmin/src/app/remote-entry/entry-module.ts',
-  },
-
+  remotes: [
+    'admin',
+    'systemAdmin'
+  ],
 };
 
 export default config;

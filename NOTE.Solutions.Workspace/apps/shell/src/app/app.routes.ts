@@ -8,6 +8,11 @@ export const appRoutes: Route[] = [
       import('systemAdmin/Module').then((m) => m.RemoteEntryModule),
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('admin/Module').then((m) => m.RemoteEntryModule),
+  },
+  {
     path: '',
     component: NxWelcome,
   },
