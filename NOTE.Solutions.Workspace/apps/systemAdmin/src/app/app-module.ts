@@ -6,8 +6,8 @@ import { App } from './app';
 @NgModule({
   declarations: [App],
   imports: [
-    BrowserModule,
-    RouterModule.forRoot(
+    // BrowserModule,
+    RouterModule.forChild(
       [
         {
           path: '',
@@ -17,7 +17,7 @@ import { App } from './app';
             ),
         },
       ],
-      { initialNavigation: 'enabledBlocking' },
+      // { initialNavigation: 'enabledBlocking' },
     ),
   ],
   providers: [],
