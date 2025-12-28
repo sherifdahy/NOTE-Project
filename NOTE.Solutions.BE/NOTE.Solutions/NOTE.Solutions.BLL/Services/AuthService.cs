@@ -1,4 +1,5 @@
-﻿using NOTE.Solutions.Entities.Abstractions.Consts;
+﻿using Microsoft.EntityFrameworkCore;
+using NOTE.Solutions.Entities.Abstractions.Consts;
 using NOTE.Solutions.Entities.Enums;
 using System.Security.Cryptography;
 
@@ -13,9 +14,12 @@ public class AuthService(SignInManager<ApplicationUser> signInManager,UserManage
 
     public async Task<Result<AuthResponse>> GetTokenAsync(LoginRequest authRequest,CancellationToken cancellationToken)
     {
-
-        var applicationUser = await _userManager.FindByEmailAsync(authRequest.Email);
-
+        var applicationUser = _userManager.Users
+                                            .Include(w=>w.RefreshTokens)
+                                            .Include(s=>s.PermissionOverrides)
+                                                .ThenInclude(po => po.RoleClaim)
+                                            .FirstOrDefault(x=>x.Email == authRequest.Email);
+        
         if(applicationUser is null)
             return Result.Failure<AuthResponse>(UserErrors.InvalidCredentials);
 
@@ -43,6 +47,20 @@ public class AuthService(SignInManager<ApplicationUser> signInManager,UserManage
                 var rolePermissions = await _roleManager.GetClaimsAsync(role);
 
                 permissions.AddRange(rolePermissions.Select(x => x.Value).Distinct());
+            }
+
+            foreach (var over in applicationUser.PermissionOverrides)
+            {
+                var permissionValue = over.RoleClaim.ClaimValue;
+
+                if (over.IsAllowed)
+                {
+                    permissions.Add(permissionValue!);
+                }
+                else
+                {
+                    permissions.Remove(permissionValue!);
+                }
             }
 
             var result = _provider.GeneratedToken(applicationUser, roles, permissions);
@@ -117,6 +135,20 @@ public class AuthService(SignInManager<ApplicationUser> signInManager,UserManage
             var rolePermissions = await _roleManager.GetClaimsAsync(role);
 
             permissions.AddRange(rolePermissions.Select(x => x.Value).Distinct());
+        }
+
+        foreach (var over in applicationUser.PermissionOverrides)
+        {
+            var permissionValue = over.RoleClaim.ClaimValue;
+
+            if (over.IsAllowed)
+            {
+                permissions.Add(permissionValue!);
+            }
+            else
+            {
+                permissions.Remove(permissionValue!);
+            }
         }
 
         var result = _provider.GeneratedToken(applicationUser, roles,permissions);

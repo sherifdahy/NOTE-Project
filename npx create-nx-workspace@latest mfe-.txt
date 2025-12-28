@@ -1,0 +1,638 @@
+npx create-nx-workspace@latest mfe-workspace --preset=angular
+
+nx g @nx/angular:host  --no-standalone --name=shell --directory=apps/shell
+nx g @nx/angular:remote --no-standalone --name=systemAdmin  --host=shell --directory=apps/systemAdmin
+ nx g @nx/angular:lib --name=core-lib --no-standalone --style=css --directory=libs/core-lib
+   
+
+
+
+
+apps/
+│
+├── shell/                                    # 🏠 التطبيق الرئيسي
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── core/
+│   │   │   │   ├── layout/
+│   │   │   │   │   ├── main-header/
+│   │   │   │   │   │   ├── main-header.component.ts
+│   │   │   │   │   │   ├── main-header.component.html
+│   │   │   │   │   │   └── main-header.component.scss
+│   │   │   │   │   │
+│   │   │   │   │   ├── main-sidebar/
+│   │   │   │   │   │   ├── main-sidebar.component.ts
+│   │   │   │   │   │   ├── main-sidebar.component.html
+│   │   │   │   │   │   └── sidebar-menu.config.ts
+│   │   │   │   │   │
+│   │   │   │   │   └── main-layout/
+│   │   │   │   │       ├── main-layout.component.ts
+│   │   │   │   │       └── main-layout.component.html
+│   │   │   │   │
+│   │   │   │   └── guards/
+│   │   │   │       ├── auth.guard.ts
+│   │   │   │       └── role.guard.ts
+│   │   │   │
+│   │   │   ├── features/
+│   │   │   │   └── auth/
+│   │   │   │       ├── login/
+│   │   │   │       │   ├── login.component.ts
+│   │   │   │       │   ├── login.component.html
+│   │   │   │       │   └── login.component.scss
+│   │   │   │       │
+│   │   │   │       └── auth.routes.ts
+│   │   │   │
+│   │   │   ├── app.component.ts
+│   │   │   ├── app.component.html
+│   │   │   ├── app.config.ts
+│   │   │   └── app.routes.ts
+│   │   │
+│   │   ├── assets/
+│   │   ├── styles.scss
+│   │   └── main.ts
+│   │
+│   ├── project.json
+│   ├── tsconfig.app.json
+│   └── module-federation.config.ts
+│
+│
+├── accountant-dashboard/                     # 📦 Remote - المحاسب
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── pages/
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── accountant-home.component.ts
+│   │   │   │   │   ├── accountant-home.component.html
+│   │   │   │   │   └── accountant-home.component.scss
+│   │   │   │   │
+│   │   │   │   ├── invoices/
+│   │   │   │   │   ├── invoices-list/
+│   │   │   │   │   │   ├── invoices-list.component.ts
+│   │   │   │   │   │   ├── invoices-list.component.html
+│   │   │   │   │   │   └── invoices-list.component.scss
+│   │   │   │   │   │
+│   │   │   │   │   ├── create-invoice/
+│   │   │   │   │   │   ├── create-invoice.component.ts
+│   │   │   │   │   │   ├── create-invoice.component.html
+│   │   │   │   │   │   └── invoice-form/
+│   │   │   │   │   │       ├── invoice-form.component.ts
+│   │   │   │   │   │       └── invoice-form.component.html
+│   │   │   │   │   │
+│   │   │   │   │   └── invoice-detail/
+│   │   │   │   │       ├── invoice-detail.component.ts
+│   │   │   │   │       └── invoice-detail.component.html
+│   │   │   │   │
+│   │   │   │   ├── receipts/
+│   │   │   │   │   ├── receipts-list/
+│   │   │   │   │   │   ├── receipts-list.component.ts
+│   │   │   │   │   │   └── receipts-list.component.html
+│   │   │   │   │   │
+│   │   │   │   │   ├── create-receipt/
+│   │   │   │   │   │   ├── create-receipt.component.ts
+│   │   │   │   │   │   └── create-receipt.component.html
+│   │   │   │   │   │
+│   │   │   │   │   └── receipt-detail/
+│   │   │   │   │       ├── receipt-detail.component.ts
+│   │   │   │   │       └── receipt-detail.component.html
+│   │   │   │   │
+│   │   │   │   └── reports/
+│   │   │   │       ├── financial-reports/
+│   │   │   │       │   ├── financial-reports.component.ts
+│   │   │   │       │   └── financial-reports.component.html
+│   │   │   │       │
+│   │   │   │       └── tax-reports/
+│   │   │   │           ├── tax-reports.component.ts
+│   │   │   │           └── tax-reports.component.html
+│   │   │   │
+│   │   │   ├── components/
+│   │   │   │   ├── accountant-header/
+│   │   │   │   │   ├── accountant-header.component.ts
+│   │   │   │   │   └── accountant-header.component.html
+│   │   │   │   │
+│   │   │   │   └── quick-stats/
+│   │   │   │       ├── quick-stats.component.ts
+│   │   │   │       └── quick-stats.component.html
+│   │   │   │
+│   │   │   └── remote-entry/
+│   │   │       ├── entry.routes.ts
+│   │   │       └── entry.component.ts
+│   │   │
+│   │   ├── assets/
+│   │   └── main.ts
+│   │
+│   ├── project.json
+│   ├── tsconfig.app.json
+│   └── module-federation.config.ts
+│
+│
+├── sales-dashboard/                          # 📦 Remote - موظف المبيعات
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── pages/
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── sales-home.component.ts
+│   │   │   │   │   └── sales-home.component.html
+│   │   │   │   │
+│   │   │   │   ├── invoices/
+│   │   │   │   │   ├── my-invoices/
+│   │   │   │   │   │   ├── my-invoices.component.ts
+│   │   │   │   │   │   └── my-invoices.component.html
+│   │   │   │   │   │
+│   │   │   │   │   └── create-invoice/
+│   │   │   │   │       ├── create-invoice.component.ts
+│   │   │   │   │       └── create-invoice.component.html
+│   │   │   │   │
+│   │   │   │   └── clients/
+│   │   │   │       ├── clients-list/
+│   │   │   │       │   ├── clients-list.component.ts
+│   │   │   │       │   └── clients-list.component.html
+│   │   │   │       │
+│   │   │   │       └── client-detail/
+│   │   │   │           ├── client-detail.component.ts
+│   │   │   │           └── client-detail.component.html
+│   │   │   │
+│   │   │   ├── components/
+│   │   │   │   └── sales-header/
+│   │   │   │       ├── sales-header.component.ts
+│   │   │   │       └── sales-header.component.html
+│   │   │   │
+│   │   │   └── remote-entry/
+│   │   │       └── entry.routes.ts
+│   │   │
+│   │   └── main.ts
+│   │
+│   ├── project.json
+│   └── module-federation.config.ts
+│
+│
+├── manager-dashboard/                        # 📦 Remote - المدير
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── pages/
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── manager-home.component.ts
+│   │   │   │   │   └── manager-home.component.html
+│   │   │   │   │
+│   │   │   │   ├── reports/
+│   │   │   │   │   ├── overview-reports/
+│   │   │   │   │   │   ├── overview-reports.component.ts
+│   │   │   │   │   │   └── overview-reports.component.html
+│   │   │   │   │   │
+│   │   │   │   │   └── performance-reports/
+│   │   │   │   │       ├── performance-reports.component.ts
+│   │   │   │   │       └── performance-reports.component.html
+│   │   │   │   │
+│   │   │   │   └── approvals/
+│   │   │   │       ├── pending-invoices/
+│   │   │   │       │   ├── pending-invoices.component.ts
+│   │   │   │       │   └── pending-invoices.component.html
+│   │   │   │       │
+│   │   │   │       └── approval-history/
+│   │   │   │           ├── approval-history.component.ts
+│   │   │   │           └── approval-history.component.html
+│   │   │   │
+│   │   │   └── remote-entry/
+│   │   │       └── entry.routes.ts
+│   │   │
+│   │   └── main.ts
+│   │
+│   ├── project.json
+│   └── module-federation.config.ts
+│
+│
+└── admin-dashboard/                          # 📦 Remote - الأدمن
+    ├── src/
+    │   ├── app/
+    │   │   ├── pages/
+    │   │   │   ├── dashboard/
+    │   │   │   │   ├── admin-home.component.ts
+    │   │   │   │   └── admin-home.component.html
+    │   │   │   │
+    │   │   │   ├── users/
+    │   │   │   │   ├── users-list/
+    │   │   │   │   │   ├── users-list.component.ts
+    │   │   │   │   │   └── users-list.component.html
+    │   │   │   │   │
+    │   │   │   │   ├── create-user/
+    │   │   │   │   │   ├── create-user.component.ts
+    │   │   │   │   │   └── create-user.component.html
+    │   │   │   │   │
+    │   │   │   │   └── user-permissions/
+    │   │   │   │       ├── user-permissions.component.ts
+    │   │   │   │       └── user-permissions.component.html
+    │   │   │   │
+    │   │   │   ├── settings/
+    │   │   │   │   ├── company-settings/
+    │   │   │   │   │   ├── company-settings.component.ts
+    │   │   │   │   │   └── company-settings.component.html
+    │   │   │   │   │
+    │   │   │   │   └── tax-settings/
+    │   │   │   │       ├── tax-settings.component.ts
+    │   │   │   │       └── tax-settings.component.html
+    │   │   │   │
+    │   │   │   └── products/
+    │   │   │       ├── products-list/
+    │   │   │       │   ├── products-list.component.ts
+    │   │   │       │   └── products-list.component.html
+    │   │   │       │
+    │   │   │       └── create-product/
+    │   │   │           ├── create-product.component.ts
+    │   │   │           └── create-product.component.html
+    │   │   │
+    │   │   └── remote-entry/
+    │   │       └── entry.routes.ts
+    │   │
+    │   └── main.ts
+    │
+    ├── project.json
+    └── module-federation.config.ts
+
+
+libs/
+│
+├── shared/                                   # 🔧 Core المشترك
+│   │
+│   ├── data-access/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── api/
+│   │   │   │   │   ├── base-api.service.ts
+│   │   │   │   │   ├── http.service.ts
+│   │   │   │   │   └── api.config.ts
+│   │   │   │   │
+│   │   │   │   ├── auth/
+│   │   │   │   │   ├── auth.service.ts
+│   │   │   │   │   ├── token.service.ts
+│   │   │   │   │   └── permission.service.ts
+│   │   │   │   │
+│   │   │   │   └── notification/
+│   │   │   │       ├── notification.service.ts
+│   │   │   │       └── toast.service.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── project.json
+│   │   └── tsconfig.lib.json
+│   │
+│   ├── models/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── common.models.ts
+│   │   │   │   ├── api-response.models.ts
+│   │   │   │   ├── pagination.models.ts
+│   │   │   │   └── user.models.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── interceptors/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── auth.interceptor.ts
+│   │   │   │   ├── error.interceptor.ts
+│   │   │   │   ├── loading.interceptor.ts
+│   │   │   │   └── retry.interceptor.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── utils/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── validators/
+│   │   │   │   │   ├── custom-validators.ts
+│   │   │   │   │   └── form-validators.ts
+│   │   │   │   │
+│   │   │   │   ├── formatters/
+│   │   │   │   │   ├── currency.formatter.ts
+│   │   │   │   │   ├── date.formatter.ts
+│   │   │   │   │   └── number.formatter.ts
+│   │   │   │   │
+│   │   │   │   └── helpers/
+│   │   │   │       ├── array.helpers.ts
+│   │   │   │       └── string.helpers.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   └── ui/                                   # مكونات UI مشتركة
+│       ├── button/
+│       │   ├── src/
+│       │   │   ├── lib/
+│       │   │   │   ├── button.component.ts
+│       │   │   │   ├── button.component.html
+│       │   │   │   └── button.component.scss
+│       │   │   │
+│       │   │   └── index.ts
+│       │   │
+│       │   └── project.json
+│       │
+│       ├── modal/
+│       │   ├── src/
+│       │   │   ├── lib/
+│       │   │   │   ├── modal.component.ts
+│       │   │   │   ├── modal.component.html
+│       │   │   │   ├── modal.component.scss
+│       │   │   │   └── modal.service.ts
+│       │   │   │
+│       │   │   └── index.ts
+│       │   │
+│       │   └── project.json
+│       │
+│       ├── table/
+│       │   ├── src/
+│       │   │   ├── lib/
+│       │   │   │   ├── table.component.ts
+│       │   │   │   ├── table.component.html
+│       │   │   │   ├── table.component.scss
+│       │   │   │   └── table-config.interface.ts
+│       │   │   │
+│       │   │   └── index.ts
+│       │   │
+│       │   └── project.json
+│       │
+│       ├── form-controls/
+│       │   ├── src/
+│       │   │   ├── lib/
+│       │   │   │   ├── input/
+│       │   │   │   │   ├── input.component.ts
+│       │   │   │   │   └── input.component.html
+│       │   │   │   │
+│       │   │   │   ├── select/
+│       │   │   │   │   ├── select.component.ts
+│       │   │   │   │   └── select.component.html
+│       │   │   │   │
+│       │   │   │   └── datepicker/
+│       │   │   │       ├── datepicker.component.ts
+│       │   │   │       └── datepicker.component.html
+│       │   │   │
+│       │   │   └── index.ts
+│       │   │
+│       │   └── project.json
+│       │
+│       └── file-upload/
+│           ├── src/
+│           │   ├── lib/
+│           │   │   ├── file-upload.component.ts
+│           │   │   ├── file-upload.component.html
+│           │   │   └── file-upload.component.scss
+│           │   │
+│           │   └── index.ts
+│           │
+│           └── project.json
+│
+│
+├── invoices/                                 # 📄 Vertical Slice - الفواتير
+│   │
+│   ├── data-access/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── invoice.service.ts
+│   │   │   │   │   ├── invoice-api.service.ts
+│   │   │   │   │   └── invoice-state.service.ts
+│   │   │   │   │
+│   │   │   │   └── state/                   # NgRx Store (اختياري)
+│   │   │   │       ├── invoice.actions.ts
+│   │   │   │       ├── invoice.reducer.ts
+│   │   │   │       ├── invoice.selectors.ts
+│   │   │   │       └── invoice.effects.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── project.json
+│   │   └── tsconfig.lib.json
+│   │
+│   ├── models/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── invoice.model.ts
+│   │   │   │   ├── invoice-item.model.ts
+│   │   │   │   ├── invoice-status.enum.ts
+│   │   │   │   └── create-invoice.dto.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── ui/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── invoice-card/
+│   │   │   │   │   ├── invoice-card.component.ts
+│   │   │   │   │   ├── invoice-card.component.html
+│   │   │   │   │   └── invoice-card.component.scss
+│   │   │   │   │
+│   │   │   │   ├── invoice-table/
+│   │   │   │   │   ├── invoice-table.component.ts
+│   │   │   │   │   ├── invoice-table.component.html
+│   │   │   │   │   └── invoice-table.component.scss
+│   │   │   │   │
+│   │   │   │   ├── invoice-preview/
+│   │   │   │   │   ├── invoice-preview.component.ts
+│   │   │   │   │   ├── invoice-preview.component.html
+│   │   │   │   │   └── invoice-preview.component.scss
+│   │   │   │   │
+│   │   │   │   └── invoice-status-badge/
+│   │   │   │       ├── invoice-status-badge.component.ts
+│   │   │   │       └── invoice-status-badge.component.html
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   └── utils/
+│       ├── src/
+│       │   ├── lib/
+│       │   │   ├── invoice-validators.ts
+│       │   │   ├── invoice-calculators.ts
+│       │   │   └── invoice-pdf-generator.ts
+│       │   │
+│       │   └── index.ts
+│       │
+│       └── project.json
+│
+│
+├── receipts/                                 # 🧾 Vertical Slice - الإيصالات
+│   │
+│   ├── data-access/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── receipt.service.ts
+│   │   │   │   │   ├── receipt-api.service.ts
+│   │   │   │   │   └── receipt-state.service.ts
+│   │   │   │   │
+│   │   │   │   └── state/
+│   │   │   │       ├── receipt.actions.ts
+│   │   │   │       ├── receipt.reducer.ts
+│   │   │   │       └── receipt.selectors.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── models/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── receipt.model.ts
+│   │   │   │   ├── payment-method.enum.ts
+│   │   │   │   └── create-receipt.dto.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── ui/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── receipt-card/
+│   │   │   │   │   ├── receipt-card.component.ts
+│   │   │   │   │   ├── receipt-card.component.html
+│   │   │   │   │   └── receipt-card.component.scss
+│   │   │   │   │
+│   │   │   │   └── receipt-preview/
+│   │   │   │       ├── receipt-preview.component.ts
+│   │   │   │       └── receipt-preview.component.html
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   └── utils/
+│       ├── src/
+│       │   ├── lib/
+│       │   │   └── receipt-pdf-generator.ts
+│       │   │
+│       │   └── index.ts
+│       │
+│       └── project.json
+│
+│
+├── clients/                                  # 👥 Vertical Slice - العملاء
+│   │
+│   ├── data-access/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── client.service.ts
+│   │   │   │   │   └── client-api.service.ts
+│   │   │   │   │
+│   │   │   │   └── state/
+│   │   │   │       ├── client.actions.ts
+│   │   │   │       ├── client.reducer.ts
+│   │   │   │       └── client.selectors.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── models/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── client.model.ts
+│   │   │   │   ├── client-type.enum.ts
+│   │   │   │   └── create-client.dto.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   └── ui/
+│       ├── src/
+│       │   ├── lib/
+│       │   │   ├── client-card/
+│       │   │   │   ├── client-card.component.ts
+│       │   │   │   ├── client-card.component.html
+│       │   │   │   └── client-card.component.scss
+│       │   │   │
+│       │   │   └── client-info/
+│       │   │       ├── client-info.component.ts
+│       │   │       └── client-info.component.html
+│       │   │
+│       │   └── index.ts
+│       │
+│       └── project.json
+│
+│
+├── products/                                 # 📦 Vertical Slice - المنتجات
+│   │
+│   ├── data-access/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   └── services/
+│   │   │   │       ├── product.service.ts
+│   │   │   │       └── product-api.service.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   ├── models/
+│   │   ├── src/
+│   │   │   ├── lib/
+│   │   │   │   ├── product.model.ts
+│   │   │   │   ├── product-category.enum.ts
+│   │   │   │   └── create-product.dto.ts
+│   │   │   │
+│   │   │   └── index.ts
+│   │   │
+│   │   └── project.json
+│   │
+│   └── ui/
+│       ├── src/
+│       │   ├── lib/
+│       │   │   ├── product-card/
+│       │   │   │   ├── product-card.component.ts
+│       │   │   │   └── product-card.component.html
+│       │   │   │
+│       │   │   └── product-selector/
+│       │   │       ├── product-selector.component.ts
+│       │   │       └── product-selector.component.html
+│       │   │
+│       │   └── index.ts
+│       │
+│       └── project.json
+│
+│
+└── reports/                                  # 📊 Vertical Slice - التقارير
+    │
+    ├── data-access/
+    │   ├── src/
+    │   │   ├── lib/
+    │   │   │   └── services/
+    │   │   │       ├── report.service.ts
+    │   │   │       └── report-api.service.ts
+    │   │   │
+    │   │   └── index.ts
+    │   │
+    │   └── project.json
+    │
+    ├── models/
+    │   ├── src/
+    │   │   ├── lib/
+    │   │   │   ├── report.model.ts
+    │   │   │   ├── report-type.enum.ts
+    │   │   │   └── financial-summary.model.ts
+    │   │   │
+    │   │   └── index.ts
+    │   │
+    │   └── project.json
+    │
+    └── ui/
+        ├── src/
+        │   ├── lib/
+        │   │   ├── chart-card/
+        │   │   │   ├── chart-card.component.ts
+        │   │   │   └── chart-card.component.html
+        │   │   │
+        │   │   └── report-table/
+        │   │       ├── report-table.component.ts
+        │   │       └── report-table.component.html
+        │   │
+        │   └── index.ts
+        │
+        └── project.

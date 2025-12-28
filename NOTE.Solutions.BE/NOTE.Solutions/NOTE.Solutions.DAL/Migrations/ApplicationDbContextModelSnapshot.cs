@@ -962,6 +962,25 @@ namespace NOTE.Solutions.DAL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.UserPermissionOverride", b =>
+                {
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleClaimId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAllowed")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ApplicationUserId", "RoleClaimId");
+
+                    b.HasIndex("RoleClaimId", "ApplicationUserId")
+                        .IsUnique();
+
+                    b.ToTable("UserPermissionOverride");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Manager.Manager", b =>
                 {
                     b.Property<int>("Id")
@@ -1110,7 +1129,7 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BranchId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -1118,6 +1137,9 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1132,7 +1154,7 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("CreatedById");
 
@@ -1163,9 +1185,8 @@ namespace NOTE.Solutions.DAL.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("InternalBarcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -1186,15 +1207,11 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.HasIndex("CreatedById");
 
+                    b.HasIndex("ProductId");
+
                     b.HasIndex("UnitId");
 
                     b.HasIndex("UpdatedById");
-
-                    b.HasIndex("ProductId", "InternalBarcode")
-                        .IsUnique();
-
-                    b.HasIndex("ProductId", "UnitId")
-                        .IsUnique();
 
                     b.ToTable("ProductUnits");
                 });
@@ -1216,6 +1233,9 @@ namespace NOTE.Solutions.DAL.Migrations
 
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -1498,6 +1518,25 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("RefreshTokens");
                 });
 
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.UserPermissionOverride", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany("PermissionOverrides")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", "RoleClaim")
+                        .WithMany()
+                        .HasForeignKey("RoleClaimId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("RoleClaim");
+                });
+
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Manager.Manager", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", "ApplicationUser")
@@ -1596,9 +1635,9 @@ namespace NOTE.Solutions.DAL.Migrations
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Product.Product", b =>
                 {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Branch", "Branch")
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Company.Company", "Company")
                         .WithMany("Products")
-                        .HasForeignKey("BranchId")
+                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1612,7 +1651,7 @@ namespace NOTE.Solutions.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("UpdatedById");
 
-                    b.Navigation("Branch");
+                    b.Navigation("Company");
 
                     b.Navigation("CreatedBy");
 
@@ -1694,8 +1733,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("BranchEmplyees");
 
                     b.Navigation("PointOfSales");
-
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Company.Company", b =>
@@ -1703,6 +1740,8 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("ActiveCodeCompanies");
 
                     b.Navigation("Branches");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Customer.Customer", b =>
@@ -1714,6 +1753,11 @@ namespace NOTE.Solutions.DAL.Migrations
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.Employee", b =>
                 {
                     b.Navigation("BranchEmplyees");
+                });
+
+            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("PermissionOverrides");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Order.Order", b =>

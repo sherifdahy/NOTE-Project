@@ -8,5 +8,5 @@ public class ApplicationUser : IdentityUser<int>
     public bool IsDisabled { get; set; }
     public bool IsDeleted { get; set; }
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
-
+    public ICollection<UserPermissionOverride> PermissionOverrides { get; set; } = new HashSet<UserPermissionOverride>();
 }
