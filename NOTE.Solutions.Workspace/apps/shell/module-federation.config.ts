@@ -15,7 +15,7 @@ const config: ModuleFederationConfig = {
    *
    */
   remotes: [
-    ['systemAdmin','https://note-system-admin.vercel.app']
+    ['systemAdmin','https://note-system-admin.vercel.app/remoteEntry.mjs']
   ],
 };
 
