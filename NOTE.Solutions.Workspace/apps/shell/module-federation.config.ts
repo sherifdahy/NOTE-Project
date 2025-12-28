@@ -18,23 +18,15 @@ const config: ModuleFederationConfig = {
     ['systemAdmin', 'https://note-system-admin.vercel.app/remoteEntry.mjs']
   ],
 
-  shared: (name, config) => {
-    if (
-      name === '@angular/core' ||
-      name === '@angular/common' ||
-      name === '@angular/router' ||
-      name === 'rxjs'
-    ) {
-      return {
-        singleton: true,
-        strictVersion: true,
-        requiredVersion: config?.requiredVersion ?? false,
-      };
-    }
-    return config;
-  },
-};
+  shared: {
+    '@angular/core': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    'rxjs': { singleton: true, strictVersion: false, requiredVersion: 'auto' }
+  }
 
+};
 /**
  * Nx requires a default export of the config to allow correct resolution of the module federation graph.
  **/
