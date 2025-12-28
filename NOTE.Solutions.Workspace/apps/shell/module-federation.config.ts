@@ -1,6 +1,5 @@
-import { ModuleFederationConfig } from '@nx/module-federation';
 
-const config: ModuleFederationConfig = {
+const config  = {
   name: 'shell',
   /**
    * To use a remote that does not exist in your current Nx Workspace

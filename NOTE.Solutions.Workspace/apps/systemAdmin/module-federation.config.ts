@@ -1,6 +1,4 @@
-import { ModuleFederationConfig } from '@nx/module-federation';
-
-const config: ModuleFederationConfig = {
+const config = {
   name: 'systemAdmin',
   exposes: {
     './Module': 'apps/systemAdmin/src/app/remote-entry/entry-module.ts',
