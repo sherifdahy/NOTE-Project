@@ -17,7 +17,8 @@ const config: ModuleFederationConfig = {
     if (sharedLibraries.includes(name)) {
       return {
         singleton: true,
-        strictVersion: true
+        strictVersion: false,
+        requiredVersion: 'auto'
       };
     }
     return config;
