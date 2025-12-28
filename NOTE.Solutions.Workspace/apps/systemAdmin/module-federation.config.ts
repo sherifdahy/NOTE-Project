@@ -16,9 +16,9 @@ const config: ModuleFederationConfig = {
 
     if (sharedLibraries.includes(name)) {
       return {
+        ...config,
         singleton: true,
-        strictVersion: name !== 'rxjs',
-        requiredVersion: name === 'rxjs' ? '7.8.2' : '21.0.6'
+        strictVersion: true,
       };
     }
     return config;
