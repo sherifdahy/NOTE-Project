@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NOTE.Solutions.Entities.Abstractions.Consts;
-using NOTE.Solutions.Entities.Enums;
 using System.Security.Cryptography;
 
 namespace NOTE.Solutions.BLL.Services;
@@ -96,7 +94,6 @@ public class AuthService(SignInManager<ApplicationUser> signInManager,UserManage
 
         return Result.Failure<AuthResponse>(error);        
     }
-
     public async Task<Result<AuthResponse>> GetRefreshTokenAsync(string token, string refreshToken, CancellationToken cancellationToken = default)
     {
         var userId = _provider.ValidateToken(token);
@@ -175,12 +172,10 @@ public class AuthService(SignInManager<ApplicationUser> signInManager,UserManage
 
         return Result.Success(response);
     }
-
     private static string GenerateRefreshToken()
     {
         return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
     }
-
     public async Task<Result> RevokeAsync(string token, string refreshToken, CancellationToken cancellationToken = default)
     {
         var userId = _provider.ValidateToken(token);

@@ -6,19 +6,19 @@ const config: ModuleFederationConfig = {
     './Module': 'apps/systemAdmin/src/app/remote-entry/entry-module.ts',
   },
   shared: (name, config) => {
-    const sharedLibraries = [
-      '@angular/core',
-      '@angular/common',
-      '@angular/common/http',
-      '@angular/router',
-      'rxjs'
-    ];
+    const sharedLibraries : { [key: string]: string } = {
+      '@angular/core': '21.0.6',
+      '@angular/common': '21.0.6',
+      '@angular/common/http': '21.0.6',
+      '@angular/router': '21.0.6',
+      'rxjs': '7.8.2'
+    };
 
-    if (sharedLibraries.includes(name)) {
+    if (name in sharedLibraries) {
       return {
         singleton: true,
         strictVersion: false,
-        requiredVersion: 'auto'
+        requiredVersion: sharedLibraries[name]
       };
     }
     return config;
