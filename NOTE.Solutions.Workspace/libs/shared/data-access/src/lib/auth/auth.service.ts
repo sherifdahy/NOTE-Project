@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   login() {
-    alert('User logged in');
     return true;
   }
 }
