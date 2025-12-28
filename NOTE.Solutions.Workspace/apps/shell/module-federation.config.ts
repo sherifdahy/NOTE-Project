@@ -31,7 +31,7 @@ const config: ModuleFederationConfig = {
       return {
         singleton: true,
         strictVersion: name !== 'rxjs',
-        requiredVersion: '21.0.0'
+        requiredVersion: 'auto'
       };
     }
     return config;
