@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthResponse } from '@invoicing-system/shared/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { STORAGE_KEY_CONSTS } from '../../constants/storage-key-consts';
+import { STORAGE_KEY_CONSTS } from '@invoicing-system/shared/constants';
+
 
 @Injectable({
   providedIn: 'root'

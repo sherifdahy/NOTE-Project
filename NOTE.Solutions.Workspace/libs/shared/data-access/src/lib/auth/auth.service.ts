@@ -4,7 +4,7 @@ import { JwtService } from './jwt.service';
 import { AuthStorageService } from './auth-storage.service';
 import { ApiClientService } from '../api/api-client.service';
 import { AuthResponse, AuthenticatedUserResponse, LoginRequest, ForgetPasswordRequest} from '@invoicing-system/shared/models';
-import { API_ENDPOINTS_CONSTS } from '../../constants/end-point-consts';
+import { API_ENDPOINTS_CONSTS } from '@invoicing-system/shared/constants';
 
 @Injectable({
   providedIn: 'root',
