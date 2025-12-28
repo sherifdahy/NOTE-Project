@@ -17,9 +17,9 @@ const config: ModuleFederationConfig = {
   remotes: [
     ['systemAdmin', 'https://note-system-admin.vercel.app/remoteEntry.mjs']
   ],
-
+  disableNxRuntimeLibraryControlPlugin: true,
   shared: (name, config) => {
-    const sharedLibraries : { [key: string]: string } = {
+    const sharedLibraries: { [key: string]: string } = {
       // '@angular/core': '21.0.6',
       // '@angular/common': '21.0.6',
       // '@angular/common/http': '21.0.6',
