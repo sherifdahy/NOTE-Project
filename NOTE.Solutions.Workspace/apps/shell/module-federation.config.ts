@@ -14,10 +14,7 @@ const config: ModuleFederationConfig = {
    * declare module 'my-external-remote';
    *
    */
-  remotes: [
-    ['systemAdmin', '/systemAdmin/remoteEntry.js'] // path بالنسبة للـ shell بعد deploy
-  ],
-
+  remotes: ['systemAdmin'],
 };
 
 /**
