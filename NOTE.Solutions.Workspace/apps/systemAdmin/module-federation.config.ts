@@ -15,18 +15,18 @@ const config: ModuleFederationConfig = {
     './Module': 'apps/systemAdmin/src/app/remote-entry/entry-module.ts',
   },
 
-  disableNxRuntimeLibraryControlPlugin: true,
+  // disableNxRuntimeLibraryControlPlugin: true,
 
-  shared: (name) => {
-    if (sharedPackages[name]) {
-      return {
-        singleton: true,
-        strictVersion: true,
-        requiredVersion: sharedPackages[name],
-      };
-    }
-    return undefined;
-  },
+  // shared: (name) => {
+  //   if (sharedPackages[name]) {
+  //     return {
+  //       singleton: true,
+  //       strictVersion: true,
+  //       requiredVersion: sharedPackages[name],
+  //     };
+  //   }
+  //   return undefined;
+  // },
 };
 
 export default config;
