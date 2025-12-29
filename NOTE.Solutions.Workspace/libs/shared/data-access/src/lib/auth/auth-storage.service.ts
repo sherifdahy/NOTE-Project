@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthResponse } from '@invoicing-system/shared/models';
+import { AuthResponse } from '@note-solutions-workspace/shared/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { STORAGE_KEY_CONSTS } from '@invoicing-system/shared/constants';
+import { STORAGE_KEY_CONSTS } from '@note-solutions-workspace/shared/constants';
 
 
 @Injectable({

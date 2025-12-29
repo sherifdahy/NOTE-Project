@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NOTE.Solutions.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f4abb0f86d2bbfceb49e3d8bd1c6446af1a8edb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3660ea0cb7ea372b2951ebe9fbb62d9ff269ffd")]
 [assembly: System.Reflection.AssemblyProductAttribute("NOTE.Solutions.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NOTE.Solutions.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -27,8 +27,15 @@ export default [
     },
   },
   {
-    files: ['**/*.html'],
+    files: ['**/*.*'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@angular-eslint/prefer-standalone': 'off',
+      '@angular-eslint/prefer-inject': 'off',
+      "@typescript-eslint/no-empty-function": "off",
+      "@angular-eslint/no-empty-lifecycle-method": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@angular-eslint/component-selector": "off"
+    },
   },
 ];

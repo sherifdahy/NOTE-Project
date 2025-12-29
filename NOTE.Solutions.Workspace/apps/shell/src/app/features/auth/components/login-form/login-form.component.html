@@ -1,17 +1,23 @@
-<div class="container d-flex vh-100 justify-content-center align-items-center">
+<div class="container card p-4">
+  <div>
+    <h2 class="text-center mb-4">Login</h2>
+  </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" style="width: 400px">
     <div class="form-group mb-3">
       <label class="form-label" for="email">Email:</label>
-      <input class="form-control" id="email" type="text" formControlName="email" />
+      <input class="form-control" id="email" type="text" formControlName="email" placeholder="Enter your Name" />
+      <app-display-error [control]="email"></app-display-error>
     </div>
-
-    <div class="form-group mb-3">
+    <div class="form-group mb-4">
       <label class="form-label" for="password">Password:</label>
-      <input class="form-control" id="password" type="password" formControlName="password" />
+      <a [routerLink]="['/auth/forgot-password']">
+        <small class="float-end">Forgot password?</small>
+      </a>
+      <input class="form-control" id="password" type="password" formControlName="password"
+        placeholder="Enter your Password" />
+      <app-display-error [control]="password"></app-display-error>
     </div>
-
 
     <button class="btn btn-primary w-100" type="submit">Login</button>
   </form>
-
 </div>

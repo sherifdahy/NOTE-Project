@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 import { App } from './app';
 import { appRoutes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LoaderInterceptor, TokenInterceptor, ErrorInterceptor } from '@invoicing-system/shared/interceptors';
+import { LoaderInterceptor, TokenInterceptor, ErrorInterceptor } from '@note-solutions-workspace/shared/interceptors';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { AppToasterModule, AppTranslateModule} from '@note-solutions-workspace/shared/modules'
 
 @NgModule({
   declarations: [
@@ -19,11 +19,8 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-      timeOut: 3000,
-      preventDuplicates: true,
-    }),
+    AppTranslateModule.forRoot(),
+    AppToasterModule.forRoot(),
   ],
   providers: [
     {

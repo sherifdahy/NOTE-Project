@@ -2,8 +2,8 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@invoicing-system/shared/data-access';
-import { AuthResponse } from '@invoicing-system/shared/models';
+import { AuthService } from '@note-solutions-workspace/shared/data-access';
+import { AuthResponse } from '@note-solutions-workspace/shared/models';
 
 @Injectable({
   providedIn: 'root'

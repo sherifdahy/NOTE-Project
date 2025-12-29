@@ -1,1 +1,1 @@
-export * from '@invoicing-system/shared/data-access'
+export * from '@note-solutions-workspace/shared/data-access'
