@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
 namespace NOTE.Solutions.Entities.Entities.Identity;
+
 public class ApplicationUser : IdentityUser<int>
 {
     public string Name { get; set; } = string.Empty;

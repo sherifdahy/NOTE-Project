@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NOTE.Solutions.API.Extensions;
@@ -15,7 +16,7 @@ using NOTE.Solutions.Entities.Extensions;
 using System.Linq.Expressions;
 
 namespace NOTE.Solutions.DAL.Data;
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int,ApplicationUserClaims,IdentityUserRole<int>,IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
 {
     private readonly IHttpContextAccessor _httpContext;
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions,IHttpContextAccessor httpContextAccessor) : base(dbContextOptions)

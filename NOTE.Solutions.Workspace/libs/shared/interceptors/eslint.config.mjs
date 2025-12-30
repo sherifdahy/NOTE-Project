@@ -29,12 +29,6 @@ export default [
   {
     files: ['**/*.*'],
     // Override or add rules here
-    rules: {
-      '@angular-eslint/prefer-standalone': 'off',
-      '@angular-eslint/prefer-inject': 'off',
-      "@typescript-eslint/no-empty-function": "off",
-      "@angular-eslint/no-empty-lifecycle-method": "off",
-      "@typescript-eslint/no-explicit-any": "off"
-    },
+    rules: '/rules.json'
   },
 ];

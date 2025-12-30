@@ -2,14 +2,14 @@
 using System.Security.Cryptography;
 
 namespace NOTE.Solutions.BLL.Services;
-public class AuthService(SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,IUnitOfWork unitOfWork, IJWTProvider provider) : IAuthService
+public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,IUnitOfWork unitOfWork, IJWTProvider provider) : IAuthService
 {
     private readonly IJWTProvider _provider = provider;
+    private readonly IUnitOfWork _unitOfWork = unit;
     private readonly UserManager<ApplicationUser> _userManager = userManager;
     private readonly RoleManager<ApplicationRole> _roleManager = roleManager;
     private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
     private readonly int _refreshTokenExpiryDays = 14;
-
     public async Task<Result<AuthResponse>> GetTokenAsync(LoginRequest authRequest,CancellationToken cancellationToken)
     {
         var applicationUser = _userManager.Users

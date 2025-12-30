@@ -2,8 +2,12 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
-    path : 'auth',
-    loadChildren : ()=> import('./features/auth/auth.module').then(m=>m.AuthModule)
+    path: '',
+    loadChildren: () => import('./features/landing/landing.module').then(d => d.LandingModule)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'systemAdmin',
@@ -21,7 +25,7 @@ export const appRoutes: Route[] = [
       import('client/Module').then((m) => m.RemoteEntryModule),
   },
   {
-    path : '**',
-    redirectTo : ''
+    path: '**',
+    redirectTo: ''
   }
 ];

@@ -13,31 +13,17 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 
         builder.OwnsMany(x => x.RefreshTokens).WithOwner();
 
-
-
         builder.HasData(new ApplicationUser()
         {
-            Id = DefaultUsers.AdminId,
-            UserName = DefaultUsers.AdminEmail,
-            Email = DefaultUsers.AdminEmail,
-            NormalizedEmail = DefaultUsers.AdminEmail.ToUpper(),
-            NormalizedUserName = DefaultUsers.AdminEmail.ToUpper(),
-            ConcurrencyStamp = DefaultUsers.AdminConcurrencyStamp,
-            SecurityStamp = DefaultUsers.AdminSecurityStamp,
+            Id = DefaultUsers.SystemAdminId,
+            UserName = DefaultUsers.SystemAdminEmail,
+            Email = DefaultUsers.SystemAdminEmail,
+            NormalizedEmail = DefaultUsers.SystemAdminEmail.ToUpper(),
+            NormalizedUserName = DefaultUsers.SystemAdminEmail.ToUpper(),
+            ConcurrencyStamp = DefaultUsers.SystemAdminConcurrencyStamp,
+            SecurityStamp = DefaultUsers.SystemAdminSecurityStamp,
             EmailConfirmed = true,
-            PasswordHash = DefaultUsers.AdminPassword
-        },
-        new ApplicationUser()
-        {
-            Id = DefaultUsers.SupportId,
-            UserName = DefaultUsers.SupportEmail,
-            Email = DefaultUsers.SupportEmail,
-            NormalizedEmail = DefaultUsers.SupportEmail.ToUpper(),
-            NormalizedUserName = DefaultUsers.SupportEmail.ToUpper(),
-            ConcurrencyStamp = DefaultUsers.SupportConcurrencyStamp,
-            SecurityStamp = DefaultUsers.SupportSecurityStamp,
-            EmailConfirmed = true,
-            PasswordHash = DefaultUsers.AdminPassword
+            PasswordHash = DefaultUsers.SystemAdminPassword
         });
     }
 }

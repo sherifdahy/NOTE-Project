@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import {  finalize, Observable } from "rxjs";
-import { LoaderService } from "@invoicing-system/shared/data-access";
+import { LoaderService } from "@app/shared/data-access";
 
 @Injectable({
   providedIn: 'root'

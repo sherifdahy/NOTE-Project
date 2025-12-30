@@ -28,6 +28,7 @@ public interface IUnitOfWork : IDisposable
     public IRepository<BranchEmployee> BranchEmployees { get; }
     public IRepository<Employee> Employees { get; }
     public IRepository<Manager> Managers { get; }
+    public IRepository<ApplicationDashboard> Dashboards { get; }
     Task<int> SaveAsync(CancellationToken cancellationToken = default);
     Task<IDbContextTransaction> BeginTransactionAsync();
 }

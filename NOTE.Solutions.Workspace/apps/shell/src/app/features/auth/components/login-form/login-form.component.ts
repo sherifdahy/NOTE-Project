@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '@invoicing-system/shared/data-access';
-import { LoginRequest } from '@invoicing-system/shared/models';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '@app/shared/data-access';
+import { LoginRequest } from '@app/shared/models';
 
 @Component({
   selector: 'app-login-form',
@@ -21,6 +21,13 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  get email(): FormControl {
+    return this.form.get('email') as FormControl;
+  }
+
+  get password(): FormControl {
+    return this.form.get('password') as FormControl;
+  }
 
   onSubmit() {
     if (this.form.invalid) {

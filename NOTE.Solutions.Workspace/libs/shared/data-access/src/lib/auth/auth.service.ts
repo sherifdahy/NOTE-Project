@@ -3,8 +3,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { JwtService } from './jwt.service';
 import { AuthStorageService } from './auth-storage.service';
 import { ApiClientService } from '../api/api-client.service';
-import { AuthResponse, AuthenticatedUserResponse, LoginRequest, ForgetPasswordRequest} from '@invoicing-system/shared/models';
-import { API_ENDPOINTS_CONSTS } from '@invoicing-system/shared/constants';
+import { AuthResponse, AuthenticatedUserResponse, LoginRequest, ForgetPasswordRequest} from '@app/shared/models';
+import { API_ENDPOINTS_CONSTS } from '@app/shared/constants';
 
 @Injectable({
   providedIn: 'root',
