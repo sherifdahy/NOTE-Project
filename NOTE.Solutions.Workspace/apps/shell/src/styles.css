@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+  --main-color : #0901af;
+  --alter-color : #0909d8;
+  --background-color:#abd2eb;
+}
+
+
+* {
+  box-sizing :border-box;
+
+}
+
+body{
+  font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0px;
+  margin: 0px;
+  background-color: var(--background-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+

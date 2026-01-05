@@ -16,7 +16,7 @@ using NOTE.Solutions.Entities.Extensions;
 using System.Linq.Expressions;
 
 namespace NOTE.Solutions.DAL.Data;
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int,ApplicationUserClaims,IdentityUserRole<int>,IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int>
 {
     private readonly IHttpContextAccessor _httpContext;
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions,IHttpContextAccessor httpContextAccessor) : base(dbContextOptions)

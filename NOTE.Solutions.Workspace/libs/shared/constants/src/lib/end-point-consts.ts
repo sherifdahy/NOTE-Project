@@ -1,6 +1,6 @@
 import { environment } from 'environments/environment'
 // const API_VERSION = 'v1';
-const BASE_URL = `${environment}/api`;
+const BASE_URL = `${environment.apiUrl}/api`;
 
 export const API_ENDPOINTS_CONSTS = {
   AUTH: {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '@app/shared/data-access';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AuthService, NotificationService } from '@app/shared/data-access';
 import { LoginRequest } from '@app/shared/models';
 
 @Component({
@@ -12,7 +13,7 @@ import { LoginRequest } from '@app/shared/models';
 export class LoginFormComponent implements OnInit {
 
   public form!: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private notificationService: NotificationService, private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -39,10 +40,11 @@ export class LoginFormComponent implements OnInit {
 
     this.authService.login(loginRequest).subscribe({
       next: () => {
-        alert('Login successful:');
+        const returnUrl = this.activatedRoute.snapshot.paramMap.get('returnUrl') ?? '/';
+        this.router.navigateByUrl(returnUrl);
       },
-      error: () => {
-        alert('Login failed:');
+      error: (error) => {
+        this.notificationService.handleError(error);
       }
     });
   }

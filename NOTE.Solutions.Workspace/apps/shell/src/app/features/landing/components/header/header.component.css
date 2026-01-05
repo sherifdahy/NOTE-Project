@@ -1,0 +1,22 @@
+header{
+  height: 56px;
+}
+
+nav ul li a{
+  position: relative;
+}
+
+nav ul li a::after {
+  content:  "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--main-color);
+  height: 2px;
+}
+
+nav ul li a.active::after,
+nav ul li a:active::after,
+nav ul li a:hover::after{
+  width: 100%;
+}

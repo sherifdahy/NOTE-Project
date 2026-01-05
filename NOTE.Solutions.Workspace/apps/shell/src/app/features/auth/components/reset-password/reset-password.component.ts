@@ -2,15 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-reset-password',
-  standalone : false,
+  standalone: false,
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css']
 })
-export class ResetPasswordComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class ResetPasswordComponent {
 
 }

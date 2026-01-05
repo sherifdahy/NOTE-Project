@@ -266,6 +266,30 @@ namespace NOTE.Solutions.DAL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
@@ -722,30 +746,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationDashboard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicationDashboard");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "SystemAdmin"
-                        });
-                });
-
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>
                 {
                     b.Property<int>("Id")
@@ -799,28 +799,6 @@ namespace NOTE.Solutions.DAL.Migrations
                             IsDeleted = false,
                             Name = "Member",
                             NormalizedName = "MEMBER"
-                        });
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRoleDashboards", b =>
-                {
-                    b.Property<int>("ApplicationDashboardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ApplicationRoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ApplicationDashboardId", "ApplicationRoleId");
-
-                    b.HasIndex("ApplicationRoleId");
-
-                    b.ToTable("ApplicationRoleDashboards");
-
-                    b.HasData(
-                        new
-                        {
-                            ApplicationDashboardId = 1,
-                            ApplicationRoleId = 1
                         });
                 });
 
@@ -930,33 +908,6 @@ namespace NOTE.Solutions.DAL.Migrations
                             TwoFactorEnabled = false,
                             UserName = "admin@note-solutions.com"
                         });
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUserClaims", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.UserPermissionOverride", b =>
@@ -1276,6 +1227,15 @@ namespace NOTE.Solutions.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
@@ -1469,25 +1429,6 @@ namespace NOTE.Solutions.DAL.Migrations
                     b.Navigation("UpdatedBy");
                 });
 
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRoleDashboards", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationDashboard", "ApplicationDashboard")
-                        .WithMany("RoleDashboards")
-                        .HasForeignKey("ApplicationDashboardId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", "ApplicationRole")
-                        .WithMany("RoleDashboards")
-                        .HasForeignKey("ApplicationRoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationDashboard");
-
-                    b.Navigation("ApplicationRole");
-                });
-
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>
                 {
                     b.OwnsMany("NOTE.Solutions.Entities.Entities.Identity.RefreshToken", "RefreshTokens", b1 =>
@@ -1523,15 +1464,6 @@ namespace NOTE.Solutions.DAL.Migrations
                         });
 
                     b.Navigation("RefreshTokens");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUserClaims", b =>
-                {
-                    b.HasOne("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.UserPermissionOverride", b =>
@@ -1769,16 +1701,6 @@ namespace NOTE.Solutions.DAL.Migrations
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Employee.Employee", b =>
                 {
                     b.Navigation("BranchEmplyees");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationDashboard", b =>
-                {
-                    b.Navigation("RoleDashboards");
-                });
-
-            modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationRole", b =>
-                {
-                    b.Navigation("RoleDashboards");
                 });
 
             modelBuilder.Entity("NOTE.Solutions.Entities.Entities.Identity.ApplicationUser", b =>

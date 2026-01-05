@@ -59,8 +59,8 @@
       "continuous": true,
       "executor": "@nx/angular:dev-server",
       "options": {
-        "port": 4203,
-        "publicHost": "http://localhost:4203"
+        "port": 4202,
+        "publicHost": "http://localhost:4202"
       },
       "configurations": {
         "production": {
@@ -70,7 +70,8 @@
           "buildTarget": "client:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "dependsOn": ["shell:serve"]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -87,7 +88,7 @@
       "defaultConfiguration": "production",
       "options": {
         "buildTarget": "client:build",
-        "port": 4203,
+        "port": 4202,
         "watch": false
       },
       "configurations": {

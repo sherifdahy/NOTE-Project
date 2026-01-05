@@ -1,0 +1,15 @@
+<header class="bg-white align-items-center d-flex">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <a routerLink="/" class="fw-bold fs-5" style="color:var(--main-color)">
+      NOTE <span class="text-dark">Solutions</span>
+    </a>
+
+    <div class="d-flex gap-4">
+      <select class="form-select form-select-sm" [value]="currentLang" (change)="changeLang($any($event.target).value)">
+        <option value="en">English</option>
+        <option value="ar">Arabic</option>
+      </select>
+    </div>
+  </div>
+</header>

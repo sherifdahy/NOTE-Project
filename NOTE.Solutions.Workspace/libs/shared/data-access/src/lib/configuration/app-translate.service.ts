@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { STORAGE_KEY_CONSTS } from '@app/shared/constants';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
-import { STORAGE_KEY_CONSTS } from '../../constants/storage-key-consts';
 
 @Injectable({
   providedIn: 'root'

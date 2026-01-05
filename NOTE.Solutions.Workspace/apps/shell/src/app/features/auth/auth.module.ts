@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth.routing.module';
-import { AuthLayoutComponent } from '../../layouts/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { DisplayErrorComponent } from '@app/shared/ui'
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AppTranslateModule } from '@app/shared/modules';
+import { TranslateService } from '@ngx-translate/core';
+import { AppTranslateService } from '@app/shared/data-access';
+import { HeaderComponent } from "./components/header/header.component";
+
 
 @NgModule({
   imports: [
@@ -13,10 +21,28 @@ import { DisplayErrorComponent } from '@app/shared/ui'
     FormsModule,
     ReactiveFormsModule,
     DisplayErrorComponent,
-  ],
+    MatTooltipModule,
+    AppTranslateModule.forChild('/auth.json'),
+
+],
   declarations: [
     AuthLayoutComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    ResetPasswordComponent,
+    ForgetPasswordComponent,
+    HeaderComponent
   ]
 })
-export class AuthModule { }
+
+export class AuthModule {
+  constructor(
+    private translateService: TranslateService,
+    private appTranslateService: AppTranslateService
+  ) {
+    this.appTranslateService.language$.subscribe((lang) => {
+      this.translateService.getTranslation(lang).subscribe((file) => {
+        this.translateService.setTranslation(lang, file, true);
+      });
+    });
+  }
+}

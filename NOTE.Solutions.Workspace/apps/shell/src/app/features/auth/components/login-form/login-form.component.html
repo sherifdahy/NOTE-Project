@@ -1,19 +1,49 @@
-<div class="container d-flex vh-100 justify-content-center align-items-center">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" style="width: 400px">
-    <div class="form-group mb-3">
-      <label class="form-label" for="email">Email:</label>
-      <input class="form-control" id="email" type="text" formControlName="email" />
-      <app-display-error [control]="email"></app-display-error>
-    </div>
+<div class="card shadow-lg border-0 rounded-4">
 
-    <div class="form-group mb-3">
-      <label class="form-label" for="password">Password:</label>
-      <input class="form-control" id="password" type="password" formControlName="password" />
-      <app-display-error [control]="password"></app-display-error>
-    </div>
+  <!-- Card Header -->
+  <div class="card-header text-center text-light py-4 rounded-top-4" style="background-color: var(--main-color);">
+    <h4 class="mb-0 fw-bold">
+      {{ 'login.title' | translate }}
+    </h4>
+    <small class="opacity-75">
+      {{ 'login.subtitle' | translate }}
+    </small>
+  </div>
 
+  <!-- Card Body -->
+  <div class="card-body p-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <button class="btn btn-primary w-100" type="submit">Login</button>
-  </form>
+      <!-- Email Field -->
+      <div class="mb-3">
+        <label class="form-label" for="email">
+          {{ 'login.emailLabel' | translate }}
+        </label>
+        <input class="form-control" id="email" type="text" placeholder="{{ 'login.emailPlaceholder' | translate }}"
+          formControlName="email" />
+        <app-display-error [control]="email"></app-display-error>
+      </div>
 
+      <!-- Password Field -->
+      <div class="mb-3">
+        <div class="d-flex justify-content-between">
+          <label class="form-label" for="password">
+            {{ 'login.passwordLabel' | translate }}
+          </label>
+          <a routerLink="/auth/forget-password" class="text-decoration-none small">
+            {{ 'login.forgotPassword' | translate }}
+          </a>
+        </div>
+        <input class="form-control" id="password" type="password"
+          placeholder="{{ 'login.passwordPlaceholder' | translate }}" formControlName="password" />
+        <app-display-error [control]="password"></app-display-error>
+      </div>
+
+      <button [class.disabled]="form.invalid" class="btn text-light w-100" style="background-color: var(--main-color);"
+        type="submit">
+        {{ 'login.submitButton' | translate }}
+      </button>
+
+    </form>
+  </div>
 </div>

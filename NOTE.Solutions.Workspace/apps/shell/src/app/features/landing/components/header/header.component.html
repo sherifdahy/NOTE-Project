@@ -1,0 +1,31 @@
+<header class=" bg-white">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+
+      <a routerLink="/" class="fw-bold fs-5"  style="color:var(--main-color)">
+        NOTE <span class="text-dark">Solutions</span>
+      </a>
+
+      <nav>
+        <ul class="d-flex">
+          <li>
+            <a routerLinkActive="active" class="p-3 text-dark d-block" routerLink="home">{{ 'header.links.home' | translate }}</a>
+          </li>
+          <li>
+            <a routerLinkActive="active" class="p-3 text-dark d-block" routerLink="services">{{ 'header.links.services' | translate }}</a>
+          </li>
+          <li>
+            <a routerLinkActive="active" class="p-3 text-dark d-block" routerLink="about">{{ 'header.links.about' | translate }}</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="d-flex gap-4">
+        <select class="form-select form-select-sm" [value]="currentLang" (change)="changeLang($any($event.target).value)">
+          <option value="en">English</option>
+          <option value="ar">Arabic</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</header>
