@@ -2,12 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { RemoteEntry } from './entry';
-import { NxWelcome } from './nx-welcome';
 import { remoteRoutes } from './entry.routes';
+import { LayoutComponent } from '../layouts/layout/layout.component';
+import { DashboardPageComponent } from '../features/dashboard/pages/dashboard-page/dashboard-page.component';
+import { HeaderComponent } from '../shared/ui/header/header.component';
+import { SidebarComponent } from '../shared/ui/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [RemoteEntry, NxWelcome],
+  declarations: [
+    LayoutComponent,
+    DashboardPageComponent,
+    HeaderComponent,
+    SidebarComponent
+  ],
   imports: [CommonModule, RouterModule.forChild(remoteRoutes)],
   providers: [],
 })
