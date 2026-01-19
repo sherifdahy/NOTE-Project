@@ -1,3 +1,18 @@
-<p>
-  roles-page works!
-</p>
+<h5 class="mb-3">Roles</h5>
+
+<div class="d-flex gap-3 mb-3">
+  <input type="text" class="form-control form-control-sm w-100" placeholder="Type to Search.....">
+
+  <select [(ngModel)]="includeDisabled" (ngModelChange)="loadGrid()" class="form-select form-select-sm w-25">
+
+    <option [ngValue]="false">Show Active Only</option>
+    <option [ngValue]="true">Show Disabled Only</option>
+  </select>
+
+  <a routerLink="create" class="btn btn-success btn-sm">Create</a>
+</div>
+
+<div class="d-flex gap-3">
+  <app-role-card *ngFor="let role of roles$ | async" [role]="role" (roleToggleStatusListner)="loadGrid()">
+  </app-role-card>
+</div>

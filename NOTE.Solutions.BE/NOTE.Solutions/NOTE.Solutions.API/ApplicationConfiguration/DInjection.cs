@@ -170,7 +170,6 @@ public static class DInjection
         services.AddScoped<IGovernateService, GovernateService>();
         services.AddScoped<IActiveCodesService, ActiveCodeService>();
         services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IManagerService, ManagerService>();
         services.AddScoped<IUnitService, UnitService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductUnitService, ProductUnitService>();

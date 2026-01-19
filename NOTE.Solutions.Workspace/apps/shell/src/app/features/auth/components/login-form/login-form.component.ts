@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { AuthService, NotificationService } from '@app/shared/data-access';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthNavigationService, AuthService, NotificationService } from '@app/shared/data-access';
 import { LoginRequest } from '@app/shared/models';
 
 @Component({
@@ -13,7 +13,13 @@ import { LoginRequest } from '@app/shared/models';
 export class LoginFormComponent implements OnInit {
 
   public form!: FormGroup;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private notificationService: NotificationService, private fb: FormBuilder, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private notificationService: NotificationService,
+    private fb: FormBuilder,
+    private authNavigationService: AuthNavigationService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -39,9 +45,9 @@ export class LoginFormComponent implements OnInit {
     const loginRequest = this.form.value as LoginRequest;
 
     this.authService.login(loginRequest).subscribe({
-      next: () => {
-        const returnUrl = this.activatedRoute.snapshot.paramMap.get('returnUrl') ?? '/';
-        this.router.navigateByUrl(returnUrl);
+      next: (response) => {
+        const returnUrl = this.activatedRoute.snapshot.paramMap.get('returnUrl');
+        this.authNavigationService.redirect(returnUrl);
       },
       error: (error) => {
         this.notificationService.handleError(error);

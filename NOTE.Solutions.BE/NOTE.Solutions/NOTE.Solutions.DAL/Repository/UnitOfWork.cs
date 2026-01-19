@@ -4,7 +4,6 @@ using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
 using NOTE.Solutions.Entities.Entities.Employee;
 using NOTE.Solutions.Entities.Entities.Identity;
-using NOTE.Solutions.Entities.Entities.Manager;
 using NOTE.Solutions.Entities.Entities.Order;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
@@ -36,7 +35,6 @@ public class UnitOfWork : IUnitOfWork
         ActiveCodeCompanies = new Repository<ActiveCodeCompany>(_context);
         BranchEmployees = new Repository<BranchEmployee>(_context);
         Employees = new Repository<Employee>(_context);
-        Managers = new Repository<Manager>(_context);
     }
 
     public IRepository<Company> Companies { get; }
@@ -55,7 +53,6 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<POS> POSs { get; }
     public IRepository<BranchEmployee> BranchEmployees { get; }
     public IRepository<Employee> Employees { get; }
-    public IRepository<Manager> Managers { get; }
     public async Task<IDbContextTransaction> BeginTransactionAsync()
         => await _context.Database.BeginTransactionAsync();
     public void Dispose()

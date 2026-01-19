@@ -1,0 +1,8 @@
+.card{
+  width: 300px;
+  transition: 0.2s;
+}
+
+.card:hover{
+  scale: 1.04;
+}

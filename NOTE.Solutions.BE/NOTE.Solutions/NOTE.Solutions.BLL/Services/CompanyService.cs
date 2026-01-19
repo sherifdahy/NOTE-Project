@@ -52,7 +52,6 @@ public class CompanyService(IUnitOfWork unitOfWork) : ICompanyService
         var company = await _unitOfWork.Companies.FindAsync(
             x => x.Id == id, 
             [
-                x=>x.Include(x=>x.Managers.Where(w=>!w.ApplicationUser.IsDeleted)),
                 x=>x.Include(w=>w.ActiveCodeCompanies.Where(s=>!s.ActiveCode.IsDeleted)).ThenInclude(y=>y.ActiveCode),
                 x=>x.Include(w=>w.Branches.Where(w=>!w.IsDeleted))
             ],cancellationToken

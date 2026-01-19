@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppTranslateService } from '@app/shared/data-access';
 
 @Component({
@@ -10,7 +11,7 @@ import { AppTranslateService } from '@app/shared/data-access';
 export class HeaderComponent implements OnInit {
 
   currentLang!: string;
-  constructor(private appTranslateService: AppTranslateService) {
+  constructor(private router:Router,private appTranslateService: AppTranslateService) {
   }
 
   ngOnInit() {
@@ -23,4 +24,7 @@ export class HeaderComponent implements OnInit {
     this.appTranslateService.changeLanguage(lang);
   }
 
+  login(){
+    this.router.navigate(['auth/login']);
+  }
 }

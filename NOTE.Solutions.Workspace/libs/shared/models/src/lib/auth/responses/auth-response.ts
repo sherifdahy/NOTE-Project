@@ -1,8 +1,7 @@
 export interface AuthResponse {
   id : number;
   email : string;
-  firstName : string;
-  lastName : string;
+  name : string;
   token: string;
   expiresIn: number;
   refreshToken: string;

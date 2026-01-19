@@ -3,44 +3,16 @@
   "WorkspaceRootPath": "F:\\NOTE-Project\\NOTE.Solutions.BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20260101225330_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20260101225330_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93B1D516-5647-FF79-4054-E61FD3C62307}|NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.dal\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93B1D516-5647-FF79-4054-E61FD3C62307}|NOTE.Solutions\\NOTE.Solutions.DAL\\NOTE.Solutions.DAL.csproj|solutionrelative:note.solutions\\note.solutions.dal\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\interfaces\\iunitofwork .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\interfaces\\iunitofwork .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entitiesconfiguration\\activecodeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entitiesconfiguration\\activecodeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entitiesconfiguration\\applicationuserconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entitiesconfiguration\\applicationuserconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entitiesconfiguration\\applicationroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entitiesconfiguration\\applicationroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entities\\identity\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entities\\identity\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.entities\\entities\\identity\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{49E3AA6D-4E13-6F37-1A3E-15BC14CCD93F}|NOTE.Solutions\\NOTE.Solutions.Entities\\NOTE.Solutions.Entities.csproj|solutionrelative:note.solutions\\note.solutions.entities\\entities\\identity\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\note.solutions.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\note.solutions.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.api\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD89253B-BDAB-1908-3A8A-4949A38CE2CD}|NOTE.Solutions\\NOTE.Solutions.API\\NOTE.Solutions.API.csproj|solutionrelative:note.solutions\\note.solutions.api\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|f:\\note-project\\note.solutions.be\\note.solutions\\note.solutions.bll\\authentication\\jwtprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A6DF70E-6C60-FD26-B974-DA8E0885BE4A}|NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj|solutionrelative:note.solutions\\note.solutions.bll\\authentication\\jwtprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,136 +22,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20260101225330_init.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20260101225330_init.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20260101225330_init.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20260101225330_init.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.DAL\\Migrations\\20260101225330_init.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "RolesController.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\RolesController.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\RolesController.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\RolesController.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.API\\Controllers\\RolesController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAAC4AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:53:30.323Z",
+              "WhenOpened": "2026-01-18T14:23:03.596Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.DAL\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.DAL\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.DAL\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAcwBMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:51:52.314Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IUnitOfWork .cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Interfaces\\IUnitOfWork .cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\Interfaces\\IUnitOfWork .cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Interfaces\\IUnitOfWork .cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\Interfaces\\IUnitOfWork .cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAuwB4AAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:51:40.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ActiveCodeConfiguration.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ActiveCodeConfiguration.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ActiveCodeConfiguration.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ActiveCodeConfiguration.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ActiveCodeConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:51:26.26Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ApplicationUserConfiguration.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationUserConfiguration.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationUserConfiguration.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationUserConfiguration.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationUserConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:51:24.74Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationUser.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationUser.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationUser.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAB1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:50:39.711Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApplicationRole.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationRole.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationRole.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationRole.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\Entities\\Identity\\ApplicationRole.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:50:36.478Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ApplicationRoleConfiguration.cs",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationRoleConfiguration.cs",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationRoleConfiguration.cs",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationRoleConfiguration.cs",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.Entities\\EntitiesConfiguration\\ApplicationRoleConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:50:21.604Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "NOTE.Solutions.BLL",
-              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
-              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
-              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
-              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\NOTE.Solutions.BLL.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-01T22:50:07.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "AuthService.cs",
               "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
               "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
               "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Services\\AuthService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBIAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAYwLUAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T22:15:25.262Z",
+              "WhenOpened": "2026-01-18T14:21:34.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JWTProvider.cs",
+              "DocumentMoniker": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Authentication\\JWTProvider.cs",
+              "RelativeDocumentMoniker": "NOTE.Solutions\\NOTE.Solutions.BLL\\Authentication\\JWTProvider.cs",
+              "ToolTip": "F:\\NOTE-Project\\NOTE.Solutions.BE\\NOTE.Solutions\\NOTE.Solutions.BLL\\Authentication\\JWTProvider.cs",
+              "RelativeToolTip": "NOTE.Solutions\\NOTE.Solutions.BLL\\Authentication\\JWTProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-18T09:28:17.742Z",
               "EditorCaption": ""
             }
           ]

@@ -1,6 +1,4 @@
 ﻿using NOTE.Solutions.Entities.Entities.Address;
-using NOTE.Solutions.Entities.Entities.Manager;
-using System.Linq.Expressions;
 
 namespace NOTE.Solutions.BLL.Services;
 

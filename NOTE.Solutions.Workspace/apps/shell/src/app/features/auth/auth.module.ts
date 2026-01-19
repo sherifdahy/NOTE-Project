@@ -12,6 +12,8 @@ import { AppTranslateModule } from '@app/shared/modules';
 import { TranslateService } from '@ngx-translate/core';
 import { AppTranslateService } from '@app/shared/data-access';
 import { HeaderComponent } from "./components/header/header.component";
+import { BranchSelectComponent } from './components/branch-select/branch-select.component';
+import { DashboardSelectComponent } from './components/dashboard-select/dashboard-select.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { HeaderComponent } from "./components/header/header.component";
     LoginFormComponent,
     ResetPasswordComponent,
     ForgetPasswordComponent,
-    HeaderComponent
+    HeaderComponent,
+    BranchSelectComponent,
+    DashboardSelectComponent
   ]
 })
 

@@ -18,4 +18,4 @@ import { SidebarComponent } from '../shared/ui/sidebar/sidebar.component';
   imports: [CommonModule, RouterModule.forChild(remoteRoutes)],
   providers: [],
 })
-export class RemoteEntryModule {}
+export class RemoteEntryModule { }

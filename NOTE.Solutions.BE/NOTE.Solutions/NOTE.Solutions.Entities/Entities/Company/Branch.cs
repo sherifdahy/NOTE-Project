@@ -19,6 +19,4 @@ public class Branch
     public Company Company { get; set; } = default!;
     public ICollection<BranchEmployee> BranchEmplyees { get; set; } = new HashSet<BranchEmployee>();
     public ICollection<POS> PointOfSales { get; set; } = new HashSet<POS>();
-
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppTranslateService } from '@app/shared/data-access';
+import { Router } from '@angular/router';
+import { AppTranslateService, AuthService } from '@app/shared/data-access';
 
 @Component({
   selector: 'app-header',
@@ -8,18 +9,24 @@ import { AppTranslateService } from '@app/shared/data-access';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  currentEmail!: string;
   currentLang!: string;
-  constructor(private appTranslateService: AppTranslateService) { }
+  constructor(private router: Router, private authService: AuthService, private appTranslateService: AppTranslateService) { }
 
   ngOnInit() {
+    this.currentEmail = this.authService.currentUser?.email!;
     this.appTranslateService.language$.subscribe(lang => {
       this.currentLang = lang;
     })
   }
 
-  changeLang(lang:string)
-  {
+  changeLang(lang: string) {
     this.appTranslateService.changeLanguage(lang);
+  }
+
+  onLogout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 }

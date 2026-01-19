@@ -15,12 +15,12 @@ public class RoleClaimConfiguration : IEntityTypeConfiguration<IdentityRoleClaim
     public void Configure(EntityTypeBuilder<IdentityRoleClaim<int>> builder)
     {
         var permissions = Permissions.GetAllPermissions();
-        
-        var adminClaims = new List<IdentityRoleClaim<int>>();
+
+        var systemAdminClaims = new List<IdentityRoleClaim<int>>();
 
         for (var i = 0; i < permissions.Count; i++)
         {
-            adminClaims.Add(new IdentityRoleClaim<int>
+            systemAdminClaims.Add(new IdentityRoleClaim<int>
             {
                 Id = i + 1,
                 ClaimType = Permissions.Type,
@@ -30,7 +30,6 @@ public class RoleClaimConfiguration : IEntityTypeConfiguration<IdentityRoleClaim
         }
 
 
-        builder.HasData(adminClaims);
-
+        builder.HasData(systemAdminClaims);
     }
 }

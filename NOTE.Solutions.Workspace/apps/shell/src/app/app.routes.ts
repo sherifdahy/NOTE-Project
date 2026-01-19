@@ -5,21 +5,25 @@ import {
   ServerErrorComponent,
 } from '@app/shared/ui';
 
+import { authGuard, branchGuard, hasContextGuard } from '@app/shared/guards'
+
 export const appRoutes: Route[] = [
   {
+    path: '',
+    loadChildren: () => import('./features/landing/landing.module').then(x => x.LandingModule)
+  },
+  {
     path: 'client',
+    canActivate: [authGuard, hasContextGuard, branchGuard],
+    data: { 'required-context': 'client' },
     loadChildren: () =>
       import('client/Module').then((m) => m!.RemoteEntryModule),
   },
   {
     path: 'system-admin',
-    loadChildren: () =>
-      import('systemAdmin/Module').then((m) => m!.RemoteEntryModule),
-  },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./features/landing/landing.module').then((d) => d.LandingModule),
+    canActivate: [authGuard, hasContextGuard],
+    data: { 'required-context': 'System Admin' },
+    loadChildren: () => import('systemAdmin/Module').then((m) => m!.RemoteEntryModule),
   },
   {
     path: 'auth',

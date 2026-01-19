@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NOTE.Solutions.API.Extensions;
@@ -8,12 +7,10 @@ using NOTE.Solutions.Entities.Entities.Address;
 using NOTE.Solutions.Entities.Entities.Company;
 using NOTE.Solutions.Entities.Entities.Employee;
 using NOTE.Solutions.Entities.Entities.Identity;
-using NOTE.Solutions.Entities.Entities.Manager;
 using NOTE.Solutions.Entities.Entities.Order;
 using NOTE.Solutions.Entities.Entities.Product;
 using NOTE.Solutions.Entities.Entities.Unit;
 using NOTE.Solutions.Entities.Extensions;
-using System.Linq.Expressions;
 
 namespace NOTE.Solutions.DAL.Data;
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,int>
@@ -26,9 +23,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser,Applicatio
 
     #region Identity
     public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+    public virtual DbSet<Context> Contexts { get; set; }
     #endregion
     public virtual DbSet<Employee> Employees { get; set; }
-    public virtual DbSet<Manager> Managers { get; set; }
+
 
     #region Address
     public virtual DbSet<City> Cities { get; set; }

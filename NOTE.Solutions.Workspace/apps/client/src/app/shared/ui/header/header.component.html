@@ -1,0 +1,18 @@
+<div class="header d-flex align-items-center justify-content-between">
+  <h6 class="mb-0">Dashboard</h6>
+
+  <div class="header-actions d-flex align-items-center gap-3">
+    <select (change)="changeLang($any($event.target).value)" [value]="currentLang" class="form-select form-select-sm">
+      <option value="en">English</option>
+      <option value="ar">Arabic</option>
+    </select>
+    <div class="dropdown"> <button class="btn btn-secondary dropdown-toggle btn-sm" type="button"
+        data-bs-toggle="dropdown" aria-expanded="false"> {{currentEmail}} </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><button (click)="onLogout()" class="dropdown-item" href="#">Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</div>

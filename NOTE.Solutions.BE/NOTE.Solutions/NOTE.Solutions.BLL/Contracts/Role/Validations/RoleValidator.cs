@@ -16,5 +16,6 @@ public class RoleValidator : AbstractValidator<RoleRequest>
         RuleFor(x => x.Permissions).NotNull().NotEmpty();
         RuleFor(x => x.Permissions).Must(x => x.Distinct().Count() == x.Count).WithMessage("You cannot add DUPLICATED Permissions for the same Role")
             .When(x => x.Permissions != null);
+
     }
 }

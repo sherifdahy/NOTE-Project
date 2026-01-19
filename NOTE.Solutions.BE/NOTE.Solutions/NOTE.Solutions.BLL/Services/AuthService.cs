@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NOTE.Solutions.Entities.Abstractions.Consts;
 using System.Security.Cryptography;
 
 namespace NOTE.Solutions.BLL.Services;
-public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,IUnitOfWork unitOfWork, IJWTProvider provider) : IAuthService
+public class AuthService(SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,IUnitOfWork unitOfWork, IJWTProvider provider) : IAuthService
 {
     private readonly IJWTProvider _provider = provider;
-    private readonly IUnitOfWork _unitOfWork = unit;
     private readonly UserManager<ApplicationUser> _userManager = userManager;
     private readonly RoleManager<ApplicationRole> _roleManager = roleManager;
     private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
@@ -14,11 +14,13 @@ public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInM
     {
         var applicationUser = _userManager.Users
                                             .Include(w=>w.RefreshTokens)
+                                            .Include(w=>w.ApplicationUserContexts)
+                                                .ThenInclude(e=>e.Context)
                                             .Include(s=>s.PermissionOverrides)
                                                 .ThenInclude(po => po.RoleClaim)
                                             .FirstOrDefault(x=>x.Email == authRequest.Email);
         
-        if(applicationUser is null)
+        if (applicationUser is null)
             return Result.Failure<AuthResponse>(UserErrors.InvalidCredentials);
 
         if (applicationUser.IsDeleted)
@@ -44,7 +46,7 @@ public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInM
 
                 var rolePermissions = await _roleManager.GetClaimsAsync(role);
 
-                permissions.AddRange(rolePermissions.Select(x => x.Value).Distinct());
+                permissions.AddRange(rolePermissions.Where(x=>x.Type == Permissions.Type).Select(x => x.Value).Distinct());
             }
 
             foreach (var over in applicationUser.PermissionOverrides)
@@ -63,7 +65,8 @@ public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInM
 
             var result = _provider.GeneratedToken(applicationUser, roles, permissions);
 
-            // token dosn't related to jwt token
+            // refresh token dosn't related to jwt token
+
             var refreshToken = GenerateRefreshToken();
             var refreshTokenExpiration = DateTime.UtcNow.AddDays(_refreshTokenExpiryDays);
 
@@ -81,6 +84,8 @@ public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInM
                 ExpireIn = result.expiresIn,
                 RefreshToken = refreshToken,
                 RefreshTokenExpiration = refreshTokenExpiration,
+                Name = applicationUser.Name,
+                Email = applicationUser.Email!
             };
 
             return Result.Success(response);
@@ -101,7 +106,13 @@ public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInM
         if(userId is null)
             return Result.Failure<AuthResponse>(UserErrors.InvalidCredentials);
 
-        var applicationUser = await _userManager.FindByIdAsync(userId.ToString()!);
+        var applicationUser = _userManager.Users
+                                            .Include(w => w.RefreshTokens)
+                                            .Include(w => w.ApplicationUserContexts)
+                                                .ThenInclude(e => e.Context)
+                                            .Include(s => s.PermissionOverrides)
+                                                .ThenInclude(po => po.RoleClaim)
+                                            .FirstOrDefault(x => x.Id == userId);
 
         if (applicationUser is null)
             return Result.Failure<AuthResponse>(UserErrors.InvalidCredentials);
@@ -131,7 +142,7 @@ public class AuthService(IUnitOfWork unit,SignInManager<ApplicationUser> signInM
 
             var rolePermissions = await _roleManager.GetClaimsAsync(role);
 
-            permissions.AddRange(rolePermissions.Select(x => x.Value).Distinct());
+            permissions.AddRange(rolePermissions.Where(x => x.Type == Permissions.Type).Select(x => x.Value).Distinct());
         }
 
         foreach (var over in applicationUser.PermissionOverrides)

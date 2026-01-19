@@ -1,16 +1,17 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using NOTE.Solutions.Entities.Abstractions.Consts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace NOTE.Solutions.BLL.Authentication;
 
 public class JWTProvider(IOptions<JwtOptions> options) : IJWTProvider
 {
     private readonly IOptions<JwtOptions> _options = options;
-
     public (string token, int expiresIn) GeneratedToken(ApplicationUser applicationUser,IEnumerable<string> roles,IEnumerable<string> permissions)
     {
         List<Claim> claims = [
@@ -21,6 +22,7 @@ public class JWTProvider(IOptions<JwtOptions> options) : IJWTProvider
 
         claims.Add(new Claim(nameof(roles), JsonConvert.SerializeObject(roles), JsonClaimValueTypes.JsonArray));
         claims.Add(new Claim(nameof(permissions), JsonConvert.SerializeObject(permissions),JsonClaimValueTypes.JsonArray));
+        claims.Add(new Claim("contexts", JsonConvert.SerializeObject(applicationUser.ApplicationUserContexts.Where(x=> !x.Context.IsDeleted).Select(x=> x.Context.Name )), JsonClaimValueTypes.JsonArray));
 
         var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Value.Key));
 

@@ -6,6 +6,15 @@
       <option value="en">English</option>
       <option value="ar">Arabic</option>
     </select>
-    <span class="user-name">Sherif</span>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{currentEmail}}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><button class="dropdown-item" (click)="onLogout()">Logout</button></li>
+      </ul>
+    </div>
   </div>
 </div>

@@ -4,14 +4,16 @@ import { RouterModule } from '@angular/router';
 
 import { remoteRoutes } from './entry.routes';
 import { LayoutComponent } from '../layouts/layout/layout.component';
-import { HeaderComponent } from '../shared/ui/ui/header/header.component';
-import { SidebarComponent } from '../shared/ui/ui/sidebar/sidebar.component';
+import { HeaderComponent } from '../shared/ui/header/header.component';
+import { SidebarComponent } from '../shared/ui/sidebar/sidebar.component';
+import { DashboardPageComponent } from '../features/dashboard/pages/dashboard-page/dashboard-page.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardPageComponent
   ],
   imports: [CommonModule, RouterModule.forChild(remoteRoutes)],
   providers: [],

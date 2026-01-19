@@ -44,7 +44,7 @@ public class RolesController : ControllerBase
         return result.IsSuccess ? NoContent() : result.ToProblem();
     }
 
-    [HttpPost("{id:int}/toggle-status")]
+    [HttpDelete("{id:int}/toggle-status")]
     [HasPermission(Permissions.ToggleStatus)]
     public async Task<IActionResult> ToggleStatus([FromRoute] int id, CancellationToken cancellationToken = default)
     {

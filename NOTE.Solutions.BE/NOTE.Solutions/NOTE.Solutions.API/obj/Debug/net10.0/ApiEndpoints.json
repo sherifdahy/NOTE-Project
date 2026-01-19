@@ -463,43 +463,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ManagersController",
-    "Method": "GetAll",
-    "RelativePath": "api/companies/{companyId}/managers",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "companyId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ManagersController",
-    "Method": "Create",
-    "RelativePath": "api/companies/{companyId}/Managers",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "companyId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "request",
-        "Type": "NOTE.Solutions.BLL.Contracts.Manager.Requests.ManagerRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "NOTE.Solutions.API.Controllers.ProductsController",
     "Method": "GetAll",
     "RelativePath": "api/companies/{companyId}/Products",
@@ -547,59 +510,6 @@
       {
         "Name": "companyId",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ManagersController",
-    "Method": "GetById",
-    "RelativePath": "api/Managers/{managerId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "managerId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ManagersController",
-    "Method": "Delete",
-    "RelativePath": "api/Managers/{managerId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "managerId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "NOTE.Solutions.API.Controllers.ManagersController",
-    "Method": "Update",
-    "RelativePath": "api/Managers/{managerId}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "managerId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "request",
-        "Type": "NOTE.Solutions.BLL.Contracts.Manager.Requests.ManagerRequest",
         "IsRequired": true
       }
     ],
@@ -867,7 +777,7 @@
     "ContainingType": "NOTE.Solutions.API.Controllers.RolesController",
     "Method": "ToggleStatus",
     "RelativePath": "api/Roles/{id}/toggle-status",
-    "HttpMethod": "POST",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -962,6 +872,16 @@
     "ContainingType": "NOTE.Solutions.API.Controllers.UsersController",
     "Method": "GetAll",
     "RelativePath": "api/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NOTE.Solutions.API.Controllers.UsersController",
+    "Method": "GetBranches",
+    "RelativePath": "api/Users/branches",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

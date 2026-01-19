@@ -784,180 +784,6 @@
         ]
       }
     },
-    "/api/companies/{companyId}/Managers": {
-      "post": {
-        "tags": [
-          "Managers"
-        ],
-        "parameters": [
-          {
-            "name": "companyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ManagerRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ManagerRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ManagerRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          { }
-        ]
-      }
-    },
-    "/api/Managers/{managerId}": {
-      "get": {
-        "tags": [
-          "Managers"
-        ],
-        "parameters": [
-          {
-            "name": "managerId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          { }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Managers"
-        ],
-        "parameters": [
-          {
-            "name": "managerId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          { }
-        ]
-      },
-      "put": {
-        "tags": [
-          "Managers"
-        ],
-        "parameters": [
-          {
-            "name": "managerId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ManagerRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ManagerRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ManagerRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          { }
-        ]
-      }
-    },
-    "/api/companies/{companyId}/managers": {
-      "get": {
-        "tags": [
-          "Managers"
-        ],
-        "parameters": [
-          {
-            "name": "companyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          { }
-        ]
-      }
-    },
     "/api/Permissions": {
       "get": {
         "tags": [
@@ -1681,7 +1507,7 @@
       }
     },
     "/api/Roles/{id}/toggle-status": {
-      "post": {
+      "delete": {
         "tags": [
           "Roles"
         ],
@@ -1866,6 +1692,21 @@
           { }
         ]
       }
+    },
+    "/api/Users/branches": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          { }
+        ]
+      }
     }
   },
   "components": {
@@ -1924,20 +1765,6 @@
             "type": "string"
           },
           "password": {
-            "type": "string"
-          }
-        }
-      },
-      "ManagerRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "identifierNumber": {
-            "type": "string"
-          },
-          "phoneNumber": {
             "type": "string"
           }
         }
@@ -2051,9 +1878,6 @@
     },
     {
       "name": "Companies"
-    },
-    {
-      "name": "Managers"
     },
     {
       "name": "Permissions"

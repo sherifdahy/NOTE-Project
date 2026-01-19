@@ -1,10 +1,10 @@
-﻿using NOTE.Solutions.BLL.Contracts.User.Responses;
+﻿using Microsoft.EntityFrameworkCore;
+using NOTE.Solutions.BLL.Contracts.User.Responses;
 
 namespace NOTE.Solutions.BLL.Services;
 public class UserService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> roleManager,UserManager<ApplicationUser> userManager) : IUserService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    private readonly RoleManager<ApplicationRole> _roleManager = roleManager;
     private readonly UserManager<ApplicationUser> _userManager = userManager;
 
     public async Task<Result<IEnumerable<UserResponse>>> GetAllAsync (CancellationToken cancellationToken = default (CancellationToken))
@@ -26,5 +26,11 @@ public class UserService(IUnitOfWork unitOfWork,RoleManager<ApplicationRole> rol
         }
 
         return Result.Success<IEnumerable<UserResponse>>(result);
+    }
+
+    public async Task<Result<IEnumerable<BranchResponse>>> GetBranchesAsync(int userId,CancellationToken cancellationToken = default)
+    {
+        var branches = await _unitOfWork.Branches.FindAllAsync(d => d.Company.UserCompanies.Any(d => d.ApplicationUserId == userId), [X=>X.Include(e=>e.Company)],cancellationToken);
+        return Result.Success(branches.Adapt<IEnumerable<BranchResponse>>());
     }
 }
